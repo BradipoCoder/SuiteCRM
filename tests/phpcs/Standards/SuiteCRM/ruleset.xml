@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+<ruleset name="SuiteCRM">
+    <description>The CodeSniffer pattern for SuiteCRM.</description>
+    <exclude-pattern>*Test.php</exclude-pattern>
+
+    <!-- ARRAYS -->
+    <rule ref="Squiz.Arrays.ArrayBracketSpacing"/>
+
+
+    <!-- CLASSES -->
+    <rule ref="Generic.Classes.DuplicateClassName"/>
+    <!--<rule ref="PEAR.Classes.ClassDeclaration"/>-->
+    <!--<rule ref="PSR2.Classes.ClassDeclaration"/>-->
+    <rule ref="PSR2.Classes.PropertyDeclaration"/>
+    <rule ref="Squiz.Classes.ClassDeclaration"/>
+    <rule ref="Squiz.Classes.ClassFileName"/>
+    <rule ref="Squiz.Classes.LowercaseClassKeywords"/>
+    <rule ref="Squiz.Classes.SelfMemberReference"/>
+    <rule ref="Squiz.Classes.ValidClassName"/>
+
+
+    <!-- CODE ANALYSIS -->
+    <rule ref="Generic.CodeAnalysis.EmptyStatement"/>
+    <rule ref="Generic.CodeAnalysis.ForLoopWithTestFunctionCall"/>
+    <rule ref="Generic.CodeAnalysis.JumbledIncrementer"/>
+    <rule ref="Generic.CodeAnalysis.UnconditionalIfStatement"/>
+    <rule ref="Generic.CodeAnalysis.UnusedFunctionParameter"/>
+    <rule ref="Generic.CodeAnalysis.UselessOverridingMethod"/>
+
+
+    <!-- COMMENTING -->
+    <rule ref="Generic.Commenting.Todo"/>
+    <!--<rule ref="Generic.Commenting.DocComment"/>-->
+    <!--<rule ref="Generic.Commenting.Fixme"/>-->
+    <!--<rule ref="PEAR.Commenting.ClassComment"/>-->
+    <!--<rule ref="PEAR.Commenting.FunctionComment"/>-->
+    <rule ref="PEAR.Commenting.InlineComment"/>
+    <!--<rule ref="Squiz.Commenting.BlockComment"/>-->
+    <rule ref="Squiz.Commenting.ClassComment"/>
+    <rule ref="Squiz.Commenting.EmptyCatchComment"/>
+    <!--<rule ref="Squiz.Commenting.FileComment"/>-->
+    <!--<rule ref="Squiz.Commenting.FunctionComment"/>-->
+    <rule ref="Squiz.Commenting.FunctionCommentThrowTag"/>
+    <!--<rule ref="Squiz.Commenting.InlineComment"/>-->
+    <!--<rule ref="Squiz.Commenting.PostStatementComment"/>-->
+    <rule ref="Squiz.Commenting.VariableComment"/>
+
+
+    <!-- CONTROL STRUCTURES -->
+    <rule ref="PSR2.ControlStructures.ElseIfDeclaration"/>
+    <rule ref="Squiz.ControlStructures.ElseIfDeclaration"/>
+    <rule ref="Squiz.ControlStructures.LowercaseDeclaration"/>
+
+
+    <!-- FILES -->
+    <rule ref="Generic.Files.ByteOrderMark"/>
+    <rule ref="Generic.Files.EndFileNewline"/>
+    <rule ref="Generic.Files.LineEndings"/>
+    <!--<rule ref="Generic.Files.LineLength">-->
+        <!--<properties>-->
+            <!--<property name="lineLimit" value="120"/>-->
+            <!--<property name="absoluteLineLimit" value="160"/>-->
+        <!--</properties>-->
+    <!--</rule>-->
+    <rule ref="Generic.Files.OneClassPerFile"/>
+    <rule ref="Generic.Files.OneInterfacePerFile"/>
+    <rule ref="Generic.Files.OneTraitPerFile"/>
+    <!--<rule ref="PEAR.Files.IncludingFile"/>-->
+    <rule ref="PSR1.Files.SideEffects"/>
+    <rule ref="PSR2.Files.ClosingTag"/>
+
+    <!-- FORMATTING -->
+    <rule ref="Generic.Formatting.DisallowMultipleStatements"/>
+    <rule ref="Generic.Formatting.NoSpaceAfterCast"/>
+
+    <!-- FUNCTIONS -->
+    <rule ref="Generic.Functions.CallTimePassByReference"/>
+    <rule ref="Generic.Functions.FunctionCallArgumentSpacing"/>
+    <rule ref="Generic.Functions.OpeningFunctionBraceBsdAllman"/>
+    <!--<rule ref="Generic.Functions.OpeningFunctionBraceKernighanRitchie"/>-->
+    <rule ref="PEAR.Functions.FunctionCallSignature"/>
+    <rule ref="PEAR.Functions.FunctionDeclaration"/>
+    <!--<rule ref="PEAR.Functions.ValidDefaultValue"/>-->
+    <rule ref="Squiz.Functions.FunctionDeclaration"/>
+    <rule ref="Squiz.Functions.FunctionDuplicateArgument"/>
+    <rule ref="Squiz.Functions.GlobalFunction"/>
+
+
+    <!-- METHODS -->
+    <!--<rule ref="PSR2.Methods.FunctionCallSignature"/>-->
+    <rule ref="PSR2.Methods.MethodDeclaration"/>
+
+
+    <!-- METRICS -->
+    <!--<rule ref="Generic.Metrics.NestingLevel"/>-->
+    <rule ref="Generic.Metrics.CyclomaticComplexity">
+        <properties>
+            <property name="complexity" value="25"/>
+            <property name="absoluteComplexity" value="50"/>
+        </properties>
+    </rule>
+
+
+    <!-- NAMING CONVENTIONS -->
+    <rule ref="Generic.NamingConventions.ConstructorName"/>
+    <rule ref="Generic.NamingConventions.UpperCaseConstantName"/>
+    <!--<rule ref="Generic.NamingConventions.CamelCapsFunctionName"/>-->
+    <rule ref="PEAR.NamingConventions.ValidClassName"/>
+    <!--<rule ref="PEAR.NamingConventions.ValidFunctionName"/>-->
+    <rule ref="PEAR.NamingConventions.ValidVariableName"/>
+
+
+    <!-- PHP -->
+    <rule ref="Generic.PHP.DeprecatedFunctions"/>
+    <rule ref="Generic.PHP.DisallowShortOpenTag"/>
+    <rule ref="Generic.PHP.LowerCaseKeyword"/>
+    <rule ref="Generic.PHP.LowerCaseConstant"/>
+    <!--<rule ref="Generic.PHP.NoSilencedErrors"/>-->
+    <rule ref="Generic.PHP.Syntax"/>
+
+    <!-- WHITESPACE -->
+    <!--<rule ref="Generic.WhiteSpace.DisallowTabIndent"/>-->
+    <!--<rule ref="Generic.WhiteSpace.ScopeIndent"/>-->
+
+</ruleset>
