@@ -1,0 +1,177 @@
+configuration:
+  tables:
+    accounts_cstm:
+      table_name: accounts_cstm
+      skip: false
+      record_limit: false
+      columns:
+        id_c: id_c
+        piva_c: vat_number_c
+        codfisc_c: codice_fiscale_c
+        codmetodo_c: imp_metodo_code_old_c
+        pulizie_c: imp_cleaning_c
+        servito_imp_imp_c: imp_served_by_c
+        ateco_c: codice_ateco_old_c
+        provenienza_c: imp_origin_c
+        cciaa_rea_c: cciaa_rea_c
+        target2_c: target_c
+        euroannuicliente_c: imp_client_yearly_revenue_c
+        numerodipedenti_c: employee_number_c
+        concorrenzaimp_c: imp_competitor_c
+        notecommerciali_c: imp_commercial_notes_c
+        annoiniziorapporto_c: imp_account_start_c
+        categoriearticolidiinteresse_c: imp_interest_articles_c
+        #
+        profittabilita_c: imp_profitability_c
+        codice_agente_c: imp_agent_code_c
+        location_zone_c: zone_c
+        company_status_c: imp_status_c
+        pulizie_c: imp_cleaning_c
+
+        #dati fatturato
+        fatturato_lastyear_1_c: fatturato_lastyear_1_c
+        fatturato_lastyear_2_c: fatturato_lastyear_2_c
+        fatturato_lastyear_3_c: fatturato_lastyear_3_c
+        fatturato_lastyear_4_c: fatturato_lastyear_4_c
+        fatturato_lastyear_5_c: fatturato_lastyear_5_c
+        fatturato_lastyear_6_c: fatturato_lastyear_6_c
+        fatturato_lastyear_7_c: fatturato_lastyear_7_c
+        fatturato_lastyear_8_c: fatturato_lastyear_8_c
+        fatturato_lastyear_9_c: fatturato_lastyear_9_c
+        fatturato_lastyear_10_c: fatturato_lastyear_10_c
+        fatturato_lastyear_11_c: fatturato_lastyear_11_c
+        fatturato_lastyear_12_c: fatturato_lastyear_12_c
+        fatturato_thisyear_1_c: fatturato_thisyear_1_c
+        fatturato_thisyear_2_c: fatturato_thisyear_2_c
+        fatturato_thisyear_3_c: fatturato_thisyear_3_c
+        fatturato_thisyear_4_c: fatturato_thisyear_4_c
+        fatturato_thisyear_5_c: fatturato_thisyear_5_c
+        fatturato_thisyear_6_c: fatturato_thisyear_6_c
+        fatturato_thisyear_7_c: fatturato_thisyear_7_c
+        fatturato_thisyear_8_c: fatturato_thisyear_8_c
+        fatturato_thisyear_9_c: fatturato_thisyear_9_c
+        fatturato_thisyear_10_c: fatturato_thisyear_10_c
+        fatturato_thisyear_11_c: fatturato_thisyear_11_c
+        fatturato_thisyear_12_c: fatturato_thisyear_12_c
+        ft_periodo_attuale_c: ft_periodo_attuale_c
+        ft_anno_meno_uno_c: ft_anno_meno_uno_c
+        ft_periodo_mobile_c: ft_periodo_mobile_c
+        ft_perc_att_amu_c: ft_perc_att_amu_c
+        ft_anno_meno_uno_completo_c: ft_anno_meno_uno_completo_c
+        ft_perc_att_mob_c: ft_perc_att_mob_c
+        dagenaoggi_c: dagenaoggi_c
+        stessoanno1_c: stessoanno1_c
+        inizioannostesso1_c: inizioannostesso1_c
+        mesi12mobiliannom1_c: mesi12mobiliannom1_c
+
+    calls_cstm:
+      table_name: calls_cstm
+      skip: false
+      record_limit: false
+      columns:
+        id_c: id_c
+        result_c: result_c
+        motivazionenegativa_c: negative_reason_c
+        clienteassegnatoa_c: assigned_client_c
+        ateco_c: ateco_c
+        billing_address_city_c: billing_address_city_c
+        billing_address_postalcode_c: billing_address_postalcode_c
+        billing_address_street_c: billing_address_street_c
+        call_period_c: call_period_c
+        campagna_telefonica_c: campagna_telefonica_c
+        company_status_c: company_status_c
+        currency_id: currency_id
+        ft_anno_meno_uno_c: ft_anno_meno_uno_c
+        ft_periodo_attuale_c: ft_periodo_attuale_c
+        ft_periodo_mobile_c: ft_periodo_mobile_c
+        industry_c: industry_c
+        location_zone_c: location_zone_c
+        phone_office_c: office_phone_c
+        profittabilita_c: profitability_c
+        target_c: target_c
+    cases_cstm:
+      table_name: cases_cstm
+      skip: false
+      record_limit: false
+      columns:
+        id_c: id_c
+        case_area_c: area_dinteresse_imp_c
+        controlled_c: controlled_c
+        date_close_efct_c: date_close_efct_c
+        date_close_prg_c: date_close_prg_c
+        n_matricola_macchinario_c: n_matricola_macchinario_c
+        origine_c: origine_c
+        ref_worksheet_c: ref_worksheet_c
+    contacts_cstm:
+      table_name: contacts_cstm
+      skip: false
+      record_limit: false
+      columns:
+        id_c: id_c
+        acc_code_metodo_c: acc_code_metodo_c
+        unique_cod_metodo_c: unique_cod_metodo_c
+        contact_role_c: contact_role_c
+#    leads_cstm:
+#      table_name: leads_cstm
+#      skip: true
+#      record_limit: false
+#      columns:
+#        id_c: id_c
+#        codice_agente_c: agent_code_c
+#        assigned_agent: assigned_agent_c
+#        codfisc_c: cod_fisc_c
+#        direct_sales_c: direct_sales_c
+#        direct_sales_notes_c: direct_sales_notes_c
+#        import_notes_c: import_notes_c
+#        industry: industry_c
+#        location_zone_c: location_zone_c
+#        mobile_1_c: mobile_1_c
+#        mobile_2_c: mobile_2_c
+#        name_ref_2_c: name_ref_2_c
+#        name_ref_3_c: name_ref_3_c
+#        piva_c: p_iva_c
+#        phone_alternate: phone_alternate_c
+#        phone_fax2_c: phone_fax_2_c
+    meetings_cstm:
+      table_name: meetings_cstm
+      skip: false
+      record_limit: false
+      columns:
+        id_c: id_c
+        assistence_request_data_c: assistence_request_data_c
+        meeting_type_c: meeting_type_c
+        campagnaattiva_c: campagnadropdown_c
+        foglio_lavoro_c: fogliolavoro_c
+    tasks_cstm:
+      table_name: tasks_cstm
+      skip: false
+      record_limit: false
+      columns:
+        id_c: id_c
+        fase_temporale_c: fase_temporale_c
+    project_cstm:
+      table_name: project_cstm
+      skip: false
+      record_limit: false
+      columns:
+        id_c: id_c
+        aggiornamenti_c : aggiornamenti_c
+        analisirealta_c : analisi_realta_c
+        areadiinteresse_c : area_dinteresse_imp_c
+        conclusione_c : conclusioni_c
+        esitoprogetto_c : esito_progetto_c
+        fineeffettiva_c : fineeffettiva_c
+        raggiungimentopercentuale_c : raggiungimentopercentuale_c
+        tipo_c : tipo_c
+    opportunities_cstm:
+      table_name: opportunities_cstm
+      skip: false
+      record_limit: false
+      columns:
+        id_c: id_c
+        campagna_c : campagna_old_c
+        datachiusuraeffettiva_c : datachiusuraeffettiva_c
+        dataofc_c : dataofc_c
+        descizione_esito_c : descizione_esito_c
+        numero_ofc_c : numero_ofc_c
+        scontomedio_c : scontomedio_c

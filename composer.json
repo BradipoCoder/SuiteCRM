@@ -9,6 +9,9 @@
     "vendor-dir": "vendor"
   },
   "require": {
+    "symfony/console": "^2.6",
+    "monolog/monolog": "^1.19",
+    "symfony/filesystem": "^3.0"
   },
   "require-dev": {
     "phpunit/phpunit": "^3.7",

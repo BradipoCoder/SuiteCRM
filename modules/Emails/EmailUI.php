@@ -440,9 +440,11 @@ eoq;
         //Generate Language Packs
 		$lang = "var app_strings = new Object();\n";
 		foreach($app_strings as $k => $v) {
-			if(strpos($k, 'LBL_EMAIL_') !== false) {
-				$lang .= "app_strings.{$k} = '{$v}';\n";
-			}
+            if(preg_match('/LBL_EMAIL_/', $k)) {
+                if(is_string($v)) {
+                    $lang .= "app_strings.{$k} = '{$v}';\n";
+                }
+            }
 		}
 		//Get the email mod strings but don't use the global variable as this may be overridden by
 		//other modules when the quick create is rendered.

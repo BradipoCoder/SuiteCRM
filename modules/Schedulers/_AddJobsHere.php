@@ -74,7 +74,7 @@ $job_strings = array(
     14 => 'cleanJobQueue',
     15 => 'removeDocumentsFromFS',
     16 => 'trimSugarFeeds',
-
+    17 => 'sendQueuedEmails',
 );
 
 /**
@@ -509,6 +509,17 @@ function trimSugarFeeds()
     return true;
 }
 
+/**
+ * Job 17 - Sends Emails with status 'queued'
+ * @param array $job
+ * @return bool
+ */
+function sendQueuedEmails($job) {
+    require_once("modules/Emails/EmailQueueManager.php");
+    $EQM = new EmailQueueManager();
+    $EQM->sendQueuedEMails($job);
+    return true;
+}
 
 function cleanJobQueue($job)
 {

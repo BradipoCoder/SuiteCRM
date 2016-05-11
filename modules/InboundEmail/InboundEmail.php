@@ -5727,7 +5727,7 @@ eoq;
 				$meta['is_sugarEmail'] = true;
 			}
 		} else {
-			if( $this->email->status != 'sent' ){
+            if( !in_array($this->email->status, ['sent', 'queued']) ){
 				// mark SugarEmail read
 				$q = "UPDATE emails SET status = 'read' WHERE id = '{$uid}'";
 				$r = $this->db->query($q);

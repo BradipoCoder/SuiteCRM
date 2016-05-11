@@ -1,0 +1,4 @@
+configuration:
+  global:
+    log_to_console: true
+    temporary_path: "/home/crm2.ingrossomaterialipulizia.it/httpdocs/_sync/tmp"

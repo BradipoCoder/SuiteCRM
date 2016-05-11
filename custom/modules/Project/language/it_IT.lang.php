@@ -1,0 +1,26 @@
+<?php
+// created: 2016-04-14 14:28:23
+$mod_strings = array (
+  'LBL_TIPO' => 'Tipo',
+  'LBL_CODICE_COMMESSA_METODO' => 'Codice Commessa Metodo',
+  'LBL_STATUS' => 'Stato:',
+  'LBL_ESITO_PROGETTO' => 'Esito Progetto',
+  'LBL_PRIORITY' => 'Priorità:',
+  'LBL_AREA_DINTERESSE_IMP' => 'Area di interesse (IMP)',
+  'LBL_AREA_DINTERESSE_MEKIT' => 'Area di interesse (Mekit)',
+  'LBL_PANEL_ASSIGNMENT' => 'Analisi Realtà',
+  'LBL_EDITVIEW_PANEL1' => 'Aggiornamenti',
+  'LBL_EDITVIEW_PANEL2' => 'Conclusioni',
+  'LBL_DATA_CHIUSURA_EFFETTIVA' => 'Data Chiusura Effettiva',
+  'LBL_ANALISI_REALTA' => 'Analisi Realtà',
+  'LBL_AGGIORNAMENTI' => 'Aggiornamenti',
+  'LBL_CONCLUSIONI' => 'Conclusioni',
+  'LBL_EDITVIEW_PANEL3' => 'Aggiornamenti',
+  'LBL_EDITVIEW_PANEL4' => 'Analisi Realtà',
+  'LBL_CASES' => 'Ticket',
+  'LBL_CASES_SUBPANEL_TITLE' => 'Tickets',
+  'LBL_FINEEFFETTIVA' => 'Data fine effettiva',
+  'LBL_RAGGIUNGIMENTOPERCENTUALE' => '% Raggiungimento',
+  'LBL_DATE_END' => 'Data Fine:',
+  'LBL_MKT_WORKLOGS_PROJECT_FROM_MKT_WORKLOGS_TITLE' => 'Worklogs',
+);

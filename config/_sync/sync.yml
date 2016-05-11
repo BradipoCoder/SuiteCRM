@@ -1,0 +1,8 @@
+imports:
+    - { resource: default.yml }
+    - { resource: ../database.yml }
+    - { resource: automap.yml }
+    - { resource: custom.yml }
+    - { resource: datafix.yml }
+configuration:
+  title: "Sync from old crm to new crm."

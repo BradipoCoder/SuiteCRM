@@ -47,6 +47,12 @@ class AOR_Report extends Basic {
 	var $assigned_user_link;
 	var $report_module;
 
+    /** @var  string */
+    protected $report_sql;
+
+    /** @var  string */
+    protected $report_error;
+
 	function __construct(){
 		parent::__construct();
         $this->load_report_beans();
@@ -519,13 +525,18 @@ class AOR_Report extends Basic {
         } else {
             $max_rows = 20;
         }
-        
+
         $total_rows = 0;
         $count_sql = explode('ORDER BY', $report_sql);
         $count_query = 'SELECT count(*) c FROM ('.$count_sql[0].') as n';
 
         // We have a count query.  Run it and get the results.
         $result = $this->db->query($count_query);
+        if($this->db->lastDbError() !== false) {
+            $this->report_error = $this->db->lastDbError();
+        }
+
+
         $assoc = $this->db->fetchByAssoc($result);
         if(!empty($assoc['c']))
         {
@@ -946,9 +957,28 @@ class AOR_Report extends Basic {
             }
             $query .= ' '.$query_sort_by;
         }
+
+        //for outputting sql on view
+        $this->report_sql = $query;
+
         return $query;
 
     }
+
+    /**
+     * @return string
+     */
+    public function getReportSql() {
+        return $this->report_sql;
+    }
+
+    /**
+     * @return string
+     */
+    public function getReportError() {
+        return $this->report_error;
+    }
+
 
     private function queryWhereRepair($query_where) {
 
@@ -1324,6 +1354,15 @@ class AOR_Report extends Basic {
                             $value = '"' . $current_user->id . '"';
                             break;
                         case 'Value':
+                            if ($data['dbType'] == 'datetime') {
+                                //$condition->operator = 'Starts_With';
+                                $condition->value_type = 'Period';
+                                $customPeriod = true;
+                                $tiltLogicOp = true;
+                            } else {
+                                $value = "'" . $this->db->quote($condition->value) . "'";
+                            }
+                            break;
                         default:
                             $value = "'" . $this->db->quote($condition->value) . "'";
                             break;
@@ -1348,26 +1387,40 @@ class AOR_Report extends Basic {
 
                     if($tiltLogicOp) {
                         if ($condition->value_type == "Period") {
-                            if (array_key_exists($condition->value, $app_list_strings['date_time_period_list'])) {
-                                $params = $condition->value;
+
+                            if (array_key_exists($condition->value, $app_list_strings['date_time_period_list'])
+                            ) {
+                                $date1 = getPeriodEndDate($condition->value);
+                                $date2 = getPeriodDate($condition->value);
+                            } else if (isset($customPeriod) && $customPeriod === true) {
+                                //this means that $condition->value has specific date
+                                $date1 = new \DateTime($condition->value);
+                                $date1->add(new \DateInterval('P1D'));
+                                $date2 = new \DateTime($condition->value);
                             } else {
                                 $params = base64_decode($condition->value);
+                                $date1 = getPeriodEndDate($params);
+                                $date2 = getPeriodDate($params);
                             }
-                            $date = getPeriodEndDate($params)->format('Y-m-d H:i:s');
-                            $value = '"' . getPeriodDate($params)->format('Y-m-d H:i:s') . '"';
+
+                            $sql_date1 = $date1 instanceof \DateTime ? $date1->format('Y-m-d H:i:s') : '';
+                            $sql_date2 = $date2 instanceof \DateTime ? $date2->format('Y-m-d H:i:s') : '';
 
                             switch ($app_list_strings['aor_sql_operator_list'][$condition->operator]) {
                                 case "=":
-                                    $query['where'][] = $field . ' BETWEEN ' . $value .  ' AND ' . '"' . $date . '"';
+                                    $query['where'][] = $field . ' BETWEEN "' . $sql_date2 .  '" AND ' . '"' . $sql_date1 . '"';
                                     break;
                                 case "!=":
-                                    $query['where'][] = $field . ' NOT BETWEEN ' . $value .  ' AND ' . '"' . $date . '"';
+                                    $query['where'][] = $field . ' NOT BETWEEN "' . $sql_date2 .  '" AND ' . '"' . $sql_date1 . '"';
                                     break;
                                 case ">":
                                 case "<":
                                 case ">=":
                                 case "<=":
-                                    $query['where'][] = $field . ' ' . $app_list_strings['aor_sql_operator_list'][$condition->operator] . ' ' . $value;
+                                    if(isset($query['where']) && count($query['where']) > 1) {
+                                        $query['where'][] = 'AND';
+                                    }
+                                    $query['where'][] = $field . ' ' . $app_list_strings['aor_sql_operator_list'][$condition->operator] . ' "' . $sql_date2 . '"';
                                     break;
                             }
                         } else {

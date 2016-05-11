@@ -1,0 +1,231 @@
+@charset "UTF-8";
+
+.drawing_block {
+}
+
+.drawing_block a {
+	text-decoration: none;
+}
+
+.drawing {
+	display: block;
+	/*position: relative;*/
+	/* float: left; */
+	/*clear: both;*/
+}
+
+.drawing_canvas {
+	border: 1px solid black;
+}
+
+.drawing_canvas_undo {
+	display: none;
+}
+
+.drawing_left_tools {
+/*	float: left; */
+	display: inline-block;
+	padding: 8px 0 8px 0;
+}
+
+.drawing_left_tools a{
+/*	float: left; */
+	display: inline-block;
+}
+
+.drawing_left_tools span {
+	margin-top: 8px;
+}
+
+.drawing_right_tools {
+/*	float: left; */
+	padding: 0 8px 0 14px;
+}
+
+.drawing_right_tools span {
+	margin-top: 8px;
+}
+/*
+.drawing_top_tools {
+	text-align: left;
+}
+*/
+.drawing_tool_selected {
+	background-color: lightgray;
+}
+
+span.drawing_tool_general {
+	display: block;
+	width: 50px;
+}
+a.drawing_tool_general {
+	display: inline-block;
+	background-repeat:no-repeat;
+	width: 27px;
+	height: 25px;
+}
+
+.drawing_tool_general.drawing_tool_clear {
+	background-image: url('icons/clear.png');
+}
+.drawing_tool_general.drawing_tool_clear:active {
+	background-image: url('icons/select-clear.png');
+}
+.drawing_tool_general.drawing_tool_reinit {
+	background-image: url('icons/reinit.png');
+}
+.drawing_tool_general.drawing_tool_reinit:active {
+	background-image: url('icons/select-reinit.png');
+}
+.drawing_tool_general.drawing_tool_undo {
+	background-image: url('icons/undo.png');
+}
+.drawing_tool_general.drawing_tool_undo:active {
+	background-image: url('icons/select-undo.png');
+}
+
+span.drawing_tool_brush {
+	display: block;
+	width: 50px;
+}
+a.drawing_tool_brush {
+	display: inline-block;
+	background-repeat:no-repeat;
+	width: 27px;
+	height: 25px;
+}
+
+.drawing_tool_brush.drawing_tool_eraser {
+	background-image: url('icons/eraser.png');
+}
+.drawing_tool_brush.drawing_tool_eraser.drawing_tool_selected {
+	background-image: url('icons/select-eraser.png');
+}
+.drawing_tool_brush.drawing_tool_hand {
+	background-image: url('icons/hand.png');
+}
+.drawing_tool_brush.drawing_tool_hand.drawing_tool_selected {
+	background-image: url('icons/select-hand.png');
+}
+.drawing_tool_brush.drawing_tool_line {
+	background-image: url('icons/line.png');
+}
+.drawing_tool_brush.drawing_tool_line.drawing_tool_selected {
+	background-image: url('icons/select-line.png');
+}
+.drawing_tool_brush.drawing_tool_rect {
+	background-image: url('icons/rect.png');
+}
+.drawing_tool_brush.drawing_tool_rect.drawing_tool_selected {
+	background-image: url('icons/select-rect.png');
+}
+.drawing_tool_brush.drawing_tool_ellipse {
+	background-image: url('icons/ellipse.png');
+}
+.drawing_tool_brush.drawing_tool_ellipse.drawing_tool_selected {
+	background-image: url('icons/select-ellipse.png');
+}
+.drawing_tool_brush.drawing_tool_text {
+	background-image: url('icons/text.png');
+}
+.drawing_tool_brush.drawing_tool_text.drawing_tool_selected {
+	background-image: url('icons/select-text.png');
+}
+
+span.drawing_tools_font {
+	display: block;
+}
+a.drawing_tools_font {
+	/*display: block;
+	background-repeat:no-repeat;*/
+}
+
+span.drawing_tool_width {
+	display: block;
+	width: 150px;
+}
+a.drawing_tool_width {
+	display: inline-block;
+	text-align: center;
+	background-repeat:no-repeat;
+	width: 27px;
+	height: 25px;
+}
+
+span.drawing_tool_color {
+	display: block;
+	width: 150px;
+}
+a.drawing_tool_color {
+	display: inline-block;
+	background-repeat:no-repeat;
+	width: 27px;
+	height: 25px;
+}
+
+.drawing_tool_color.drawing_tool_black {
+	background-image: url('icons/black.png');
+}
+.drawing_tool_color.drawing_tool_black.drawing_tool_selected {
+	background-image: url('icons/select-black.png');
+}
+.drawing_tool_color.drawing_tool_red {
+	background-image: url('icons/red.png');
+}
+.drawing_tool_color.drawing_tool_red.drawing_tool_selected {
+	background-image: url('icons/select-red.png');
+}
+.drawing_tool_color.drawing_tool_green {
+	background-image: url('icons/green.png');
+}
+.drawing_tool_color.drawing_tool_green.drawing_tool_selected {
+	background-image: url('icons/select-green.png');
+}
+.drawing_tool_color.drawing_tool_blue {
+	background-image: url('icons/blue.png');
+}
+.drawing_tool_color.drawing_tool_blue.drawing_tool_selected {
+	background-image: url('icons/select-blue.png');
+}
+
+span.drawing_tool_fillcolor {
+	display: block;
+	width: 150px;
+}
+a.drawing_tool_fillcolor {
+	display: inline-block;
+	background-repeat:no-repeat;
+	width: 27px;
+	height: 25px;
+}
+
+.drawing_tool_fillcolor.drawing_tool_none {
+	background-image: url('icons/none.png');
+}
+.drawing_tool_fillcolor.drawing_tool_none.drawing_tool_selected {
+	background-image: url('icons/select-none.png');
+}
+.drawing_tool_fillcolor.drawing_tool_black {
+	background-image: url('icons/black.png');
+}
+.drawing_tool_fillcolor.drawing_tool_black.drawing_tool_selected {
+	background-image: url('icons/select-black.png');
+}
+.drawing_tool_fillcolor.drawing_tool_red {
+	background-image: url('icons/red.png');
+}
+.drawing_tool_fillcolor.drawing_tool_red.drawing_tool_selected {
+	background-image: url('icons/select-red.png');
+}
+.drawing_tool_fillcolor.drawing_tool_green {
+	background-image: url('icons/green.png');
+}
+.drawing_tool_fillcolor.drawing_tool_green.drawing_tool_selected {
+	background-image: url('icons/select-green.png');
+}
+.drawing_tool_fillcolor.drawing_tool_blue {
+	background-image: url('icons/blue.png');
+}
+.drawing_tool_fillcolor.drawing_tool_blue.drawing_tool_selected {
+	background-image: url('icons/select-blue.png');
+}

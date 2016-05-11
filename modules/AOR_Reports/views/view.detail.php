@@ -1,10 +1,10 @@
 <?php
  /**
- * 
- * 
- * @package 
+ *
+ *
+ * @package
  * @copyright SalesAgility Ltd http://www.salesagility.com
- * 
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE as published by
  * the Free Software Foundation; either version 3 of the License, or
@@ -26,6 +26,9 @@ require_once 'include/MVC/View/views/view.detail.php';
 require_once 'modules/AOW_WorkFlow/aow_utils.php';
 require_once 'modules/AOR_Reports/aor_utils.php';
 class AOR_ReportsViewDetail extends ViewDetail {
+
+    /** @var  \AOR_Report */
+    public $bean;
 
     private function getReportParameters(){
         if(!$this->bean->id){
@@ -80,6 +83,23 @@ class AOR_ReportsViewDetail extends ViewDetail {
         $this->ss->assign('charts_content', $chartsHTML);
 
         $this->ss->assign('report_content', $reportHTML);
+
+        //@todo: add developer mode check or something smart to be able to show/hide this
+        $reportSqlHtml = '';
+        if(true) {
+            $reportSql = $this->bean->getReportSql();
+            $reportSqlHtml = '<pre style="white-space: normal;">'.$reportSql.'</pre>';
+        }
+        $this->ss->assign('report_sql', $reportSqlHtml);
+
+        $reportErrorHtml = '';
+        if($reportError = $this->bean->getReportError()) {
+            $reportErrorHtml = '<pre style="white-space: normal; background: chocolate;">'.$reportError.'</pre>';
+        }
+        $this->ss->assign('report_error', $reportErrorHtml);
+
+
+
 
         echo "<input type='hidden' name='report_module' id='report_module' value='{$this->bean->report_module}'>";
         if (!is_file('cache/jsLanguage/AOR_Conditions/' . $GLOBALS['current_language'] . '.js')) {

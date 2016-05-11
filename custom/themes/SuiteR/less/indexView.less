@@ -1,0 +1,72 @@
+/**********************************************************************************************************************/
+/* INDEX VIEW (indexView.less) */
+@import "variables";
+/**********************************************************************************************************************/
+
+
+/*SEARCH FORMS*/
+.search.basic {
+  border-top: 1px solid @border_color;
+  border-bottom: 1px solid @border_color;
+}
+
+.search.advanced {
+  border-top: 1px solid @border_color;
+  border-bottom: 1px solid @border_color;
+}
+
+
+/* LIST TABLE */
+table.list.view{
+  thead{
+    tr {
+      background-color: @table_header_background_color;
+      color: @table_header_font_color;
+      th{
+        background-color: @table_header_background_color;
+        color: @table_header_font_color;
+        a {
+          color: @table_header_font_color;
+          font-weight: bold;
+        }
+      }
+    }
+    tr#pagination{
+      background-color: white;
+      td {
+        table.paginationTable{
+          th, td{
+            background-color: white;
+            color: #444444;
+            a {
+              color: #444444;
+            }
+          }
+        }
+      }
+    }
+  }
+  tbody {
+
+  }
+}
+
+
+/* SUBPANELS */
+ul#subpanel_list{
+  li.noBullet{
+    border-top: 1px solid @border_color;
+    table.formHeader{
+      td{
+        background-color: @subpanel_header_background_color;
+        padding: 10px 5px 2px 11px;
+      }
+    }
+  }
+}
+
+/* MASS ASSIGN */
+#massassign_form {
+   margin-top: 20px;
+   border: 1px solid @border_color;
+ }

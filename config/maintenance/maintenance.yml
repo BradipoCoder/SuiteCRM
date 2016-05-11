@@ -1,0 +1,6 @@
+imports:
+    - { resource: ../database.yml }
+configuration:
+  title: "Fix Database"
+  global:
+      log_to_console: true

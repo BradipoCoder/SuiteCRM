@@ -1,0 +1,62 @@
+configuration:
+  datafix:
+    remove_contacts_with_old_metodo_codes:
+        enabled: false
+        method_name:  datafixRemoveContactsWithOldMetodoCodes
+        tables:
+          contacts: id
+          contacts_cstm: id_c
+          contacts_bugs: contact_id
+          contacts_cases: contact_id
+          contacts_users: contact_id
+          accounts_contacts: contact_id
+          calls_contacts: contact_id
+          documents_contacts: contact_id
+          meetings_contacts: contact_id
+          opportunities_contacts: contact_id
+          projects_contacts: contact_id
+    relate_accounts_contacts_by_role:
+        enabled: false
+        method_name:  datafixRelateAccountsContactsByRole
+    merge_accounts:
+      enabled: false
+      method_name:  datafixMergeAccounts
+      tables:
+        accounts_bugs: account_id
+        accounts_cases: account_id
+        accounts_contacts: account_id
+        accounts_contacts_imp_acq: account_id
+        accounts_contacts_imp_adm: account_id
+        accounts_contacts_imp_com: account_id
+        accounts_contacts_imp_dir: account_id
+        accounts_contacts_imp_opr: account_id
+        accounts_contacts_mekit_acq: account_id
+        accounts_contacts_mekit_adm: account_id
+        accounts_contacts_mekit_com: account_id
+        accounts_contacts_mekit_dir: account_id
+        accounts_contacts_mekit_opr: account_id
+        accounts_opportunities: account_id
+        calls: parent_id
+        cases: account_id
+        emails: parent_id
+        leads: account_id
+        meetings: parent_id
+        notes: parent_id
+        projects_accounts: account_id
+        prospect_lists_prospects: related_id
+        tasks: parent_id
+    copy_metodo_codes:
+      enabled: false
+      method_name:  datafixCopyMetodoCodesAccounts
+    update_accounts_missing_data:
+      enabled: false
+      method_name:  datafixUpdateAccountsMissingData
+    update_calls_missing_data:
+      enabled: true
+      method_name:  datafixUpdateCallsMissingData
+
+
+
+
+# Cases - riportare old Provenienza(type) ->  provenienza_c
+

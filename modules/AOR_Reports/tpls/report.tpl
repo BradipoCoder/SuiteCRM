@@ -109,3 +109,6 @@
 </div>
 
 <script src="modules/AOR_Reports/Dashlets/AORReportsDashlet/AORReportsDashlet.js"></script>
+
+{$report_sql}
+{$report_error}
