@@ -112,6 +112,15 @@ array (
         'default' => true,
         'name' => 'parent_name',
       ),
+      'operation_type' => 
+      array (
+        'type' => 'enum',
+        'default' => true,
+        'studio' => 'visible',
+        'label' => 'LBL_OPERATION_TYPE',
+        'width' => '10%',
+        'name' => 'operation_type',
+      ),
       'completed' => 
       array (
         'type' => 'bool',
