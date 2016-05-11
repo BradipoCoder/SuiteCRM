@@ -1,5 +1,5 @@
 <?php
- // created: 2016-05-11 10:43:29
+ // created: 2016-05-11 14:42:56
 $dictionary['Account']['fields']['jjwg_maps_lat_c']['inline_edit']='1';
 $dictionary['Account']['fields']['jjwg_maps_lat_c']['labelValue']='Latitudine';
 
