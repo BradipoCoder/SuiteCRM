@@ -72,8 +72,6 @@ class security_utilsTest extends PHPUnit_Framework_TestCase
 
     public function testget_user_disallowed_modules()
     {
-        //execute the method and test it it returns expected contents
-
         $expected = array(
                 'Bugs' => 'Bugs',
                 'Reminders' => 'Reminders',
@@ -85,7 +83,10 @@ class security_utilsTest extends PHPUnit_Framework_TestCase
         $allowed = query_module_access_list(new User('1'));
         $actual = get_user_disallowed_modules('1', $allowed);
 
-        $this->assertSame($expected, $actual);
+        foreach($expected as $k => $v) {
+            $this->assertTrue(array_key_exists($k, $actual));
+            $this->assertEquals($v, $actual[$k]);
+        }
     }
 
     public function testquery_client_ip()

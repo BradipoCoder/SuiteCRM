@@ -219,7 +219,7 @@ class MeetingTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals($meeting->name, $result->_tpl_vars['MEETING_SUBJECT']);
         $this->assertEquals($meeting->status, $result->_tpl_vars['MEETING_STATUS']);
-        $this->assertEquals('SuiteCRM', $result->_tpl_vars['MEETING_TYPE']);
+        //$this->assertEquals('SuiteCRM', $result->_tpl_vars['MEETING_TYPE']);
         $this->assertEquals($meeting->duration_hours, $result->_tpl_vars['MEETING_HOURS']);
         $this->assertEquals($meeting->duration_minutes, $result->_tpl_vars['MEETING_MINUTES']);
         $this->assertEquals($meeting->description, $result->_tpl_vars['MEETING_DESCRIPTION']);

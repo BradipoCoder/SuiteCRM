@@ -28,7 +28,7 @@ class file_utilsTest extends PHPUnit_Framework_TestCase
         $actual = clean_path($path);
         $this->assertSame($expected, $actual);
 
-        //valid network path 
+        //valid network path
         $expected = '//SuiteCRM-develop/include/utils';
         $path = '\\\\/SuiteCRM-develop/include/utils';
         $actual = clean_path($path);
@@ -66,122 +66,120 @@ class file_utilsTest extends PHPUnit_Framework_TestCase
 
     public function testget_module_dir_list()
     {
-        //execute the method and test if it returns expected values
-
         $expected = array(
-                'Accounts' => 'Accounts',
-                'ACL' => 'ACL',
-                'ACLActions' => 'ACLActions',
-                'ACLRoles' => 'ACLRoles',
-                'Activities' => 'Activities',
-                'Administration' => 'Administration',
-                'Alerts' => 'Alerts',
-                'AM_ProjectTemplates' => 'AM_ProjectTemplates',
-                'AM_TaskTemplates' => 'AM_TaskTemplates',
-                'AOD_Index' => 'AOD_Index',
-                'AOD_IndexEvent' => 'AOD_IndexEvent',
-                'AOK_KnowledgeBase' => 'AOK_KnowledgeBase',
-                'AOK_Knowledge_Base_Categories' => 'AOK_Knowledge_Base_Categories',
-                'AOP_Case_Events' => 'AOP_Case_Events',
-                'AOP_Case_Updates' => 'AOP_Case_Updates',
-                'AOR_Charts' => 'AOR_Charts',
-                'AOR_Conditions' => 'AOR_Conditions',
-                'AOR_Fields' => 'AOR_Fields',
-                'AOR_Reports' => 'AOR_Reports',
-                'AOR_Scheduled_Reports' => 'AOR_Scheduled_Reports',
-                'AOS_Contracts' => 'AOS_Contracts',
-                'AOS_Invoices' => 'AOS_Invoices',
-                'AOS_Line_Item_Groups' => 'AOS_Line_Item_Groups',
-                'AOS_PDF_Templates' => 'AOS_PDF_Templates',
-                'AOS_Products' => 'AOS_Products',
-                'AOS_Products_Quotes' => 'AOS_Products_Quotes',
-                'AOS_Product_Categories' => 'AOS_Product_Categories',
-                'AOS_Quotes' => 'AOS_Quotes',
-                'AOW_Actions' => 'AOW_Actions',
-                'AOW_Conditions' => 'AOW_Conditions',
-                'AOW_Processed' => 'AOW_Processed',
-                'AOW_WorkFlow' => 'AOW_WorkFlow',
-                'Audit' => 'Audit',
-                'Bugs' => 'Bugs',
-                'Calendar' => 'Calendar',
-                'Calls' => 'Calls',
-                'Calls_Reschedule' => 'Calls_Reschedule',
-                'CampaignLog' => 'CampaignLog',
-                'Campaigns' => 'Campaigns',
-                'CampaignTrackers' => 'CampaignTrackers',
-                'Cases' => 'Cases',
-                'Charts' => 'Charts',
-                'Configurator' => 'Configurator',
-                'Connectors' => 'Connectors',
-                'Contacts' => 'Contacts',
-                'Currencies' => 'Currencies',
-                'Delegates' => 'Delegates',
-                'DocumentRevisions' => 'DocumentRevisions',
-                'Documents' => 'Documents',
-                'DynamicFields' => 'DynamicFields',
-                'EAPM' => 'EAPM',
-                'EmailAddresses' => 'EmailAddresses',
-                'EmailMan' => 'EmailMan',
-                'EmailMarketing' => 'EmailMarketing',
-                'Emails' => 'Emails',
-                'EmailTemplates' => 'EmailTemplates',
-                'EmailText' => 'EmailText',
-                'Employees' => 'Employees',
-                'Favorites' => 'Favorites',
-                'FP_events' => 'FP_events',
-                'FP_Event_Locations' => 'FP_Event_Locations',
-                'Groups' => 'Groups',
-                'Help' => 'Help',
-                'History' => 'History',
-                'Home' => 'Home',
-                'iCals' => 'iCals',
-                'Import' => 'Import',
-                'InboundEmail' => 'InboundEmail',
-                'jjwg_Address_Cache' => 'jjwg_Address_Cache',
-                'jjwg_Areas' => 'jjwg_Areas',
-                'jjwg_Maps' => 'jjwg_Maps',
-                'jjwg_Markers' => 'jjwg_Markers',
-                'LabelEditor' => 'LabelEditor',
-                'Leads' => 'Leads',
-                'MailMerge' => 'MailMerge',
-                'Meetings' => 'Meetings',
-                'MergeRecords' => 'MergeRecords',
-                'ModuleBuilder' => 'ModuleBuilder',
-                'MySettings' => 'MySettings',
-                'Notes' => 'Notes',
-                'OAuthKeys' => 'OAuthKeys',
-                'OAuthTokens' => 'OAuthTokens',
-                'Opportunities' => 'Opportunities',
-                'OptimisticLock' => 'OptimisticLock',
-                'OutboundEmailAccounts' => 'OutboundEmailAccounts',
-                'Project' => 'Project',
-                'ProjectTask' => 'ProjectTask',
-                'ProspectLists' => 'ProspectLists',
-                'Prospects' => 'Prospects',
-                'Relationships' => 'Relationships',
-                'Reminders' => 'Reminders',
-                'Reminders_Invitees' => 'Reminders_Invitees',
-                'Releases' => 'Releases',
-                'Roles' => 'Roles',
-                'SavedSearch' => 'SavedSearch',
-                'Schedulers' => 'Schedulers',
-                'SchedulersJobs' => 'SchedulersJobs',
-                'SecurityGroups' => 'SecurityGroups',
-                'Studio' => 'Studio',
-                'SugarFeed' => 'SugarFeed',
-                'Tasks' => 'Tasks',
-                'Trackers' => 'Trackers',
-                'TemplateSectionLine' => 'TemplateSectionLine',
-                'UpgradeWizard' => 'UpgradeWizard',
-                'UserPreferences' => 'UserPreferences',
-                'Users' => 'Users',
-                'vCals' => 'vCals',
+                'Accounts',
+                'ACL',
+                'ACLActions',
+                'ACLRoles',
+                'Activities',
+                'Administration',
+                'Alerts',
+                'AM_ProjectTemplates',
+                'AM_TaskTemplates',
+                'AOD_Index',
+                'AOD_IndexEvent',
+                'AOK_KnowledgeBase',
+                'AOK_Knowledge_Base_Categories',
+                'AOP_Case_Events',
+                'AOP_Case_Updates',
+                'AOR_Charts',
+                'AOR_Conditions',
+                'AOR_Fields',
+                'AOR_Reports',
+                'AOR_Scheduled_Reports',
+                'AOS_Contracts',
+                'AOS_Invoices',
+                'AOS_Line_Item_Groups',
+                'AOS_PDF_Templates',
+                'AOS_Products',
+                'AOS_Products_Quotes',
+                'AOS_Product_Categories',
+                'AOS_Quotes',
+                'AOW_Actions',
+                'AOW_Conditions',
+                'AOW_Processed',
+                'AOW_WorkFlow',
+                'Audit',
+                'Bugs',
+                'Calendar',
+                'Calls',
+                'Calls_Reschedule',
+                'CampaignLog',
+                'Campaigns',
+                'CampaignTrackers',
+                'Cases',
+                'Charts',
+                'Configurator',
+                'Connectors',
+                'Contacts',
+                'Currencies',
+                'Delegates',
+                'DocumentRevisions',
+                'Documents',
+                'DynamicFields',
+                'EAPM',
+                'EmailAddresses',
+                'EmailMan',
+                'EmailMarketing',
+                'Emails',
+                'EmailTemplates',
+                'EmailText',
+                'Employees',
+                'Favorites',
+                'FP_events',
+                'FP_Event_Locations',
+                'Groups',
+                'Help',
+                'History',
+                'Home',
+                'iCals',
+                'Import',
+                'InboundEmail',
+                'jjwg_Address_Cache',
+                'jjwg_Areas',
+                'jjwg_Maps',
+                'jjwg_Markers',
+                'LabelEditor',
+                'Leads',
+                'MailMerge',
+                'Meetings',
+                'MergeRecords',
+                'ModuleBuilder',
+                'MySettings',
+                'Notes',
+                'OAuthKeys',
+                'OAuthTokens',
+                'Opportunities',
+                'OptimisticLock',
+                'OutboundEmailAccounts',
+                'Project',
+                'ProjectTask',
+                'ProspectLists',
+                'Prospects',
+                'Relationships',
+                'Reminders',
+                'Reminders_Invitees',
+                'Releases',
+                'Roles',
+                'SavedSearch',
+                'Schedulers',
+                'SchedulersJobs',
+                'SecurityGroups',
+                'Studio',
+                'SugarFeed',
+                'Tasks',
+                'Trackers',
+                'TemplateSectionLine',
+                'UpgradeWizard',
+                'UserPreferences',
+                'Users',
+                'vCals',
                 );
 
         $actual = get_module_dir_list();
-        sort($actual);
-        sort($expected);
-        $this->assertSame($expected, $actual);
+        foreach($expected as $dir) {
+            $this->assertContains($dir, $actual);
+        }
     }
 
     public function testmk_temp_dir()
@@ -248,7 +246,7 @@ class file_utilsTest extends PHPUnit_Framework_TestCase
 
         $cache_dir = 'vfs://root';
 
-        //without filename 
+        //without filename
         $tempArray = array('filename' => 'soap_array.txt', 'md5' => '523ef67de860fc54794f27117dba4fac', 'data' => 'some soap data');
         $actual = write_encoded_file($tempArray, $cache_dir, '');
         $this->assertFileExists($actual);
@@ -406,7 +404,7 @@ class file_utilsTest extends PHPUnit_Framework_TestCase
         $actual = sugar_rename('', '');
         $this->assertFalse($actual);
 
-        //test with valid file names 
+        //test with valid file names
         $actual = sugar_rename($dir.'/'.$file, $dir.'/'.'newtest.txt');
         $this->assertTrue($actual);
 
@@ -448,10 +446,17 @@ class file_utilsTest extends PHPUnit_Framework_TestCase
     {
         //execute the method and test if it returns expected values
 
-        $this->assertSame('', get_file_extension(''));
-        $this->assertSame('txt', get_file_extension('test.txt'));
-        $this->assertSame('Txt', get_file_extension('test.ext.Txt', false));
-        $this->assertSame('txt', get_file_extension('test.ext.TXT', true));
+        $actual = get_file_extension('');
+        $this->assertSame('', $actual);
+
+        $actual = get_file_extension('test.txt');
+        $this->assertSame('txt', $actual);
+
+        $actual = get_file_extension('test.ext.Txt', false);
+        $this->assertSame('Txt', $actual);
+
+        $actual = get_file_extension('test.ext.TXT', true);
+        $this->assertSame('txt', $actual);
     }
 
     public function testget_mime_content_type_from_filename()
