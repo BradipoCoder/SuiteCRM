@@ -90,9 +90,20 @@ class HookCallsCustomFixDates
                 }
             }
 
-            if(!empty($dateEnd)) {
-                $dateEnd = '';
-                $call->date_end = $dateEnd;
+            if(empty($durationHours)) {
+                $durationHours = 0;
+                $call->duration_hours = $durationHours;
+            }
+            if(empty($durationMinutes)) {
+                $durationMinutes = 5;
+                $call->duration_minutes = $durationMinutes;
+            }
+            if(empty($dateEnd)) {
+                $td = $TD->fromDb($dateStart);
+                if($td) {
+                    $dateEnd = $td->modify("+{$durationHours} hours {$durationMinutes} mins")->asDb();
+                    $call->date_end = $dateEnd;
+                }
             }
         }
 
@@ -125,16 +136,10 @@ class HookCallsCustomFixDates
             if(empty($dateEnd)) {
                 $td = $TD->fromDb($dateStart);
                 if($td) {
-                    $dateEnd = $td->modify("+{$call->duration_hours} hours {$call->duration_minutes} mins")->asDb();
+                    $dateEnd = $td->modify("+{$durationHours} hours {$durationMinutes} mins")->asDb();
                     $call->date_end = $dateEnd;
                 }
             }
         }
-
-        //die("<br />KO(SETTING DATE START[".($isSaveAndNew?"Y":"N")."])!");
-//        echo ("<br />S&N: ".($isSaveAndNew?"Y":"N"));
-//        echo ("<br />S&N: ".( $_POST["isSaveAndNew"]));
-//        echo "<br />POST: " . print_r($_POST, true);
-        //die("<br />KO!");
     }
 }
