@@ -5,11 +5,14 @@
  * Time: 10.04
  */
 
-namespace Mekit\SugarCrm\Maintenance;
-
+namespace Mekit\Maintenance;
 
 use Mekit\Console\Configuration;
 
+/**
+ * Class Maintenance
+ * @package Mekit\Maintenance
+ */
 class Maintenance {
     /** @var callable */
     protected $logger;
@@ -30,7 +33,9 @@ class Maintenance {
     }
 
 
-
+    /**
+     * @param array $options
+     */
     public function execute($options) {
         $cfg = Configuration::getConfiguration();
         $this->cleanUpMultipleMails();

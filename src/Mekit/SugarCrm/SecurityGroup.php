@@ -7,11 +7,13 @@
 
 namespace Mekit\SugarCrm;
 
-
+/**
+ * Class SecurityGroup
+ * @package Mekit\SugarCrm
+ */
 class SecurityGroup {
     /** @var array */
     private static $userGroups = false;
-
 
     /**
      * @param string $groupName
@@ -28,8 +30,6 @@ class SecurityGroup {
         }
         return $answer;
     }
-
-
 
     /**
      * populates the local variable userGroups
