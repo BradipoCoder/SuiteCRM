@@ -1,8 +1,8 @@
 <?php
 /**
  * Created by Adam Jakab.
- * Date: 29/04/16
- * Time: 11.17
+ * Date: 12/05/16
+ * implemented in: custom/Extension/modules/Calls/Ext/LogicHooks/logic_hooks.php
  */
 $hook_array['before_save'][] = Array(
     999,
