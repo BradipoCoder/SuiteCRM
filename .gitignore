@@ -1,28 +1,39 @@
-## First part from https://github.com/github/gitignore/blob/master/SugarCRM.gitignore
-# Ignore custom .htaccess stuff.
+# Ignore custom .htaccess / web.config stuff
 /.htaccess
-# Ignore large parts of the annoying cache directory without breaking things.
+/web.config
+
+# Ignore cache / upload directories
 cache/*
 upload/*
 !upload/index.html
-# Ignore some files and directories from the custom directory.
-custom/history/*
+
+# Ignore stuff in custom directory
+custom/application/Ext/*
 custom/blowfish/*
 custom/modulebuilder/*
-custom/working/*
-custom/modules/*/Ext/
 custom/modules/unified_search_modules_display.php
+custom/modules/*/Ext/*
+custom/history/*
+custom/working/*
+
 # Ignore AOD indexes
 modules/AOD_Index/Index/*
 install/status.json
+
 # Configuration files should be ignored.
 /config.php
 /config_override.php
 /config_si.php
+
 # Connector configuration should also be ignored.
 custom/modules/Connectors/connectors/sources/ext/*/*/config.php
+
 # Logs files can safely be ignored.
 *.log
+
+# Ignore composer vendor folder
+vendor/
+
 ## IDE specific items
 # Eclipse
 *.pydevproject
@@ -69,5 +80,3 @@ lang_cmp.php
 .kdev4/
 SuiteCRM.kdev4
 
-#Ignore composer vendor folder
-vendor/
