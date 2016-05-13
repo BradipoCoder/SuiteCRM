@@ -20,13 +20,7 @@ class CallTest extends PHPUnit_Framework_TestCase
         $this->assertAttributeEquals(true, 'importable', $call);
         $this->assertAttributeEquals(false, 'syncing', $call);
         $this->assertAttributeEquals(true, 'update_vcal', $call);
-
-        //unless it has been modified
-        //$this->assertAttributeEquals(array(0 => '00', 15 => '15', 30 => '30', 45 => '45'), 'minutes_values', $call);
-        $this->assertContains('00', $call->minutes_values);
-        $this->assertContains('15', $call->minutes_values);
-        $this->assertContains('30', $call->minutes_values);
-        $this->assertContains('45', $call->minutes_values);
+        $this->assertSame($GLOBALS['app_list_strings']['duration_intervals'], $call->minutes_values);
     }
 
     public function testACLAccess()
