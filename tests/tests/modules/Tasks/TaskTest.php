@@ -128,20 +128,24 @@ class TaskTest extends PHPUnit_Framework_TestCase
         $expected = array(
                 'NAME' => 'test',
                 'DELETED' => 0,
-                'STATUS' => 'In Progress',
+                'STATUS' => translate('task_status_dom', 'Tasks', 'In Progress'),
                 'DATE_DUE_FLAG' => '0',
                 'DATE_START_FLAG' => '0',
                 'PARENT_TYPE' => 'Accounts',
                 'PARENT_NAME' => 'test',
                 'CONTACT_NAME' => 'test',
                 'CONTACT_PHONE' => '1234567',
-                'PRIORITY' => 'Medium',
+                'PRIORITY' => translate('task_priority_dom', 'Tasks', 'Medium'),
                 'PARENT_MODULE' => 'Accounts',
                 'SET_COMPLETE' => '~'.preg_quote("<a id='' onclick='SUGAR.util.closeActivityPanel.show(\"Tasks\",\"\",\"Completed\",\"listview\",\"1\");'><img src=\"themes/SuiteR/images/close_inline.png?v=")
                     .'[\w-]+'
-                    .preg_quote("\"    title=Close border='0' alt=\"Close\" /></a>")
+                                  . preg_quote(
+                                      "\"    title=" . translate('LBL_LIST_CLOSE', 'Tasks') . " border='0' alt=\""
+                                      . translate('LBL_LIST_CLOSE', 'Tasks') . "\" /></a>"
+                                  )
                     .'~',
-                'TITLE' => ": test\nAccount: test",
+                'TITLE' => ": test\n" . $GLOBALS["app_list_strings"]['parent_type_display'][$task->parent_type]
+                           . ": test",
         );
 
         $actual = $task->get_list_view_data();
@@ -171,8 +175,10 @@ class TaskTest extends PHPUnit_Framework_TestCase
         $result = $task->set_notification_body(new Sugar_Smarty(), $task);
 
         $this->assertEquals($task->name, $result->_tpl_vars['TASK_SUBJECT']);
-        $this->assertEquals($task->status, $result->_tpl_vars['TASK_STATUS']);
-        $this->assertEquals($task->priority, $result->_tpl_vars['TASK_PRIORITY']);
+        $this->assertEquals(translate('task_status_dom', 'Tasks', $task->status), $result->_tpl_vars['TASK_STATUS']);
+        $this->assertEquals(
+            translate('task_priority_dom', 'Tasks', $task->priority), $result->_tpl_vars['TASK_PRIORITY']
+        );
         $this->assertEquals('02/11/2016 17:30 UTC(+00:00)', $result->_tpl_vars['TASK_DUEDATE']);
         $this->assertEquals($task->description, $result->_tpl_vars['TASK_DESCRIPTION']);
     }

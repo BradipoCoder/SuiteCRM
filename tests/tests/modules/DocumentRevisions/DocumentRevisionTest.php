@@ -109,7 +109,7 @@ class DocumentRevisionTest extends PHPUnit_Framework_TestCase
         $documentRevision->filename = 'test.ext';
         $documentRevision->revision = 1;
         $result = $documentRevision->getDocumentRevisionNameForDisplay();
-        $this->assertEquals('-Revision_1.ext', $result);
+        $this->assertEquals('-' . translate('LBL_REVISION', 'DocumentRevisions') . '_1.ext', $result);
     }
 
     public function testfill_document_name_revision()

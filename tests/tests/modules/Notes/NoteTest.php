@@ -129,7 +129,7 @@ class NoteTest extends PHPUnit_Framework_TestCase
                       'DELETED' => 0,
                       'CONTACT_NAME' => 'test contact',
                       'PARENT_MODULE' => 'Account',
-                      'STATUS' => 'Note',
+                      'STATUS' => translate('LBL_NOTE_STATUS', 'Notes'),
                     );
 
         $actual = $note->get_list_view_data();

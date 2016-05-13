@@ -289,11 +289,7 @@ class EmailTemplateTest extends PHPUnit_Framework_TestCase
     public function testgetTypeOptionsForSearch()
     {
         //execute the method and verify that it retunrs expected results
-        $expected = array(
-                '' => '',
-                'campaign' => 'Campaign',
-                'email' => 'Email',
-        );
+        $expected = $GLOBALS['app_list_strings']['emailTemplates_type_list'];
         $actual = EmailTemplate::getTypeOptionsForSearch();
         $this->assertSame($expected, $actual);
     }

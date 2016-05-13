@@ -142,7 +142,7 @@ class SavedSearchTest extends PHPUnit_Framework_TestCase
 
         $savedSearch->fill_in_additional_list_fields();
 
-        $this->assertEquals('Leads', $savedSearch->search_module);
+        $this->assertEquals($GLOBALS["app_list_strings"]['moduleList']['Leads'], $savedSearch->search_module);
         $this->assertEquals($admin->name, $savedSearch->assigned_user_name);
     }
 

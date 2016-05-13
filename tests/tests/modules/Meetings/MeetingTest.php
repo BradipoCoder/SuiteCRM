@@ -151,7 +151,7 @@ class MeetingTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(false, $meeting->reminder_checked);
         $this->assertEquals(-1, $meeting->email_reminder_time);
         $this->assertEquals(false, $meeting->email_reminder_checked);
-        $this->assertEquals('Accounts', $meeting->parent_type);
+        $this->assertEquals($GLOBALS["app_list_strings"]['record_type_default_key'], $meeting->parent_type);
     }
 
     public function testget_list_view_data()
@@ -159,7 +159,7 @@ class MeetingTest extends PHPUnit_Framework_TestCase
         $meeting = new Meeting();
 
         //preset required attribute values
-        $meeting->status == 'Planned';
+        $meeting->status = 'Planned';
         $meeting->parent_type = 'Accounts';
         $meeting->contact_id = 1;
         $meeting->contact_name = 'test';
@@ -168,7 +168,7 @@ class MeetingTest extends PHPUnit_Framework_TestCase
         $expected = array(
                       'DELETED' => 0,
                       'PARENT_TYPE' => 'Accounts',
-                      'STATUS' => 'Planned',
+                      'STATUS' => translate('meeting_status_dom', 'Meetings', 'Planned'),
                       'TYPE' => 'Sugar',
                       'REMINDER_TIME' => '-1',
                       'EMAIL_REMINDER_TIME' => '-1',
@@ -220,7 +220,9 @@ class MeetingTest extends PHPUnit_Framework_TestCase
         $result = $meeting->set_notification_body(new Sugar_Smarty(), $meeting);
 
         $this->assertEquals($meeting->name, $result->_tpl_vars['MEETING_SUBJECT']);
-        $this->assertEquals($meeting->status, $result->_tpl_vars['MEETING_STATUS']);
+        $this->assertEquals(
+            translate('meeting_status_dom', 'Meetings', $meeting->status), $result->_tpl_vars['MEETING_STATUS']
+        );
         //$this->assertEquals('SuiteCRM', $result->_tpl_vars['MEETING_TYPE']);
         $this->assertEquals($meeting->duration_hours, $result->_tpl_vars['MEETING_HOURS']);
         $this->assertEquals($meeting->duration_minutes, $result->_tpl_vars['MEETING_MINUTES']);

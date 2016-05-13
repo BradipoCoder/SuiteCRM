@@ -130,7 +130,7 @@ class SchedulerTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(array('*', 1, 2, 3, 4, 5, 6, 0), $scheduler->dayInt);
         $this->assertEquals(array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12), $scheduler->monthsInt);
-        $this->assertEquals(array('', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'), $scheduler->monthsLabel);
+        $this->assertEquals($GLOBALS["app_list_strings"]['dom_cal_month_long'], $scheduler->monthsLabel);
         $this->assertEquals(array('*', '/', '-', ','), $scheduler->metricsVar);
         $this->assertEquals(array(' every ', '', ' thru ', ' and '), $scheduler->metricsVal);
     }
@@ -171,7 +171,7 @@ class SchedulerTest extends PHPUnit_Framework_TestCase
     {
         $scheduler = new Scheduler();
 
-        //execute the method and capture the echo output 
+        //execute the method and capture the echo output
         ob_start();
 
         $scheduler->displayCronInstructions();
