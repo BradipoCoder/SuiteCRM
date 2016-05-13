@@ -131,15 +131,19 @@ class SavedSearchTest extends PHPUnit_Framework_TestCase
 
     public function testfill_in_additional_list_fields()
     {
+        $admin = new \User();
+        $adminId = 1;
+        $admin->retrieve($adminId);
+
         $savedSearch = new SavedSearch();
 
-        $savedSearch->assigned_user_id = 1;
+        $savedSearch->assigned_user_id = $adminId;
         $savedSearch->contents = array('search_module' => 'Leads');
 
         $savedSearch->fill_in_additional_list_fields();
 
         $this->assertEquals('Leads', $savedSearch->search_module);
-        $this->assertEquals('Administrator', $savedSearch->assigned_user_name);
+        $this->assertEquals($admin->name, $savedSearch->assigned_user_name);
     }
 
     public function testpopulateRequest()

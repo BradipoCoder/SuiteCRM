@@ -125,20 +125,22 @@ class MeetingTest extends PHPUnit_Framework_TestCase
 
     public function testfill_in_additional_detail_fields()
     {
-        $meeting = new Meeting();
+        $admin = new \User();
+        $adminId = 1;
+        $admin->retrieve($adminId);
 
-        //preset required attributes
-        $meeting->assigned_user_id = 1;
-        $meeting->modified_user_id = 1;
-        $meeting->created_by = 1;
-        $meeting->contact_id = 1;
+        $meeting = new Meeting();
+        $meeting->assigned_user_id = $adminId;
+        $meeting->modified_user_id = $adminId;
+        $meeting->created_by = $adminId;
+        $meeting->contact_id = $adminId;
 
         $meeting->fill_in_additional_detail_fields();
 
         //verify effected atributes
-        $this->assertEquals('Administrator', $meeting->assigned_user_name);
-        $this->assertEquals('Administrator', $meeting->created_by_name);
-        $this->assertEquals('Administrator', $meeting->modified_by_name);
+        $this->assertEquals($admin->name, $meeting->assigned_user_name);
+        $this->assertEquals($admin->name, $meeting->created_by_name);
+        $this->assertEquals($admin->name, $meeting->modified_by_name);
         $this->assertTrue(isset($meeting->time_start_hour));
         $this->assertTrue(isset($meeting->date_start));
         $this->assertTrue(isset($meeting->time_start));

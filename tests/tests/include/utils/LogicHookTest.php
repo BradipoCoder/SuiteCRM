@@ -154,9 +154,9 @@ class LogicHookTest extends PHPUnit_Framework_TestCase {
         // @todo: order might be changed!!!
         $LogicHook = new LogicHook();
         $actual = $LogicHook->loadHooks('Accounts');
-        foreach($expected as $condition => $conditionHooks) {
+        foreach ($expected as $condition => $conditionHooks) {
             $this->assertArrayHasKey($condition, $actual);
-            foreach($conditionHooks as $conditionHook) {
+            foreach ($conditionHooks as $conditionHook) {
                 $this->assertContains($conditionHook, $actual[$condition]);
             }
         }
@@ -164,15 +164,33 @@ class LogicHookTest extends PHPUnit_Framework_TestCase {
         //test with an invalid module, it will get the application hooks
         $expected = array(
             'after_save' => array(
-                array(1, 'AOD Index Changes', 'modules/AOD_Index/AOD_LogicHooks.php', 'AOD_LogicHooks', 'saveModuleChanges'),
+                array(
+                    1,
+                    'AOD Index Changes',
+                    'modules/AOD_Index/AOD_LogicHooks.php',
+                    'AOD_LogicHooks',
+                    'saveModuleChanges'
+                ),
                 array(30, 'popup_select', 'modules/SecurityGroups/AssignGroups.php', 'AssignGroups', 'popup_select'),
                 array(99, 'AOW_Workflow', 'modules/AOW_WorkFlow/AOW_WorkFlow.php', 'AOW_WorkFlow', 'run_bean_flows'),
             ),
             'after_delete' => array(
-                array(1, 'AOD Index changes', 'modules/AOD_Index/AOD_LogicHooks.php', 'AOD_LogicHooks', 'saveModuleDelete'),
+                array(
+                    1,
+                    'AOD Index changes',
+                    'modules/AOD_Index/AOD_LogicHooks.php',
+                    'AOD_LogicHooks',
+                    'saveModuleDelete'
+                ),
             ),
             'after_restore' => array(
-                array(1, 'AOD Index changes', 'modules/AOD_Index/AOD_LogicHooks.php', 'AOD_LogicHooks', 'saveModuleRestore'),
+                array(
+                    1,
+                    'AOD Index changes',
+                    'modules/AOD_Index/AOD_LogicHooks.php',
+                    'AOD_LogicHooks',
+                    'saveModuleRestore'
+                ),
             ),
             'after_ui_footer' => array(
                 array(10, 'popup_onload', 'modules/SecurityGroups/AssignGroups.php', 'AssignGroups', 'popup_onload'),
@@ -183,9 +201,9 @@ class LogicHookTest extends PHPUnit_Framework_TestCase {
             ),
         );
         $actual = $LogicHook->loadHooks('');
-        foreach($expected as $condition => $conditionHooks) {
+        foreach ($expected as $condition => $conditionHooks) {
             $this->assertArrayHasKey($condition, $actual);
-            foreach($conditionHooks as $conditionHook) {
+            foreach ($conditionHooks as $conditionHook) {
                 $this->assertContains($conditionHook, $actual[$condition]);
             }
         }
@@ -222,18 +240,18 @@ class LogicHookTest extends PHPUnit_Framework_TestCase {
 
 		//test with refresh false/default
         $actual = $LogicHook->getHooks('Accounts');
-        foreach($expected as $condition => $conditionHooks) {
+        foreach ($expected as $condition => $conditionHooks) {
             $this->assertArrayHasKey($condition, $actual);
-            foreach($conditionHooks as $conditionHook) {
+            foreach ($conditionHooks as $conditionHook) {
                 $this->assertContains($conditionHook, $actual[$condition]);
             }
         }
 
-		//test wit refresh true
-        $actual = $LogicHook->getHooks('Accounts',true);
-        foreach($expected as $condition => $conditionHooks) {
+        //test wit refresh true
+        $actual = $LogicHook->getHooks('Accounts', TRUE);
+        foreach ($expected as $condition => $conditionHooks) {
             $this->assertArrayHasKey($condition, $actual);
-            foreach($conditionHooks as $conditionHook) {
+            foreach ($conditionHooks as $conditionHook) {
                 $this->assertContains($conditionHook, $actual[$condition]);
             }
         }

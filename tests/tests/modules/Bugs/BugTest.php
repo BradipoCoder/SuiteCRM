@@ -78,17 +78,22 @@ class BugTest extends PHPUnit_Framework_TestCase
 
     public function testfill_in_additional_detail_fields()
     {
+
+        $admin = new \User();
+        $adminId = 1;
+        $admin->retrieve($adminId);
+
         $bug = new Bug();
-        $bug->assigned_user_id = 1;
-        $bug->created_by = 1;
-        $bug->modified_user_id = 1;
+        $bug->assigned_user_id = $adminId;
+        $bug->created_by = $adminId;
+        $bug->modified_user_id = $adminId;
 
         //test with attributes preset and verify attributes are set accordingly
         $bug->fill_in_additional_detail_fields();
 
-        $this->assertEquals('Administrator', $bug->assigned_user_name);
-        $this->assertEquals('Administrator', $bug->created_by_name);
-        $this->assertEquals('Administrator', $bug->modified_by_name);
+        $this->assertEquals($admin->name, $bug->assigned_user_name);
+        $this->assertEquals($admin->name, $bug->created_by_name);
+        $this->assertEquals($admin->name, $bug->modified_by_name);
     }
 
     public function testset_release()

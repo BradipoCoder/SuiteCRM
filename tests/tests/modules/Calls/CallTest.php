@@ -132,18 +132,21 @@ class CallTest extends PHPUnit_Framework_TestCase
 
     public function testget_list_view_data()
     {
-        $call = new Call();
+        $admin = new \User();
+        $adminId = 1;
+        $admin->retrieve($adminId);
 
-        $call->assigned_user_id = 1;
-        $call->created_by = 1;
-        $call->modified_user_id = 1;
+        $call = new Call();
+        $call->assigned_user_id = $adminId;
+        $call->created_by = $adminId;
+        $call->modified_user_id = $adminId;
 
         //execute the method and verify that it retunrs expected results
         $expected = array(
-                'MODIFIED_USER_ID' => 1,
-                'CREATED_BY' => 1,
+            'MODIFIED_USER_ID' => $adminId,
+            'CREATED_BY' => $adminId,
                 'DELETED' => 0,
-                'ASSIGNED_USER_ID' => 1,
+            'ASSIGNED_USER_ID' => $adminId,
                 /*'STATUS' => 'Planned',*/
                 'REMINDER_TIME' => '-1',
                 'EMAIL_REMINDER_TIME' => '-1',
@@ -170,9 +173,9 @@ class CallTest extends PHPUnit_Framework_TestCase
             }
         }
 
-        $this->assertEquals('Administrator', $call->assigned_user_name);
-        $this->assertEquals('Administrator', $call->created_by_name);
-        $this->assertEquals('Administrator', $call->modified_by_name);
+        $this->assertEquals($admin->name, $call->assigned_user_name);
+        $this->assertEquals($admin->name, $call->created_by_name);
+        $this->assertEquals($admin->name, $call->modified_by_name);
     }
 
     public function testset_notification_body()
