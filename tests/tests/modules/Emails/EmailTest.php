@@ -767,12 +767,18 @@ class EmailTest extends PHPUnit_Framework_TestCase
         $expected = array(
                 'ID' => 1,
                 'FROM_ADDR_NAME' => 'Admin',
-                'TYPE' => 'Archived',
+                'TYPE' => translate('dom_email_types', 'Email', 'archived'),
                 'INTENT' => 'support',
                 'FROM_ADDR' => null,
-                'QUICK_REPLY' => '<a  href="index.php?module=Emails&action=Compose&replyForward=true&reply=reply&record=1&inbound_email_id=1">Reply</a>',
+                'QUICK_REPLY' => '<a  href="index.php?module=Emails&action=Compose&replyForward=true&reply=reply&record=1&inbound_email_id=1">'
+                                 . translate('LNK_QUICK_REPLY', 'Emails') . '</a>',
                 'STATUS' => null,
-                'CREATE_RELATED' => '~'.preg_quote('<a href="index.php?module=Cases&action=EditView&inbound_email_id=1" ><img src="themes/SuiteR/images/CreateCases.gif?v=').'[\w-]+'.preg_quote('"    border="0" alt="Create Cases" />Create Case</a>').'~',
+                'CREATE_RELATED' => '~' . preg_quote(
+                        '<a href="index.php?module=Cases&action=EditView&inbound_email_id=1" ><img src="themes/SuiteR/images/CreateCases.gif?v='
+                    ) . '[\w-]+' . preg_quote(
+                                        '"    border="0" alt="' . translate('LBL_CREATE_CASES', 'Emails') . '" />'
+                                        . translate('LBL_CREATE_CASE', 'Emails') . '</a>'
+                                    ) . '~',
                 'CONTACT_NAME' => '</a>abc@email.com<a>',
                 'CONTACT_ID' => '',
                 'ATTACHMENT_IMAGE' => null,
@@ -794,9 +800,15 @@ class EmailTest extends PHPUnit_Framework_TestCase
     {
         $email = new Email();
 
-        $expected = '~'.preg_quote("Quick Create&nbsp;<a id='' onclick='return quick_create_overlib(\"\", \"SuiteR\", this);' href=\"#\" ><img src=\"themes/SuiteR/images/advanced_search.gif?v=")
+        $expected = '~' . preg_quote(
+                translate('LBL_QUICK_CREATE', 'Emails')
+                . "&nbsp;<a id='' onclick='return quick_create_overlib(\"\", \"SuiteR\", this);' href=\"#\" ><img src=\"themes/SuiteR/images/advanced_search.gif?v="
+            )
             .'[\w-]+'
-            .preg_quote("\"    border='0' align='absmiddle' alt=\"Quick Create\" /></a>")
+                    . preg_quote(
+                        "\"    border='0' align='absmiddle' alt=\"" . translate('LBL_QUICK_CREATE', 'Emails')
+                        . "\" /></a>"
+                    )
             .'~';
 
         $actual = $email->quickCreateForm();

@@ -118,7 +118,6 @@ class CallTest extends PHPUnit_Framework_TestCase
     public function testfill_in_additional_detail_fields()
     {
         $call = new Call();
-
         $call->fill_in_additional_detail_fields();
 
         $this->assertEquals('0', $call->duration_hours);
@@ -127,7 +126,7 @@ class CallTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(false, $call->reminder_checked);
         $this->assertEquals(-1, $call->email_reminder_time);
         $this->assertEquals(false, $call->email_reminder_checked);
-        $this->assertEquals('Accounts', $call->parent_type);
+        $this->assertEquals($GLOBALS['app_list_strings']['record_type_default_key'], $call->parent_type);
     }
 
     public function testget_list_view_data()
@@ -199,7 +198,7 @@ class CallTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($call->current_notify_user->new_assigned_user_name, $result->_tpl_vars['CALL_TO']);
         $this->assertEquals($call->duration_hours, $result->_tpl_vars['CALL_HOURS']);
         $this->assertEquals($call->duration_minutes, $result->_tpl_vars['CALL_MINUTES']);
-        $this->assertEquals($call->status, $result->_tpl_vars['CALL_STATUS']);
+        $this->assertEquals(translate('call_status_dom', 'Calls', $call->status), $result->_tpl_vars['CALL_STATUS']);
         $this->assertEquals('09/01/2015 00:02 UTC(+00:00)', $result->_tpl_vars['CALL_STARTDATE']);
         $this->assertEquals($call->description, $result->_tpl_vars['CALL_DESCRIPTION']);
     }

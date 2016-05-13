@@ -151,11 +151,13 @@ class AOR_ReportTest extends PHPUnit_Framework_TestCase
 
     public function testgetTotalHTML()
     {
+        global $app_list_strings;
 
         //execute the method with required data preset and verify it returns expected result
         $fields = array('label' => array('display' => 1, 'total' => 'SUM', 'label' => 'total'));
         $totals = array('label' => array(10, 20, 30));
-        $expected = '<tbody><tr><th>total Sum</th></tr><tr><td>60</td></tr></tbody>';
+        $expected = '<tbody><tr><th>total ' . $app_list_strings['aor_total_options'][$fields['label']['total']]
+                    . '</th></tr><tr><td>60</td></tr></tbody>';
 
         $aor_Report = new AOR_Report();
         $actual = $aor_Report->getTotalHTML($fields, $totals);

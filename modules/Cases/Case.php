@@ -263,7 +263,12 @@ class aCase extends Basic {
         $temp_array['STATUS'] = empty($this->status)? "" : (!isset($app_list_strings[$this->field_name_map['status']['options']][$this->status]) ? $this->status : $app_list_strings[$this->field_name_map['status']['options']][$this->status]);
 		$temp_array['ENCODED_NAME'] = $this->name;
 		$temp_array['CASE_NUMBER'] = $this->case_number;
-		$temp_array['SET_COMPLETE'] =  "<a href='index.php?return_module=Home&return_action=index&action=EditView&module=Cases&record=$this->id&status=Closed'>".SugarThemeRegistry::current()->getImage("close_inline","title=".translate('LBL_LIST_CLOSE','Cases')." border='0'",null,null,'.gif',translate('LBL_LIST_CLOSE','Cases'))."</a>";
+        $temp_array['SET_COMPLETE'] = "<a href='index.php?return_module=Home&return_action=index&action=EditView&module=Cases&record=$this->id&status=Closed'>"
+                                      . SugarThemeRegistry::current()->getImage(
+                "close_inline", 'title="' . translate(
+                                  'LBL_LIST_CLOSE', 'Cases'
+                              ) . '" border="0"', NULL, NULL, '.gif', translate('LBL_LIST_CLOSE', 'Cases')
+            ) . "</a>";
 		//$temp_array['ACCOUNT_NAME'] = $this->account_name; //overwrites the account_name value returned from the cases table.
 		return $temp_array;
 	}

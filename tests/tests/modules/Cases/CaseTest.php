@@ -122,7 +122,10 @@ class aCaseTest extends PHPUnit_Framework_TestCase
                 'SET_COMPLETE' => '~'
                                 .preg_quote('<a href=\'index.php?return_module=Home&return_action=index&action=EditView&module=Cases&record=&status=Closed\'><img src="themes/SuiteR/images/close_inline.png?v=')
                                 .'[\w-]+'
-                                .preg_quote('"    title=Close border=\'0\' alt="Close" /></a>')
+                                  . preg_quote(
+                                      '"    title="' . translate('LBL_LIST_CLOSE', 'Cases') . '" border="0" alt="'
+                                      . translate('LBL_LIST_CLOSE', 'Cases') . '" /></a>'
+                                  )
                                 .'~',
         );
 
@@ -146,7 +149,7 @@ class aCaseTest extends PHPUnit_Framework_TestCase
                 'DELETED' => 0,
                 'CASE_NUMBER' => 1,
                 'STATUS' => 'New',
-                'PRIORITY' => 'High',
+                'PRIORITY' => translate('case_priority_dom', 'Cases', $aCase->priority),
                 'STATE' => 'Open',
                 'UPDATE_TEXT' => '',
                 'ENCODED_NAME' => 'test',
@@ -189,7 +192,9 @@ class aCaseTest extends PHPUnit_Framework_TestCase
         $result = $aCase->set_notification_body(new Sugar_Smarty(), $aCase);
 
         $this->assertEquals($aCase->name, $result->_tpl_vars['CASE_SUBJECT']);
-        $this->assertEquals('High', $result->_tpl_vars['CASE_PRIORITY']);
+        $this->assertEquals(
+            translate('case_priority_dom', 'Cases', $aCase->priority), $result->_tpl_vars['CASE_PRIORITY']
+        );
         //$this->assertEquals('New', $result->_tpl_vars['CASE_STATUS']);
         $this->assertEquals($aCase->description, $result->_tpl_vars['CASE_DESCRIPTION']);
     }

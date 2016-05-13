@@ -271,7 +271,12 @@ class ProjectTaskTest extends PHPUnit_Framework_TestCase
     {
         $projectTask = new ProjectTask();
 
-        $expected = "<select name=\"utilization\">\n<OPTION value='0'>none</OPTION>\n<OPTION value='25'>25</OPTION>\n<OPTION value='50'>50</OPTION>\n<OPTION value='75'>75</OPTION>\n<OPTION value='100'>100</OPTION></select>";
+        //$app_list_strings['project_task_utilization_options']
+        $GLOBALS["app_list_strings"]['project_task_utilization_options'][0];
+
+        $expected = "<select name=\"utilization\">\n<OPTION value='0'>"
+                    . $GLOBALS["app_list_strings"]['project_task_utilization_options'][0]
+                    . "</OPTION>\n<OPTION value='25'>25</OPTION>\n<OPTION value='50'>50</OPTION>\n<OPTION value='75'>75</OPTION>\n<OPTION value='100'>100</OPTION></select>";
         $actual = getUtilizationDropdown($projectTask, 'utilization', '0', 'EditView');
         $this->assertSame($expected, $actual);
     }

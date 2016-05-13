@@ -6188,11 +6188,6 @@ eoq;
 		} // if
 	}
 
-	function saveMailBoxValueOfInboundEmail() {
-		$query = "update Inbound_email set mailbox = '{$this->email_user}'";
-		$this->db->query($query);
-	}
-
 	function retrieveMailBoxFolders() {
 		$this->mailboxarray = explode(",", $this->mailbox);
 		/*

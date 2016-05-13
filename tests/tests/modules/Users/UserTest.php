@@ -85,10 +85,9 @@ class UserTest extends PHPUnit_Framework_TestCase {
 	public function testgetSignatures()
 	{
 		$user = new User();
-
 		$user->retrieve(1);
-
-		$expected = "<select onChange='setSigEditButtonVisibility();' id='signature_id' name='signature_id'>\n<OPTION selected value=''>--None--</OPTION></select>";
+        $expected = "<select onChange='setSigEditButtonVisibility();' id='signature_id' name='signature_id'>\n<OPTION selected value=''>"
+                    . translate("LBL_NONE") . "</OPTION></select>";
 		$actual = $user->getSignatures();
 		$this->assertSame($expected, $actual);
 
@@ -786,7 +785,9 @@ class UserTest extends PHPUnit_Framework_TestCase {
 
 		$user = new User();
 
-		$expected = '<script type="text/javascript" language="Javascript">var welcome = document.getElementById("welcome");var welcomeContent = welcome.innerHTML;welcome.innerHTML = welcomeContent + "&nbsp;&nbsp;&nbsp;&nbsp;<a href=index.php?module=Emails&action=ListViewGroup>Group Inbox: (0 New)</a>";</script>';
+        $expected = '<script type="text/javascript" language="Javascript">var welcome = document.getElementById("welcome");var welcomeContent = welcome.innerHTML;welcome.innerHTML = welcomeContent + "&nbsp;&nbsp;&nbsp;&nbsp;<a href=index.php?module=Emails&action=ListViewGroup>'
+                    . translate('LBL_LIST_TITLE_GROUP_INBOX', 'Emails') . ': (0 ' . translate('LBL_NEW', 'Emails')
+                    . ')</a>";</script>';
 
 		//cpature the screen output and compare with exected values
 
