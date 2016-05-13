@@ -116,6 +116,10 @@ class ProjectTaskTest extends PHPUnit_Framework_TestCase
 
     public function testfill_in_additional_detail_fields()
     {
+        $admin = new \User();
+        $adminId = 1;
+        $admin->retrieve($adminId);
+
         $projectTask = new ProjectTask();
 
         //test without setting assigned_user_id
@@ -123,13 +127,17 @@ class ProjectTaskTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('', $projectTask->assigned_user_name);
 
         //test with assigned_user_id set
-        $projectTask->assigned_user_id = 1;
+        $projectTask->assigned_user_id = $adminId;
         $projectTask->fill_in_additional_detail_fields();
-        $this->assertEquals('Administrator', $projectTask->assigned_user_name);
+        $this->assertEquals($admin->name, $projectTask->assigned_user_name);
     }
 
     public function testfill_in_additional_list_fields()
     {
+        $admin = new \User();
+        $adminId = 1;
+        $admin->retrieve($adminId);
+
         $projectTask = new ProjectTask();
 
         //test without setting assigned_user_id
@@ -137,9 +145,9 @@ class ProjectTaskTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('', $projectTask->assigned_user_name);
 
         //test with assigned_user_id set
-        $projectTask->assigned_user_id = 1;
+        $projectTask->assigned_user_id = $adminId;
         $projectTask->fill_in_additional_list_fields();
-        $this->assertEquals('Administrator', $projectTask->assigned_user_name);
+        $this->assertEquals($admin->name, $projectTask->assigned_user_name);
     }
 
     public function testget_summary_text()

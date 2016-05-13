@@ -74,20 +74,21 @@ class EmailTemplateTest extends PHPUnit_Framework_TestCase
 
     public function testfill_in_additional_detail_fields()
     {
+        $admin = new \User();
+        $adminId = 1;
+        $admin->retrieve($adminId);
+
         $emailTemplate = new EmailTemplate();
-
-        //test with attributes preset and verify template variables are set accordingly
-
-        $emailTemplate->created_by = 1;
-        $emailTemplate->modified_user_id = 1;
-        $emailTemplate->assigned_user_id = 1;
+        $emailTemplate->created_by = $adminId;
+        $emailTemplate->modified_user_id = $adminId;
+        $emailTemplate->assigned_user_id = $adminId;
         $emailTemplate->body_html = '<b>some html text</b>';
 
         $emailTemplate->fill_in_additional_detail_fields();
 
-        $this->assertEquals('Administrator', $emailTemplate->created_by_name);
-        $this->assertEquals('Administrator', $emailTemplate->modified_by_name);
-        $this->assertEquals('Administrator', $emailTemplate->assigned_user_name);
+        $this->assertEquals($admin->name, $emailTemplate->created_by_name);
+        $this->assertEquals($admin->name, $emailTemplate->modified_by_name);
+        $this->assertEquals($admin->name, $emailTemplate->assigned_user_name);
         $this->assertEquals('some html text', $emailTemplate->body);
     }
 

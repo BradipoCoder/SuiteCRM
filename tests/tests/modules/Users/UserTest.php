@@ -659,28 +659,14 @@ class UserTest extends PHPUnit_Framework_TestCase {
 
 	public function testfill_in_additional_list_fields()
 	{
-
-		$user = new User();
-
-		$user->retrieve(1);
-
-		$user->fill_in_additional_list_fields();
-
-		$this->assertEquals("Administrator",$user->full_name);
-
-	}
-
-	public function testfill_in_additional_detail_fields()
-	{
-
-		$user = new User();
-
-		$user->retrieve(1);
-
-		$user->fill_in_additional_detail_fields();
-
-		$this->assertEquals("Administrator",$user->full_name);
-
+        $admin = new User();
+        $adminId = 1;
+        $admin->retrieve($adminId);
+        $admin->created_by = $adminId;
+        $admin->modified_user_id = $adminId;
+        $admin->fill_in_additional_list_fields();
+        $this->assertEquals($admin->full_name, $admin->created_by_name);
+        $this->assertEquals($admin->full_name, $admin->modified_by_name);
 	}
 
 	public function testretrieve_user_id()

@@ -145,9 +145,9 @@ class EmailTest extends PHPUnit_Framework_TestCase
         $this->markTestIncomplete('Not testing sending email currently');
         /*
     	$email = new Email();
-    	
+
     	$result = $email->sendEmailTest('mail.someserver.com', 25, 425, false, '', '', 'admin@email.com', 'abc@email.com', 'smtp', 'admin');
-    	
+
     	$expected = array( "status"=>false, "errorMessage"=> "Error:SMTP connect() failed. https://github.com/PHPMailer/PHPMailer/wiki/Troubleshooting");
     	$this->assertSame($expected, $result);
     	*/
@@ -157,16 +157,16 @@ class EmailTest extends PHPUnit_Framework_TestCase
     {
         $this->markTestIncomplete('Not testing sending email currently');
     /*	$email = new Email();
-    	
+
     	$_REQUEST['sendSubject'] = "test subject";
-    	$_REQUEST['sendDescription'] = "test text"; 
-    	$_REQUEST['fromAccount'] = "from@email.com";		
+    	$_REQUEST['sendDescription'] = "test text";
+    	$_REQUEST['fromAccount'] = "from@email.com";
     	$_REQUEST['setEditor']  = 1;
     	$_REQUEST['description_html']  = "test html";
     	$_REQUEST['sendTo'] = "abc@email.com";
-    
+
     	$result = $email->email2Send($_REQUEST);
-    	
+
     	$this->assertEquals(false, $result);
     */
     }
@@ -176,15 +176,15 @@ class EmailTest extends PHPUnit_Framework_TestCase
         $this->markTestIncomplete('Not testing sending email currently');
         /*
     	$email = new Email();
-    	
+
     	$email->to_addrs_arr = array('email' =>'abc@xyz.com', 'display' => 'abc');
     	$email->cc_addrs_arr = array('email' =>'abc@xyz.com', 'display' => 'abc');
     	$email->bcc_addrs_arr = array('email' =>'abc@xyz.com', 'display' => 'abc');
-    	
+
     	$email->from_addr = "abc@xyz.com";
     	$email->from_name = "abc";
     	$email->reply_to_name = "xyz";
-    	
+
     	$result = $email->send();
     	$this->assertEquals(false, $result);
     	*/
@@ -266,7 +266,7 @@ class EmailTest extends PHPUnit_Framework_TestCase
 
         $email->saveEmailAddresses();
 
-        //retrieve and verify that email addresses were saved properly 
+        //retrieve and verify that email addresses were saved properly
         $email->retrieveEmailAddresses();
 
         $this->assertNotSame(false, strpos($email->from_addr, 'from_test@email.com'));
@@ -501,7 +501,7 @@ class EmailTest extends PHPUnit_Framework_TestCase
         $actual = $email->u_get_clear_form_js('', '', '');
         $this->assertSame($expected, $actual);
 
-        //with valid params 
+        //with valid params
         $expected = "\n		<script type=\"text/javascript\" language=\"JavaScript\"><!-- Begin\n			function clear_form(form) {\n				var newLoc = \"index.php?action=\" + form.action.value + \"&module=\" + form.module.value + \"&query=true&clear_query=true&type=out&assigned_user_id=1\";\n				if(typeof(form.advanced) != \"undefined\"){\n					newLoc += \"&advanced=\" + form.advanced.value;\n				}\n				document.location.href= newLoc;\n			}\n		//  End --></script>";
         $actual = $email->u_get_clear_form_js('out', '', '1');
         $this->assertSame($expected, $actual);
@@ -564,7 +564,7 @@ class EmailTest extends PHPUnit_Framework_TestCase
         $email->description_html = 'some html text with <b>sign</b>';
         $email->description = 'some text with sign';
 
-        //test for strings with signature present  
+        //test for strings with signature present
         $sig = array('signature_html' => 'sign', 'signature' => 'sign');
         $result = $email->hasSignatureInBody($sig);
         $this->assertEquals(true, $result);
@@ -719,17 +719,20 @@ class EmailTest extends PHPUnit_Framework_TestCase
 
     public function testfill_in_additional_detail_fields()
     {
-        $email = new Email();
+        $admin = new \User();
+        $adminId = 1;
+        $admin->retrieve($adminId);
 
-        $email->created_by = '1';
-        $email->modified_user_id = '1';
+        $email = new Email();
+        $email->created_by = $adminId;
+        $email->modified_user_id = $adminId;
         $email->type = 'out';
         $email->status = 'send_error';
 
         $email->fill_in_additional_list_fields();
 
-        $this->assertEquals('Administrator', $email->created_by_name);
-        $this->assertEquals('Administrator', $email->modified_by_name);
+        $this->assertEquals($admin->name, $email->created_by_name);
+        $this->assertEquals($admin->name, $email->modified_by_name);
         $this->assertEquals('', $email->type_name);
         $this->assertEquals('', $email->name);
         $this->assertEquals('DetailView', $email->link_action);

@@ -22,7 +22,9 @@ class ProjectTest extends PHPUnit_Framework_TestCase {
 
 	public function testfill_in_additional_detail_fields()
 	{
-		error_reporting(E_ERROR | E_PARSE);
+        $admin = new \User();
+        $adminId = 1;
+        $admin->retrieve($adminId);
 
 		$project = new Project();
 
@@ -32,15 +34,19 @@ class ProjectTest extends PHPUnit_Framework_TestCase {
 
 
 		//test with assigned_user_id set
-		$project->assigned_user_id = 1;
+        $project->assigned_user_id = $adminId;
 		$project->fill_in_additional_detail_fields();
-		$this->assertEquals("Administrator", $project->assigned_user_name);
+        $this->assertEquals($admin->name, $project->assigned_user_name);
 
 	}
 
 
 	public function testfill_in_additional_list_fields()
 	{
+        $admin = new \User();
+        $adminId = 1;
+        $admin->retrieve($adminId);
+
 		$project = new Project();
 
 		//test without setting assigned_user_id
@@ -49,9 +55,9 @@ class ProjectTest extends PHPUnit_Framework_TestCase {
 
 
 		//test with assigned_user_id set
-		$project->assigned_user_id = 1;
+        $project->assigned_user_id = $adminId;
 		$project->fill_in_additional_list_fields();
-		$this->assertEquals("Administrator", $project->assigned_user_name);
+        $this->assertEquals($admin->name, $project->assigned_user_name);
 
 	}
 

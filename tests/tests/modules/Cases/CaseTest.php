@@ -82,16 +82,20 @@ class aCaseTest extends PHPUnit_Framework_TestCase
 
     public function testfill_in_additional_detail_fields()
     {
+        $admin = new \User();
+        $adminId = 1;
+        $admin->retrieve($adminId);
+
         $aCase = new aCase();
-        $aCase->assigned_user_id = 1;
-        $aCase->created_by = 1;
-        $aCase->modified_user_id = 1;
+        $aCase->assigned_user_id = $adminId;
+        $aCase->created_by = $adminId;
+        $aCase->modified_user_id = $adminId;
 
         $aCase->fill_in_additional_detail_fields();
 
-        $this->assertEquals('Administrator', $aCase->assigned_user_name);
-        $this->assertEquals('Administrator', $aCase->created_by_name);
-        $this->assertEquals('Administrator', $aCase->modified_by_name);
+        $this->assertEquals($admin->name, $aCase->assigned_user_name);
+        $this->assertEquals($admin->name, $aCase->created_by_name);
+        $this->assertEquals($admin->name, $aCase->modified_by_name);
     }
 
     public function testget_contacts()
