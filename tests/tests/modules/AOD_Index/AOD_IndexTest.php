@@ -64,7 +64,7 @@ class AOD_IndexTest extends PHPUnit_Framework_TestCase
         $aod_index = new AOD_Index();
         $result = $aod_index->getIndex();
 
-        //execute the method and verify it returns a different instance of samme type 
+        //execute the method and verify it returns a different instance of samme type
         $this->assertInstanceOf('AOD_Index', $result);
         $this->assertNotSame($aod_index, $result);
     }
@@ -191,9 +191,10 @@ class AOD_IndexTest extends PHPUnit_Framework_TestCase
         );
 
         $aod_index = new AOD_Index();
-
-        //execute the method and verify that it retunrs expected results
         $actual = $aod_index->getIndexableModules();
-        $this->assertSame($expected, $actual);
+        foreach ($expected as $k => $v) {
+            $this->assertTrue(array_key_exists($k, $actual));
+            $this->assertEquals($v, $actual[$k]);
+        }
     }
 }

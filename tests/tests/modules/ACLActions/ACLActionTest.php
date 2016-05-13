@@ -14,8 +14,8 @@ class ACLActionTest extends PHPUnit_Framework_TestCase
         $this->assertAttributeEquals('ACLActions', 'module_dir', $aclAction);
         $this->assertAttributeEquals('ACLAction', 'object_name', $aclAction);
         $this->assertAttributeEquals('acl_actions', 'table_name', $aclAction);
-        $this->assertAttributeEquals(true, 'new_schema', $aclAction);
-        $this->assertAttributeEquals(true, 'disable_custom_fields', $aclAction);
+        $this->assertAttributeEquals(TRUE, 'new_schema', $aclAction);
+        $this->assertAttributeEquals(TRUE, 'disable_custom_fields', $aclAction);
     }
 
     public function testaddActions()
@@ -41,15 +41,14 @@ class ACLActionTest extends PHPUnit_Framework_TestCase
 
     public function testAccessName()
     {
-        error_reporting(E_ERROR | E_PARSE);
+        $this->assertFalse(ACLAction::AccessName(''));
 
-        $this->assertFalse(ACLAction::AccessName('')); //test with invalid value
-        $this->assertEquals('All', ACLAction::AccessName(90)); //test with a valid value
+        $expected = translate("LBL_ACCESS_ALL", 'ACLActions');
+        $this->assertEquals($expected, ACLAction::AccessName(90));
     }
 
     public function testgetDefaultActions()
     {
-        global $beanList;
         $actual = ACLAction::getDefaultActions();
         $this->assertTrue(is_array($actual)); //verify that it returns an array
         foreach ($actual as $acl) {
@@ -66,8 +65,8 @@ class ACLActionTest extends PHPUnit_Framework_TestCase
     public function testgetUserActions()
     {
         $result1 = ACLAction::getUserActions('1');
-        $result2 = ACLAction::getUserActions('1', false, 'Accounts');
-        $result3 = ACLAction::getUserActions('1', false, 'Accounts', 'list');
+        $result2 = ACLAction::getUserActions('1', FALSE, 'Accounts');
+        $result3 = ACLAction::getUserActions('1', FALSE, 'Accounts', 'list');
 
         //verify that all three results retunred are different
         $this->assertNotSame($result1, $result2);
@@ -77,27 +76,33 @@ class ACLActionTest extends PHPUnit_Framework_TestCase
 
     public function testhasAccess()
     {
-        $this->assertFalse(ACLAction::hasAccess()); //check with defaults 
-        $this->assertTrue(ACLAction::hasAccess(false, false, 90));  //access All with is owner false
-        $this->assertTrue(ACLAction::hasAccess(true, true, 90)); //access All with is owner true 
-        $this->assertFalse(ACLAction::hasAccess(false, false, -98));// check access disabled
-        $this->assertFalse(ACLAction::hasAccess(true, true, 89)); //check access enabled 
-        $this->assertTrue(ACLAction::hasAccess(true, true, 75)); //check owner access with is owner true
-        $this->assertFalse(ACLAction::hasAccess(false, true, 75)); //check owner access with is owner false
+        $this->assertFalse(ACLAction::hasAccess()); //check with defaults
+        $this->assertTrue(ACLAction::hasAccess(FALSE, FALSE, 90));  //access All with is owner false
+        $this->assertTrue(ACLAction::hasAccess(TRUE, TRUE, 90)); //access All with is owner true
+        $this->assertFalse(ACLAction::hasAccess(FALSE, FALSE, -98));// check access disabled
+        $this->assertFalse(ACLAction::hasAccess(TRUE, TRUE, 89)); //check access enabled
+        $this->assertTrue(ACLAction::hasAccess(TRUE, TRUE, 75)); //check owner access with is owner true
+        $this->assertFalse(ACLAction::hasAccess(FALSE, TRUE, 75)); //check owner access with is owner false
     }
 
     public function testuserNeedsSecurityGroup()
     {
-        $this->assertFalse(ACLAction::userNeedsSecurityGroup('1', '', ''));//test with empty module and action 
-        $this->assertFalse(ACLAction::userNeedsSecurityGroup('1', 'Accounts', 'list')); //test with valid module and action
+        $this->assertFalse(ACLAction::userNeedsSecurityGroup('1', '', ''));//test with empty module and action
+        $this->assertFalse(
+            ACLAction::userNeedsSecurityGroup('1', 'Accounts', 'list')
+        ); //test with valid module and action
     }
 
     public function testuserHasAccess()
     {
         $this->assertFalse(ACLAction::userHasAccess('', '', '')); //test with empty module and action
-        $this->assertTrue(ACLAction::userHasAccess('', 'Accounts', 'list')); //test with e,pty user and valid module and action
+        $this->assertTrue(
+            ACLAction::userHasAccess('', 'Accounts', 'list')
+        ); //test with e,pty user and valid module and action
         $this->assertTrue(ACLAction::userHasAccess('1', 'Accounts', 'list')); //test with valid User, module and action
-        $this->assertTrue(ACLAction::userHasAccess('1', 'SecurityGroups', 'list')); //test with valid User, module and action
+        $this->assertTrue(
+            ACLAction::userHasAccess('1', 'SecurityGroups', 'list')
+        ); //test with valid User, module and action
         $this->assertTrue(ACLAction::userHasAccess('1', 'Users', 'list')); //test with valid User, module and action
     }
 
@@ -134,15 +139,48 @@ class ACLActionTest extends PHPUnit_Framework_TestCase
         $categories['Accounts']['module']['list'][] = 'list';
         $categories['Accounts']['module']['edit'][] = 'edit';
 
-        $names_expected = array('list' => 'List', 'edit' => 'Edit');
+
+        $names_expected = array(
+            'list' => translate("LBL_ACTION_LIST", 'ACLActions'),
+            'edit' => translate("LBL_ACTION_EDIT", 'ACLActions')
+        );
+
+        $names_expected = array(
+            'list' => translate("LBL_ACTION_LIST", 'ACLActions'),
+            'edit' => translate("LBL_ACTION_EDIT", 'ACLActions')
+        );
 
         $categories_expected = array(
-                'Accounts' => array(
-                        'module' => array(
-                                'list' => array('list', 'accessColor' => false, 'accessName' => false, 'accessLabel' => false, 'accessOptions' => array(90 => 'All', 80 => 'Group', 75 => 'Owner', 0 => 'Not Set', -99 => 'None')),
-                                'edit' => array('edit', 'accessColor' => false, 'accessName' => false, 'accessLabel' => false, 'accessOptions' => array(90 => 'All', 80 => 'Group', 75 => 'Owner', 0 => 'Not Set', -99 => 'None')),
-                        ),
+            'Accounts' => array(
+                'module' => array(
+                    'list' => array(
+                        'list',
+                        'accessColor' => FALSE,
+                        'accessName' => FALSE,
+                        'accessLabel' => FALSE,
+                        'accessOptions' => array(
+                            90 => translate("LBL_ACCESS_ALL", 'ACLActions'),
+                            80 => translate("LBL_ACCESS_GROUP", 'ACLActions'),
+                            75 => translate("LBL_ACCESS_OWNER", 'ACLActions'),
+                            0 => translate("LBL_ACCESS_DEFAULT", 'ACLActions'),
+                            -99 => translate("LBL_ACCESS_NONE", 'ACLActions')
+                        )
+                    ),
+                    'edit' => array(
+                        'edit',
+                        'accessColor' => FALSE,
+                        'accessName' => FALSE,
+                        'accessLabel' => FALSE,
+                        'accessOptions' => array(
+                            90 => translate("LBL_ACCESS_ALL", 'ACLActions'),
+                            80 => translate("LBL_ACCESS_GROUP", 'ACLActions'),
+                            75 => translate("LBL_ACCESS_OWNER", 'ACLActions'),
+                            0 => translate("LBL_ACCESS_DEFAULT", 'ACLActions'),
+                            -99 => translate("LBL_ACCESS_NONE", 'ACLActions')
+                        )
+                    ),
                 ),
+            ),
         );
 
         //execute the method and verify that it retunrs expected results
@@ -155,8 +193,8 @@ class ACLActionTest extends PHPUnit_Framework_TestCase
     {
         $aclAction = new ACLAction();
 
-        //wihout any fields set 
-        $expected = array('id' => null, 'aclaccess' => null);
+        //wihout any fields set
+        $expected = array('id' => NULL, 'aclaccess' => NULL);
         $actual = $aclAction->toArray();
         $this->assertSame($expected, $actual);
 

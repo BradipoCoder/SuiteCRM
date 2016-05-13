@@ -131,9 +131,7 @@ class LogicHookTest extends PHPUnit_Framework_TestCase {
 
     public function testloadHooks()
     {
-        //execute the method and test if it returns expected contents
-
-        $expected_accounts = array(
+        $expected = array(
                 'before_save' => array(
                         array(77, 'updateGeocodeInfo', 'modules/Accounts/AccountsJjwg_MapsLogicHook.php', 'AccountsJjwg_MapsLogicHook', 'updateGeocodeInfo'),
                 ),
@@ -151,106 +149,66 @@ class LogicHookTest extends PHPUnit_Framework_TestCase {
                 ),
         );
 
-        $expected_default = array(
-					'after_save' => array(
-						array(1, 'AOD Index Changes', 'modules/AOD_Index/AOD_LogicHooks.php', 'AOD_LogicHooks', 'saveModuleChanges'),
-						array(30, 'popup_select', 'modules/SecurityGroups/AssignGroups.php', 'AssignGroups', 'popup_select'),
-						array(99, 'AOW_Workflow', 'modules/AOW_WorkFlow/AOW_WorkFlow.php', 'AOW_WorkFlow', 'run_bean_flows'),
-					),
-					'after_delete' => array(
-						array(1, 'AOD Index changes', 'modules/AOD_Index/AOD_LogicHooks.php', 'AOD_LogicHooks', 'saveModuleDelete'),
-					),
-					'after_restore' => array(
-						array(1, 'AOD Index changes', 'modules/AOD_Index/AOD_LogicHooks.php', 'AOD_LogicHooks', 'saveModuleRestore'),
-					),
-                    'after_ui_footer' => array(
-                            array(10, 'popup_onload', 'modules/SecurityGroups/AssignGroups.php', 'AssignGroups', 'popup_onload'),
-                    ),
-                    'after_ui_frame' => array(
-                            array(20, 'mass_assign', 'modules/SecurityGroups/AssignGroups.php', 'AssignGroups', 'mass_assign'),
-                            array(1, 'Load Social JS', 'include/social/hooks.php', 'hooks', 'load_js'),
-                    ),
-                );
-
+        // Expected hooks should be contained in $accounts_hooks
+        // Do not assertSame because deployed app might have added others
+        // @todo: order might be changed!!!
         $LogicHook = new LogicHook();
-
-        //test with a valid module
-        $accounts_hooks = $LogicHook->loadHooks('Accounts');
-        $this->assertSame($expected_accounts, $accounts_hooks);
+        $actual = $LogicHook->loadHooks('Accounts');
+        foreach ($expected as $condition => $conditionHooks) {
+            $this->assertArrayHasKey($condition, $actual);
+            foreach ($conditionHooks as $conditionHook) {
+                $this->assertContains($conditionHook, $actual[$condition]);
+            }
+        }
 
         //test with an invalid module, it will get the application hooks
-        $default_hooks = $LogicHook->loadHooks('');
-        $this->assertSame($expected_default, $default_hooks);
+        $expected = array(
+            'after_save' => array(
+                array(
+                    1,
+                    'AOD Index Changes',
+                    'modules/AOD_Index/AOD_LogicHooks.php',
+                    'AOD_LogicHooks',
+                    'saveModuleChanges'
+                ),
+                array(30, 'popup_select', 'modules/SecurityGroups/AssignGroups.php', 'AssignGroups', 'popup_select'),
+                array(99, 'AOW_Workflow', 'modules/AOW_WorkFlow/AOW_WorkFlow.php', 'AOW_WorkFlow', 'run_bean_flows'),
+            ),
+            'after_delete' => array(
+                array(
+                    1,
+                    'AOD Index changes',
+                    'modules/AOD_Index/AOD_LogicHooks.php',
+                    'AOD_LogicHooks',
+                    'saveModuleDelete'
+                ),
+            ),
+            'after_restore' => array(
+                array(
+                    1,
+                    'AOD Index changes',
+                    'modules/AOD_Index/AOD_LogicHooks.php',
+                    'AOD_LogicHooks',
+                    'saveModuleRestore'
+                ),
+            ),
+            'after_ui_footer' => array(
+                array(10, 'popup_onload', 'modules/SecurityGroups/AssignGroups.php', 'AssignGroups', 'popup_onload'),
+            ),
+            'after_ui_frame' => array(
+                array(20, 'mass_assign', 'modules/SecurityGroups/AssignGroups.php', 'AssignGroups', 'mass_assign'),
+                array(1, 'Load Social JS', 'include/social/hooks.php', 'hooks', 'load_js'),
+            ),
+        );
+        $actual = $LogicHook->loadHooks('');
+        foreach ($expected as $condition => $conditionHooks) {
+            $this->assertArrayHasKey($condition, $actual);
+            foreach ($conditionHooks as $conditionHook) {
+                $this->assertContains($conditionHook, $actual[$condition]);
+            }
+        }
     }
 
-    /*
-	public function testloadHooks()
-	{
-		//execute the method and test if it returns expected contents
-
-		$expected_accounts = array (
-				'after_ui_frame' => Array (),
-				'before_save' =>
-				array (
-						array (77, 'updateGeocodeInfo', 'modules/Accounts/AccountsJjwg_MapsLogicHook.php', 'AccountsJjwg_MapsLogicHook', 'updateGeocodeInfo',),
-				),
-				'after_save' =>
-				array (
-						array (77, 'updateRelatedMeetingsGeocodeInfo', 'modules/Accounts/AccountsJjwg_MapsLogicHook.php', 'AccountsJjwg_MapsLogicHook', 'updateRelatedMeetingsGeocodeInfo',),
-						array (78, 'updateRelatedProjectGeocodeInfo', 'modules/Accounts/AccountsJjwg_MapsLogicHook.php', 'AccountsJjwg_MapsLogicHook', 'updateRelatedProjectGeocodeInfo', ),
-						array (79, 'updateRelatedOpportunitiesGeocodeInfo', 'modules/Accounts/AccountsJjwg_MapsLogicHook.php', 'AccountsJjwg_MapsLogicHook', 'updateRelatedOpportunitiesGeocodeInfo',),
-						array (80, 'updateRelatedCasesGeocodeInfo', 'modules/Accounts/AccountsJjwg_MapsLogicHook.php', 'AccountsJjwg_MapsLogicHook', 'updateRelatedCasesGeocodeInfo',),
-				),
-				'after_relationship_add' =>
-				array (
-						array ( 77, 'addRelationship', 'modules/Accounts/AccountsJjwg_MapsLogicHook.php', 'AccountsJjwg_MapsLogicHook', 'addRelationship',),
-				),
-				'after_relationship_delete' =>
-				array (
-						array ( 77, 'deleteRelationship', 'modules/Accounts/AccountsJjwg_MapsLogicHook.php', 'AccountsJjwg_MapsLogicHook', 'deleteRelationship',),
-				),
-		);
-
-		$expected_default = array (
-					'after_ui_footer' =>
-					array (
-							array (10,'popup_onload','modules/SecurityGroups/AssignGroups.php','AssignGroups','popup_onload',),
-					),
-					'after_ui_frame' =>
-					array (
-							array (20, 'mass_assign', 'modules/SecurityGroups/AssignGroups.php', 'AssignGroups', 'mass_assign',),
-							array ( 1, 'Load Social JS', 'include/social/hooks.php', 'hooks', 'load_js',),
-					),
-					'after_save' =>
-					array (
-							array ( 30,'popup_select', 'modules/SecurityGroups/AssignGroups.php','AssignGroups','popup_select',),
-							array ( 1, 'AOD Index Changes', 'modules/AOD_Index/AOD_LogicHooks.php', 'AOD_LogicHooks', 'saveModuleChanges',),
-							array ( 99, 'AOW_Workflow', 'modules/AOW_WorkFlow/AOW_WorkFlow.php', 'AOW_WorkFlow','run_bean_flows',),
-					),
-					'after_delete' =>
-					array (
-							array ( 1, 'AOD Index changes', 'modules/AOD_Index/AOD_LogicHooks.php', 'AOD_LogicHooks','saveModuleDelete',),
-					),
-					'after_restore' =>
-					array (
-							array ( 1, 'AOD Index changes', 'modules/AOD_Index/AOD_LogicHooks.php', 'AOD_LogicHooks', 'saveModuleRestore',),
-					),
-				);
-
-
-
-		$LogicHook = new LogicHook();
-
-		//test with a valid module
-		$accounts_hooks = $LogicHook->loadHooks('Accounts');
-		$this->assertSame($expected_accounts, $accounts_hooks);
-
-		//test with an invalid module, it will get the application hooks
-		$default_hooks = $LogicHook->loadHooks('');
-		$this->assertSame($expected_default, $default_hooks);
-
-	}
-*/
 	public function testgetHooks()
 	{
 		//execute the method and test if it returns expected contents
@@ -281,16 +239,23 @@ class LogicHookTest extends PHPUnit_Framework_TestCase {
 		$LogicHook = new LogicHook();
 
 		//test with refresh false/default
-		$hooks = $LogicHook->getHooks('Accounts');
-		$this->assertEquals($expected, $hooks);
+        $actual = $LogicHook->getHooks('Accounts');
+        foreach ($expected as $condition => $conditionHooks) {
+            $this->assertArrayHasKey($condition, $actual);
+            foreach ($conditionHooks as $conditionHook) {
+                $this->assertContains($conditionHook, $actual[$condition]);
+            }
+        }
 
-		//test wit hrefresh true
-		$hooks = $LogicHook->getHooks('Accounts',true);
-		$this->assertSame($expected, $hooks);
-
-
-
-	}
+        //test wit refresh true
+        $actual = $LogicHook->getHooks('Accounts', TRUE);
+        foreach ($expected as $condition => $conditionHooks) {
+            $this->assertArrayHasKey($condition, $actual);
+            foreach ($conditionHooks as $conditionHook) {
+                $this->assertContains($conditionHook, $actual[$condition]);
+            }
+        }
+    }
 
 
 	public function testcall_custom_logic()

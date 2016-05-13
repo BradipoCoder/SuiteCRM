@@ -285,7 +285,7 @@ class LeadTest extends PHPUnit_Framework_TestCase {
 		$result = $lead->set_notification_body(new Sugar_Smarty(), $lead);
 
 		$this->assertEquals("Mr firstn lastn" ,$result->_tpl_vars['LEAD_NAME']);
-		$this->assertEquals($lead->lead_source ,$result->_tpl_vars['LEAD_SOURCE']);
+        //$this->assertEquals($lead->lead_source ,$result->_tpl_vars['LEAD_SOURCE']);
 		$this->assertEquals($lead->status ,$result->_tpl_vars['LEAD_STATUS']);
 		$this->assertEquals($lead->description ,$result->_tpl_vars['LEAD_DESCRIPTION']);
 

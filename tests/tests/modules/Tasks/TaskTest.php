@@ -198,8 +198,11 @@ class TaskTest extends PHPUnit_Framework_TestCase
     public function testgetDefaultStatus()
     {
         $task = new Task();
-
-        $result = $task->getDefaultStatus();
-        $this->assertEquals('Not Started', $result);
+        $this->assertArrayHasKey("status", $task->field_defs);
+        $statusFieldDef = $task->field_defs["status"];
+        $this->assertArrayHasKey("default", $statusFieldDef);
+        $expected = $statusFieldDef["default"];
+        $actual = $task->getDefaultStatus();
+        $this->assertEquals($expected, $actual);
     }
 }

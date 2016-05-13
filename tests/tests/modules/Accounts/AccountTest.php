@@ -41,7 +41,7 @@ class AccountTest extends PHPUnit_Framework_TestCase
 
     public function testclear_account_case_relationship()
     {
-        //This method cannot be tested because Query has a wrong column name which makes the function to die. 
+        //This method cannot be tested because Query has a wrong column name which makes the function to die.
 
         /*$Account = new Account();
         $Account->clear_account_case_relationship('','');*/
@@ -101,10 +101,11 @@ class AccountTest extends PHPUnit_Framework_TestCase
         );
 
         $Account = new Account();
-
-        //execute the method and verify that it retunrs expected results
         $actual = $Account->get_list_view_data();
-        $this->assertSame($expected, $actual);
+        foreach ($expected as $k => $v) {
+            $this->assertTrue(array_key_exists($k, $actual));
+            $this->assertEquals($v, $actual[$k]);
+        }
     }
 
     public function testbuild_generic_where_clause()
