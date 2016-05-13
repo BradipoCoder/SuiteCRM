@@ -80,3 +80,5 @@ lang_cmp.php
 .kdev4/
 SuiteCRM.kdev4
 
+# IMP/MEKIT CRM CUSTOM STUFF
+manifest.php
