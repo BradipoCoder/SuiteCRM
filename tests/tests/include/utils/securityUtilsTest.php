@@ -83,7 +83,7 @@ class security_utilsTest extends PHPUnit_Framework_TestCase
         $allowed = query_module_access_list(new User('1'));
         $actual = get_user_disallowed_modules('1', $allowed);
 
-        foreach($expected as $k => $v) {
+        foreach ($expected as $k => $v) {
             $this->assertTrue(array_key_exists($k, $actual));
             $this->assertEquals($v, $actual[$k]);
         }

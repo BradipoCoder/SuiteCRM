@@ -1,14 +1,13 @@
-## First part from https://github.com/github/gitignore/blob/master/SugarCRM.gitignore
-# Ignore custom .htaccess stuff.
+# Ignore custom .htaccess / web.config stuff
 /.htaccess
 /web.config
 
-# Ignore directories
+# Ignore cache / upload directories
 cache/*
 upload/*
 !upload/index.html
 
-# Custom
+# Ignore stuff in custom directory
 custom/application/Ext/*
 custom/blowfish/*
 custom/modulebuilder/*
@@ -19,6 +18,7 @@ custom/working/*
 
 # Ignore AOD indexes
 modules/AOD_Index/Index/*
+install/status.json
 
 # Configuration files should be ignored.
 /config.php
@@ -27,17 +27,58 @@ modules/AOD_Index/Index/*
 
 # Connector configuration should also be ignored.
 custom/modules/Connectors/connectors/sources/ext/*/*/config.php
+
 # Logs files can safely be ignored.
 *.log
 
-## IDE specific items
-.idea/
-
-#Ignore composer vendor folder
+# Ignore composer vendor folder
 vendor/
 
-#IMP/MEKIT SPECIFIC
-.SyncConfig/
-config/database.yml
+## IDE specific items
+# Eclipse
+*.pydevproject
+.project
+.metadata
+bin/**
+tmp/**
+tmp/**/*
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.classpath
+.settings/
+.loadpath
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+.elc
+auto-save-list
+tramp
+# IntelliJ Idea
+*.iml
+*.ipr
+*.iws
+.idea/
+.phpstorm.meta.php
+# NetBeans
+nbproject/
+# Vim
+.*.sw[a-z]
+*.un~
+Session.vim
+# Windows
+Thumbs.db
+Desktop.ini
+.DS_Store
+.DS_Store?
+# Disytel
+lang_cmp.php
+.kdev4/
+SuiteCRM.kdev4
+
+# IMP/MEKIT CRM CUSTOM STUFF
 manifest.php
-install/status.json

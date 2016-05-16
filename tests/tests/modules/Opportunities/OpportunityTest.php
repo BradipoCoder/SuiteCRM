@@ -176,7 +176,9 @@ class OpportunityTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(isset($opportunity->id));
         $this->assertEquals(36, strlen($opportunity->id));
         $this->assertEquals(-99, $opportunity->currency_id);
-        $this->assertEquals(30, $opportunity->probability);
+        $this->assertEquals(
+            translate('sales_probability_dom', 'Opportunities', $opportunity->sales_stage), $opportunity->probability
+        );
 
         //mark the record as deleted and verify that this record cannot be retrieved anymore.
         $opportunity->mark_deleted($opportunity->id);

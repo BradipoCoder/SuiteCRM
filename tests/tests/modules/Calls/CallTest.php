@@ -20,13 +20,7 @@ class CallTest extends PHPUnit_Framework_TestCase
         $this->assertAttributeEquals(true, 'importable', $call);
         $this->assertAttributeEquals(false, 'syncing', $call);
         $this->assertAttributeEquals(true, 'update_vcal', $call);
-
-        //unless it has been modified
-        //$this->assertAttributeEquals(array(0 => '00', 15 => '15', 30 => '30', 45 => '45'), 'minutes_values', $call);
-        $this->assertContains('00', $call->minutes_values);
-        $this->assertContains('15', $call->minutes_values);
-        $this->assertContains('30', $call->minutes_values);
-        $this->assertContains('45', $call->minutes_values);
+        $this->assertSame($GLOBALS['app_list_strings']['duration_intervals'], $call->minutes_values);
     }
 
     public function testACLAccess()
@@ -118,7 +112,6 @@ class CallTest extends PHPUnit_Framework_TestCase
     public function testfill_in_additional_detail_fields()
     {
         $call = new Call();
-
         $call->fill_in_additional_detail_fields();
 
         $this->assertEquals('0', $call->duration_hours);
@@ -127,23 +120,26 @@ class CallTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(false, $call->reminder_checked);
         $this->assertEquals(-1, $call->email_reminder_time);
         $this->assertEquals(false, $call->email_reminder_checked);
-        $this->assertEquals('Accounts', $call->parent_type);
+        $this->assertEquals($GLOBALS['app_list_strings']['record_type_default_key'], $call->parent_type);
     }
 
     public function testget_list_view_data()
     {
-        $call = new Call();
+        $admin = new \User();
+        $adminId = 1;
+        $admin->retrieve($adminId);
 
-        $call->assigned_user_id = 1;
-        $call->created_by = 1;
-        $call->modified_user_id = 1;
+        $call = new Call();
+        $call->assigned_user_id = $adminId;
+        $call->created_by = $adminId;
+        $call->modified_user_id = $adminId;
 
         //execute the method and verify that it retunrs expected results
         $expected = array(
-                'MODIFIED_USER_ID' => 1,
-                'CREATED_BY' => 1,
+            'MODIFIED_USER_ID' => $adminId,
+            'CREATED_BY' => $adminId,
                 'DELETED' => 0,
-                'ASSIGNED_USER_ID' => 1,
+            'ASSIGNED_USER_ID' => $adminId,
                 /*'STATUS' => 'Planned',*/
                 'REMINDER_TIME' => '-1',
                 'EMAIL_REMINDER_TIME' => '-1',
@@ -170,9 +166,9 @@ class CallTest extends PHPUnit_Framework_TestCase
             }
         }
 
-        $this->assertEquals('Administrator', $call->assigned_user_name);
-        $this->assertEquals('Administrator', $call->created_by_name);
-        $this->assertEquals('Administrator', $call->modified_by_name);
+        $this->assertEquals($admin->name, $call->assigned_user_name);
+        $this->assertEquals($admin->name, $call->created_by_name);
+        $this->assertEquals($admin->name, $call->modified_by_name);
     }
 
     public function testset_notification_body()
@@ -196,7 +192,7 @@ class CallTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($call->current_notify_user->new_assigned_user_name, $result->_tpl_vars['CALL_TO']);
         $this->assertEquals($call->duration_hours, $result->_tpl_vars['CALL_HOURS']);
         $this->assertEquals($call->duration_minutes, $result->_tpl_vars['CALL_MINUTES']);
-        $this->assertEquals($call->status, $result->_tpl_vars['CALL_STATUS']);
+        $this->assertEquals(translate('call_status_dom', 'Calls', $call->status), $result->_tpl_vars['CALL_STATUS']);
         $this->assertEquals('09/01/2015 00:02 UTC(+00:00)', $result->_tpl_vars['CALL_STARTDATE']);
         $this->assertEquals($call->description, $result->_tpl_vars['CALL_DESCRIPTION']);
     }

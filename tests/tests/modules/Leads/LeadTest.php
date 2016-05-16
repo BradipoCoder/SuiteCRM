@@ -285,8 +285,8 @@ class LeadTest extends PHPUnit_Framework_TestCase {
 		$result = $lead->set_notification_body(new Sugar_Smarty(), $lead);
 
 		$this->assertEquals("Mr firstn lastn" ,$result->_tpl_vars['LEAD_NAME']);
-		//$this->assertEquals($lead->lead_source ,$result->_tpl_vars['LEAD_SOURCE']);
-		$this->assertEquals($lead->status ,$result->_tpl_vars['LEAD_STATUS']);
+        //$this->assertEquals($lead->lead_source ,$result->_tpl_vars['LEAD_SOURCE']);
+        $this->assertEquals(translate('lead_status_dom', '', $lead->status), $result->_tpl_vars['LEAD_STATUS']);
 		$this->assertEquals($lead->description ,$result->_tpl_vars['LEAD_DESCRIPTION']);
 
 	}
@@ -360,8 +360,7 @@ class LeadTest extends PHPUnit_Framework_TestCase {
     public function testgetActivitiesOptions()
 	{
 		$lead = new Lead();
-
-		$expected = array( "copy"=>"Copy", "move"=>"Move", "donothing"=>"Do Nothing");
+        $expected = $GLOBALS["app_list_strings"]["lead_conv_activity_opt"];
 		$actual = $lead->getActivitiesOptions();
 		$this->assertSame($expected,$actual);
 

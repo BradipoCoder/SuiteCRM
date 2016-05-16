@@ -85,10 +85,9 @@ class UserTest extends PHPUnit_Framework_TestCase {
 	public function testgetSignatures()
 	{
 		$user = new User();
-
 		$user->retrieve(1);
-
-		$expected = "<select onChange='setSigEditButtonVisibility();' id='signature_id' name='signature_id'>\n<OPTION selected value=''>--None--</OPTION></select>";
+        $expected = "<select onChange='setSigEditButtonVisibility();' id='signature_id' name='signature_id'>\n<OPTION selected value=''>"
+                    . translate("LBL_NONE") . "</OPTION></select>";
 		$actual = $user->getSignatures();
 		$this->assertSame($expected, $actual);
 
@@ -659,28 +658,14 @@ class UserTest extends PHPUnit_Framework_TestCase {
 
 	public function testfill_in_additional_list_fields()
 	{
-
-		$user = new User();
-
-		$user->retrieve(1);
-
-		$user->fill_in_additional_list_fields();
-
-		$this->assertEquals("Administrator",$user->full_name);
-
-	}
-
-	public function testfill_in_additional_detail_fields()
-	{
-
-		$user = new User();
-
-		$user->retrieve(1);
-
-		$user->fill_in_additional_detail_fields();
-
-		$this->assertEquals("Administrator",$user->full_name);
-
+        $admin = new User();
+        $adminId = 1;
+        $admin->retrieve($adminId);
+        $admin->created_by = $adminId;
+        $admin->modified_user_id = $adminId;
+        $admin->fill_in_additional_list_fields();
+        $this->assertEquals($admin->full_name, $admin->created_by_name);
+        $this->assertEquals($admin->full_name, $admin->modified_by_name);
 	}
 
 	public function testretrieve_user_id()
@@ -800,7 +785,9 @@ class UserTest extends PHPUnit_Framework_TestCase {
 
 		$user = new User();
 
-		$expected = '<script type="text/javascript" language="Javascript">var welcome = document.getElementById("welcome");var welcomeContent = welcome.innerHTML;welcome.innerHTML = welcomeContent + "&nbsp;&nbsp;&nbsp;&nbsp;<a href=index.php?module=Emails&action=ListViewGroup>Group Inbox: (0 New)</a>";</script>';
+        $expected = '<script type="text/javascript" language="Javascript">var welcome = document.getElementById("welcome");var welcomeContent = welcome.innerHTML;welcome.innerHTML = welcomeContent + "&nbsp;&nbsp;&nbsp;&nbsp;<a href=index.php?module=Emails&action=ListViewGroup>'
+                    . translate('LBL_LIST_TITLE_GROUP_INBOX', 'Emails') . ': (0 ' . translate('LBL_NEW', 'Emails')
+                    . ')</a>";</script>';
 
 		//cpature the screen output and compare with exected values
 

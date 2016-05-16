@@ -102,7 +102,7 @@ class AccountTest extends PHPUnit_Framework_TestCase
 
         $Account = new Account();
         $actual = $Account->get_list_view_data();
-        foreach($expected as $k => $v) {
+        foreach ($expected as $k => $v) {
             $this->assertTrue(array_key_exists($k, $actual));
             $this->assertEquals($v, $actual[$k]);
         }

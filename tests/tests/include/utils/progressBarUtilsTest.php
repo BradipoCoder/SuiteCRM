@@ -12,7 +12,7 @@ class progress_bar_utilsTest extends PHPUnit_Framework_TestCase
         //execute the method and test if it doesn't throw an exception.
         //this method uses flush so we cannot get and verify content printed
         try {
-            progress_bar_flush(false);
+            progress_bar_flush(FALSE);
             $this->assertTrue(true);
         } catch (Exception $e) {
             $this->fail();
@@ -24,7 +24,7 @@ class progress_bar_utilsTest extends PHPUnit_Framework_TestCase
     {
         try {
             ob_start();
-            display_flow_bar('test', 0, 200, false);
+            display_flow_bar('test', 0, 200, FALSE);
             ob_end_clean();
             $this->assertTrue(true);
         } catch (Exception $e) {
@@ -39,7 +39,7 @@ class progress_bar_utilsTest extends PHPUnit_Framework_TestCase
         //this method uses flush so we cannot get and verify content printed
         try {
             ob_start();
-            start_flow_bar('test', 1, false);
+            start_flow_bar('test', 1, FALSE);
             ob_end_clean();
             $this->assertTrue(true);
         } catch (Exception $e) {
@@ -53,7 +53,7 @@ class progress_bar_utilsTest extends PHPUnit_Framework_TestCase
         //this method uses flush so we cannot get and verify content printed
         try {
             ob_start();
-            destroy_flow_bar('test', false);
+            destroy_flow_bar('test', FALSE);
             ob_end_clean();
             $this->assertTrue(true);
         } catch (Exception $e) {
@@ -67,7 +67,7 @@ class progress_bar_utilsTest extends PHPUnit_Framework_TestCase
         //this method uses flush so we cannot get and verify content printed
         try {
             ob_start();
-            display_progress_bar('test', 80, 100, false);
+            display_progress_bar('test', 80, 100, FALSE);
             ob_end_clean();
             $this->assertTrue(true);
         } catch (Exception $e) {
@@ -81,7 +81,7 @@ class progress_bar_utilsTest extends PHPUnit_Framework_TestCase
         //this method uses flush so we cannot get and verify content printed
         try {
             ob_start();
-            update_progress_bar('test', 80, 100, false);
+            update_progress_bar('test', 80, 100, FALSE);
             ob_end_clean();
             $this->assertTrue(true);
         } catch (Exception $e) {

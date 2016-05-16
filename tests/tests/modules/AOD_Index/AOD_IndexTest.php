@@ -192,7 +192,7 @@ class AOD_IndexTest extends PHPUnit_Framework_TestCase
 
         $aod_index = new AOD_Index();
         $actual = $aod_index->getIndexableModules();
-        foreach($expected as $k => $v) {
+        foreach ($expected as $k => $v) {
             $this->assertTrue(array_key_exists($k, $actual));
             $this->assertEquals($v, $actual[$k]);
         }

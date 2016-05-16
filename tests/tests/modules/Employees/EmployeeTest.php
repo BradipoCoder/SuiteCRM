@@ -20,8 +20,9 @@ class EmployeeTest extends PHPUnit_Framework_TestCase {
 
 
 	public function testget_summary_text() {
-
-		error_reporting(E_ERROR | E_PARSE);
+        $admin = new \User();
+        $adminId = 1;
+        $admin->retrieve($adminId);
 
 		$employee = new Employee();
 
@@ -30,7 +31,7 @@ class EmployeeTest extends PHPUnit_Framework_TestCase {
 
 		//test with name set
 		$employee->retrieve(1);
-		$this->assertEquals('Administrator',$employee->get_summary_text());
+        $this->assertEquals($admin->name, $employee->get_summary_text());
 
     }
 

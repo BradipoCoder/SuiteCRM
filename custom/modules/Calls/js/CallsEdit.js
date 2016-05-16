@@ -1,5 +1,34 @@
 (function ($) {
 
+    var cleanStartEndDateFields = function () {
+        //clear date_start
+        $("#date_start").val('');
+        $("#date_start_date").val('');
+        $("#date_start_hours").val('');
+        $("#date_start_minutes").val('');
+
+        //clear date_end
+        $("#date_end").val('');
+        $("#date_end_date").val('');
+        $("#date_end_hours").val('');
+        $("#date_end_minutes").val('');
+    };
+
+
+    var alignStartEndDateWithScheduledDate = function () {
+        $("#date_start").val($("#date_schedule_c").val());
+        $("#date_start_date").val($("#date_schedule_c_date").val());
+        $("#date_start_hours").val($("#date_schedule_c_hours").val());
+        $("#date_start_minutes").val($("#date_schedule_c_minutes").val());
+
+        $("#date_end").val($("#date_schedule_c").val());
+        $("#date_end_date").val($("#date_schedule_c_date").val());
+        $("#date_end_hours").val($("#date_schedule_c_hours").val());
+        $("#date_end_minutes").val($("#date_schedule_c_minutes").val());
+    };
+
+
+
     var closeAndCreateSetStatus = function () {
         var url = window.location.search;
         var isCloseAndCreate = url.search("&isDuplicate=true&") != -1;
@@ -18,45 +47,27 @@
                     $result.val('');
                 }
 
-                //clear date_start
-                $("#date_start").val('');
-                $("#date_start_date").val('');
-                $("#date_start_hours").val('');
-                $("#date_start_minutes").val('');
-
-                //clear date_end
-                $("#date_end").val('');
-                $("#date_end_date").val('');
-                $("#date_end_hours").val('');
-                $("#date_end_minutes").val('');
+                cleanStartEndDateFields();
             }
         }
     };
 
-    /*
+
     var statusChangeHandler = function()
     {
         if($("#status").val()=='Planned') {
-            //
-            alignStartDateWithScheduledDate();
-            //
-            $("#date_end").val("");
-            $("#date_end_date").val("");
-            $("#date_end_hours").val("");
-            $("#date_end_minutes").val("");
-            //
+            alignStartEndDateWithScheduledDate();
             $("#result_c").val('');
             $("#negative_motivation_c").val('');
         } else {
-            console.log("STATUS: HELD");
+            cleanStartEndDateFields();
         }
-    };*/
+    };
 
-    /*
     var setStatusChangeHandler = function()
     {
         $("#status").on("change", statusChangeHandler);
-    };*/
+    };
 
     /*
     var setScheduledDateChangeHandler = function()
@@ -67,14 +78,6 @@
         $("#date_schedule_c_minutes").on("change", statusChangeHandler);
     };*/
 
-    /*
-    var alignStartDateWithScheduledDate = function() {
-        $("#date_start").val($("#date_schedule_c").val());
-        $("#date_start_date").val($("#date_schedule_c_date").val());
-        $("#date_start_hours").val($("#date_schedule_c_hours").val());
-        $("#date_start_minutes").val($("#date_schedule_c_minutes").val());
-    };
-    */
 
     /*
     var setMinutesInModify = function(){
@@ -91,7 +94,7 @@
         //setMinutesInModify();
         //
         //statusChangeHandler();
-        //setStatusChangeHandler();
+        setStatusChangeHandler();
         //setScheduledDateChangeHandler();
         //
     });

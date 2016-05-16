@@ -116,6 +116,10 @@ class ProjectTaskTest extends PHPUnit_Framework_TestCase
 
     public function testfill_in_additional_detail_fields()
     {
+        $admin = new \User();
+        $adminId = 1;
+        $admin->retrieve($adminId);
+
         $projectTask = new ProjectTask();
 
         //test without setting assigned_user_id
@@ -123,13 +127,17 @@ class ProjectTaskTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('', $projectTask->assigned_user_name);
 
         //test with assigned_user_id set
-        $projectTask->assigned_user_id = 1;
+        $projectTask->assigned_user_id = $adminId;
         $projectTask->fill_in_additional_detail_fields();
-        $this->assertEquals('Administrator', $projectTask->assigned_user_name);
+        $this->assertEquals($admin->name, $projectTask->assigned_user_name);
     }
 
     public function testfill_in_additional_list_fields()
     {
+        $admin = new \User();
+        $adminId = 1;
+        $admin->retrieve($adminId);
+
         $projectTask = new ProjectTask();
 
         //test without setting assigned_user_id
@@ -137,9 +145,9 @@ class ProjectTaskTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('', $projectTask->assigned_user_name);
 
         //test with assigned_user_id set
-        $projectTask->assigned_user_id = 1;
+        $projectTask->assigned_user_id = $adminId;
         $projectTask->fill_in_additional_list_fields();
-        $this->assertEquals('Administrator', $projectTask->assigned_user_name);
+        $this->assertEquals($admin->name, $projectTask->assigned_user_name);
     }
 
     public function testget_summary_text()
@@ -204,7 +212,7 @@ class ProjectTaskTest extends PHPUnit_Framework_TestCase
         $projectTask->parent_type = 'Project';
 
         $expected = array(
-                'NAME' => 'test user',
+            'NAME' => 'test user',
                 'DESCRIPTION' => 'test assigned user',
                 'ORDER_NUMBER' => '1',
                 'DELETED' => 0,
@@ -218,7 +226,7 @@ class ProjectTaskTest extends PHPUnit_Framework_TestCase
 
         $actual = $projectTask->get_list_view_data();
 
-        foreach($expected as $k => $v) {
+        foreach ($expected as $k => $v) {
             $this->assertTrue(array_key_exists($k, $actual));
             $this->assertEquals($v, $actual[$k]);
         }
@@ -263,7 +271,12 @@ class ProjectTaskTest extends PHPUnit_Framework_TestCase
     {
         $projectTask = new ProjectTask();
 
-        $expected = "<select name=\"utilization\">\n<OPTION value='0'>none</OPTION>\n<OPTION value='25'>25</OPTION>\n<OPTION value='50'>50</OPTION>\n<OPTION value='75'>75</OPTION>\n<OPTION value='100'>100</OPTION></select>";
+        //$app_list_strings['project_task_utilization_options']
+        $GLOBALS["app_list_strings"]['project_task_utilization_options'][0];
+
+        $expected = "<select name=\"utilization\">\n<OPTION value='0'>"
+                    . $GLOBALS["app_list_strings"]['project_task_utilization_options'][0]
+                    . "</OPTION>\n<OPTION value='25'>25</OPTION>\n<OPTION value='50'>50</OPTION>\n<OPTION value='75'>75</OPTION>\n<OPTION value='100'>100</OPTION></select>";
         $actual = getUtilizationDropdown($projectTask, 'utilization', '0', 'EditView');
         $this->assertSame($expected, $actual);
     }
