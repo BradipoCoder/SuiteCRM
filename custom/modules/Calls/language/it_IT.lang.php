@@ -1,5 +1,5 @@
 <?php
-// created: 2016-05-02 13:29:23
+// created: 2016-05-17 09:08:21
 $mod_strings = array (
   'LBL_CALL_INFORMATION' => 'Chiamata',
   'LBL_ASSIGNED_CLIENT' => 'Cliente Assegnato',
@@ -37,6 +37,7 @@ $mod_strings = array (
   'LBL_DURATAMINUTI' => 'Durata Minuti intero',
   'LBL_ISTATOAZIENDA' => 'Stato Azienda Imp',
   'LBL_IFASESTATO' => 'Fase Stato Imp',
-  'LBL_DATE' => 'Data Effettuata',
+  'LBL_DATE' => 'Data Chiamata',
   'LBL_DATE_SCHEDULE' => 'Data Pianificazione',
+  'LBL_DATE_TIME' => 'Data Chiamata',
 );
