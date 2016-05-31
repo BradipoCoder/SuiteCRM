@@ -77,6 +77,9 @@ lang_cmp.php
 SuiteCRM.kdev4
 
 # IMP/MEKIT CRM CUSTOM STUFF
-manifest.php
 vendor/
 public/
+manifest.php
+.SyncConfig/
+config/database.yml
+
