@@ -140,7 +140,7 @@ class Importer
         $focus->unPopulateDefaultValues();
         $focus->save_from_post = false;
         $focus->team_id = null;
-        $this->ifs->createdBeans = array();
+      ImportFieldSanitize::$createdBeans = array();
         $this->importSource->resetRowErrorCounter();
         $do_save = true;
 
@@ -352,7 +352,9 @@ class Importer
             if ( $idc->isADuplicateRecord($enabled_dupes) )
             {
                 $this->importSource->markRowAsDuplicate($idc->_dupedFields);
-                $this->_undoCreatedBeans($this->ifs->createdBeans);
+
+              //$this->_undoCreatedBeans($this->ifs->$createdBeans);
+              $this->_undoCreatedBeans(ImportFieldSanitize::$createdBeans);
                 return;
             }
         }
@@ -365,7 +367,7 @@ class Importer
             if ( $idc->isADuplicateRecordByFields($enabled_dup_fields) )
             {
                 $this->importSource->markRowAsDuplicate($idc->_dupedFields);
-                $this->_undoCreatedBeans($this->ifs->createdBeans);
+              $this->_undoCreatedBeans(ImportFieldSanitize::$createdBeans);
                 return;
             }
         }
@@ -396,7 +398,7 @@ class Importer
                     if( ! $this->isUpdateOnly )
                     {
                         $this->importSource->writeError($mod_strings['LBL_ID_EXISTS_ALREADY'],'ID',$focus->id);
-                        $this->_undoCreatedBeans($this->ifs->createdBeans);
+                      $this->_undoCreatedBeans(ImportFieldSanitize::$createdBeans);
                         return;
                     }
 
@@ -404,7 +406,7 @@ class Importer
                     if($clonedBean === FALSE)
                     {
                         $this->importSource->writeError($mod_strings['LBL_RECORD_CANNOT_BE_UPDATED'],'ID',$focus->id);
-                        $this->_undoCreatedBeans($this->ifs->createdBeans);
+                      $this->_undoCreatedBeans(ImportFieldSanitize::$createdBeans);
                         return;
                     }
                     else
@@ -427,7 +429,7 @@ class Importer
             $this->importSource->markRowAsImported($newRecord);
         }
         else
-            $this->_undoCreatedBeans($this->ifs->createdBeans);
+          $this->_undoCreatedBeans(ImportFieldSanitize::$createdBeans);
 
         unset($defaultRowValue);
 
@@ -543,14 +545,14 @@ class Importer
         */
         if ( ( !empty($focus->new_with_id) && !empty($focus->date_modified) ) ||
              ( empty($focus->new_with_id) && $timedate->to_db($focus->date_modified) != $timedate->to_db($timedate->to_display_date_time($focus->fetched_row['date_modified'])) )
-        ) 
+        )
             $focus->update_date_modified = false;
 
         // Bug 53636 - Allow update of "Date Created"
         if (!empty($focus->date_entered)) {
         	$focus->update_date_entered = true;
         }
-            
+
         $focus->optimistic_lock = false;
         if ( $focus->object_name == "Contact" && isset($focus->sync_contact) )
         {
@@ -572,7 +574,7 @@ class Importer
                     $focus->$key = $focus->parent_id;
                 }
             }
-        }					
+        }
         //bug# 40260 setting it true as the module in focus is involved in an import
         $focus->in_import=true;
         // call any logic needed for the module preSave
@@ -581,8 +583,8 @@ class Importer
         // Bug51192: check if there are any changes in the imported data
         $hasDataChanges = false;
         $dataChanges=$focus->db->getAuditDataChanges($focus);
-        
-        if(!empty($dataChanges)) {
+
+      if(!empty($dataChanges)) {
             foreach($dataChanges as $field=>$fieldData) {
                 if($fieldData['data_type'] != 'date' || strtotime($fieldData['before']) != strtotime($fieldData['after'])) {
                     $hasDataChanges = true;
@@ -590,8 +592,8 @@ class Importer
                 }
             }
         }
-        
-        // if modified_user_id is set, set the flag to false so SugarBEan will not reset it
+
+      // if modified_user_id is set, set the flag to false so SugarBEan will not reset it
         if (isset($focus->modified_user_id) && $focus->modified_user_id && !$hasDataChanges) {
             $focus->update_modified_by = false;
         }
