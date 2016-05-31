@@ -5726,7 +5726,7 @@ eoq;
 				$meta['is_sugarEmail'] = true;
 			}
 		} else {
-            if( !in_array($this->email->status, ['sent', 'queued']) ){
+          if ($this->email->status != 'sent') {
 				// mark SugarEmail read
 				$q = "UPDATE emails SET status = 'read' WHERE id = '{$uid}'";
 				$r = $this->db->query($q);
@@ -6186,6 +6186,11 @@ eoq;
 			$query = "INSERT INTO config VALUES('InboundEmail', '{$this->id}', $value)";
 			$this->db->query($query);
 		} // if
+    }
+
+  function saveMailBoxValueOfInboundEmail() {
+    $query = "update Inbound_email set mailbox = '{$this->email_user}'";
+    $this->db->query($query);
 	}
 
 	function retrieveMailBoxFolders() {

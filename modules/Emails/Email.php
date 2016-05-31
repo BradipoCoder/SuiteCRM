@@ -433,8 +433,6 @@ class Email extends SugarBean {
 
 	/**
 	 * Sends Email for Email 2.0
-     * @param array $request
-     * @return bool
 	 */
 	function email2Send($request) {
 		global $mod_strings;
@@ -1952,13 +1950,13 @@ class Email extends SugarBean {
 		}
 	}
 
-    /**
-     * preps SMTP info for email transmission
-     * @param SugarPHPMailer $mail SugarPHPMailer object
-     * @param string $mailer_id
-     * @param string $ieId
-     * @return SugarPHPMailer mail SugarPHPMailer object
-     */
+  /**
+   * preps SMTP info for email transmission
+   * @param object mail SugarPHPMailer object
+   * @param string mailer_id
+   * @param string ieId
+   * @return object mail SugarPHPMailer object
+   */
 	function setMailer($mail, $mailer_id='', $ieId='') {
 		global $current_user;
 
