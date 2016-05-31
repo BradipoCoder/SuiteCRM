@@ -30,10 +30,6 @@ custom/modules/Connectors/connectors/sources/ext/*/*/config.php
 
 # Logs files can safely be ignored.
 *.log
-
-# Ignore composer vendor folder
-vendor/
-
 ## IDE specific items
 # Eclipse
 *.pydevproject
@@ -82,3 +78,5 @@ SuiteCRM.kdev4
 
 # IMP/MEKIT CRM CUSTOM STUFF
 manifest.php
+vendor/
+public/
