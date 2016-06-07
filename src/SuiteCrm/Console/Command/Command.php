@@ -7,6 +7,7 @@
 
 namespace SuiteCrm\Console\Command;
 
+use Mekit\Console\Configuration;
 use Symfony\Component\Console\Command\Command as ConsoleCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -17,35 +18,59 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class Command extends ConsoleCommand
 {
-    /** @var  InputInterface */
-    protected $cmdInput;
+  /** @var  InputInterface */
+  protected $cmdInput;
 
-    /** @var  OutputInterface */
-    protected $cmdOutput;
+  /** @var  OutputInterface */
+  protected $cmdOutput;
 
-    /**
-     * @param string $name
-     */
-    public function __construct($name = NULL)
+  /** @var string */
+  protected $configDir = 'config';
+
+  /**
+   * @param string $name
+   */
+  public function __construct($name = NULL)
+  {
+    parent::__construct($name);
+  }
+
+  /**
+   * @param InputInterface  $input
+   * @param OutputInterface $output
+   */
+  protected function _execute(InputInterface $input, OutputInterface $output)
+  {
+    $this->cmdInput = $input;
+    $this->cmdOutput = $output;
+    $this->setConfigurationFile();
+    //$this->setupMailer();
+    //$this->setupLogger();
+  }
+
+  /**
+   * Parse yml configuration
+   */
+  protected function setConfigurationFile()
+  {
+    $config_file = $this->cmdInput->getArgument('config_file');
+    $configPath = realpath($config_file);
+    if (!$configPath)
     {
-        parent::__construct($name);
+      $configPath = realpath(PROJECT_ROOT . '/config/' . $config_file);
     }
-
-    /**
-     * @param InputInterface  $input
-     * @param OutputInterface $output
-     */
-    protected function _execute(InputInterface $input, OutputInterface $output)
+    if (!$configPath)
     {
-        $this->cmdInput = $input;
-        $this->cmdOutput = $output;
+      throw new \InvalidArgumentException("The configuration file does not exist!");
     }
+    Configuration::initializeWithConfigurationFile($configPath);
+  }
 
-    /**
-     * @param string $msg
-     */
-    protected function log($msg)
-    {
-        $this->cmdOutput->writeln($msg);
-    }
+  /**
+   * @param string $msg
+   */
+  public function log($msg)
+  {
+    $this->cmdOutput->writeln($msg);
+  }
 }

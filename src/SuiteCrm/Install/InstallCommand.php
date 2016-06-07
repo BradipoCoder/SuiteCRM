@@ -107,7 +107,7 @@ class InstallCommand extends Command implements CommandInterface
      * @param string $msg
      * @param string $level - available: debug|info|warn|deprecated|error|fatal|security|off
      */
-    protected function log($msg, $level = 'warn')
+    public function log($msg, $level = 'warn')
     {
         $this->loggerManager->log($msg, $level);
     }
