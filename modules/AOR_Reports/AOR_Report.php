@@ -661,6 +661,12 @@ class AOR_Report extends Basic
 
     // We have a count query.  Run it and get the results.
     $result = $this->db->query($count_query);
+
+    if ($this->db->lastDbError() !== FALSE)
+    {
+      $this->report_error = $this->db->lastDbError();
+    }
+
     $assoc = $this->db->fetchByAssoc($result);
     if (!empty($assoc['c']))
     {
@@ -1178,6 +1184,10 @@ class AOR_Report extends Basic
       }
       $query .= ' ' . $query_sort_by;
     }
+
+    $this->report_sql = $query;
+
+
     return $query;
 
   }
@@ -1295,18 +1305,18 @@ class AOR_Report extends Basic
           {
             $query['group_by'][] = str_replace(
               '(%1)', '(' . $select_field . ')', preg_replace(
-              array(
-                '/\s+/',
-                '/Y/',
-                '/m/',
-                '/d/'
-              ), array(
-                ', ',
-                'YEAR(%1)',
-                'MONTH(%1)',
-                'DAY(%1)'
-              ), trim(preg_replace('/[^Ymd]/', ' ', $field->format))
-            )
+                      array(
+                        '/\s+/',
+                        '/Y/',
+                        '/m/',
+                        '/d/'
+                      ), array(
+                        ', ',
+                        'YEAR(%1)',
+                        'MONTH(%1)',
+                        'DAY(%1)'
+                      ), trim(preg_replace('/[^Ymd]/', ' ', $field->format))
+                    )
             );
             $query['second_group_by'][] = $select_field;
           }
