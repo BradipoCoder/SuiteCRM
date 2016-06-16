@@ -116,39 +116,103 @@ class AOR_ReportsController extends SugarController {
         }
         echo json_encode($charts);
     }
-
-    protected function action_addToProspectList(){
+    
+    /**
+     * Add beans to prospect list
+     */
+    protected function action_addToProspectList()
+    {
         global $beanList;
+        $answer = [
+            'STATUS' => 'UNKNOWN',
+            'ERRORS' => [],
+            'REQUEST' => $_REQUEST,
+        ];
 
         require_once('modules/Relationships/Relationship.php');
         require_once('modules/ProspectLists/ProspectList.php');
 
         $prospectList = new ProspectList();
         $prospectList->retrieve($_REQUEST['prospect_id']);
+        
+        /** @var AOR_Report $AORReport */
+        $AORReport = $this->bean;
+        
+        /** @var \SugarBean $module */
+        $module = new $beanList[$AORReport->report_module]();
+        
+        $key = Relationship::retrieve_by_modules($AORReport->report_module, 'ProspectLists', $GLOBALS['db']);
+        
+        $answer["REPORT-MODULE"] = $AORReport->report_module;
+        $answer["MODULE-TABLE-NAME"] = $module->table_name;
+        $answer["PROSPECTS-KEY"] = $key;
 
-        $module = new $beanList[$this->bean->report_module]();
-
-        $key = Relationship::retrieve_by_modules($this->bean->report_module, 'ProspectLists', $GLOBALS['db']);
         if (!empty($key)) {
-
-            $sql = $this->bean->build_report_query();
-            $result = $this->bean->db->query($sql);
-            $beans = array();
-            while ($row = $this->bean->db->fetchByAssoc($result)) {
-                if (isset($row[$module->table_name.'_id'])){
-                    $beans[] = $row[$module->table_name.'_id'];
+            $sql = $AORReport->build_report_query();
+            $answer["REPORT-SQL"] = $sql;
+    
+            $result = $AORReport->db->query($sql);
+            if ($result)
+            {
+                $answer["REPORT-RESULT-COUNT"] = 0;
+                $beans = array();
+                $idColumnName = FALSE;
+                while ($row = $AORReport->db->fetchByAssoc($result))
+                {
+                    if ($answer["REPORT-RESULT-COUNT"] == 0)
+                    {
+                        $columnKeys = array_keys($row);
+                        foreach ($columnKeys as $columnKey)
+                        {
+                            if (preg_match('#^ID[0-9]*$#i', $columnKey))
+                            {
+                                $idColumnName = $columnKey;
+                                break;
+                            }
+                        }
+                        $answer["REPORT-ID-COLUMN-NAME"] = $idColumnName;
+                    }
+                    if ($idColumnName)
+                    {
+                        $answer["REPORT-RESULT-COUNT"]++;
+                        if (isset($row[$idColumnName]))
+                        {
+                            $beans[] = $row[$idColumnName];
+                        }
+                    }
+                    else
+                    {
+                        $answer['ERRORS'][] = 'No Id column in report!';
+                        break;
+                    }
                 }
-            }
-            if(!empty($beans)){
-                foreach($prospectList->field_defs as $field=>$def){
-                    if($def['type'] == 'link' && !empty($def['relationship']) && $def['relationship'] == $key){
-                        $prospectList->load_relationship($field);
-                        $prospectList->$field->add($beans);
+        
+                if (!empty($beans))
+                {
+                    foreach ($prospectList->field_defs as $field => $def)
+                    {
+                        if ($def['type'] == 'link' && !empty($def['relationship']) && $def['relationship'] == $key)
+                        {
+                            $prospectList->load_relationship($field);
+                            $prospectList->$field->add($beans);
+                        }
                     }
                 }
             }
+            else
+            {
+                $answer['ERRORS'][] = 'The Report did not return any results!';
+            }
         }
-        die;
+        else
+        {
+            $answer['ERRORS'][] = 'Could not identify Prospects key from report module: ' . $AORReport->report_module;
+        }
+        $answer['STATUS'] = count($answer['ERRORS']) ? 'ERROR' : 'OK';
+        
+        header("Content-Type: application/json;charset=utf-8");
+        print json_encode($answer, JSON_PRETTY_PRINT);
+        exit();
     }
 
     protected function action_chartReport()
