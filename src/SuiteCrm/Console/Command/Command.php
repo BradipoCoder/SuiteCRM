@@ -14,10 +14,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Class Command
+ *
  * @package SuiteCrm\Console\Command
  */
-class Command extends ConsoleCommand
-{
+class Command extends ConsoleCommand {
   /** @var  InputInterface */
   protected $cmdInput;
 
@@ -30,47 +30,41 @@ class Command extends ConsoleCommand
   /**
    * @param string $name
    */
-  public function __construct($name = NULL)
-  {
+  public function __construct($name = NULL) {
     parent::__construct($name);
   }
 
   /**
-   * @param InputInterface  $input
+   * @param InputInterface $input
    * @param OutputInterface $output
    */
-  protected function _execute(InputInterface $input, OutputInterface $output)
-  {
+  protected function _execute(InputInterface $input, OutputInterface $output) {
     $this->cmdInput = $input;
     $this->cmdOutput = $output;
     $this->setConfigurationFile();
-    //$this->setupMailer();
-    //$this->setupLogger();
   }
 
   /**
    * Parse yml configuration
    */
-  protected function setConfigurationFile()
-  {
-    $config_file = $this->cmdInput->getArgument('config_file');
-    $configPath = realpath($config_file);
-    if (!$configPath)
-    {
-      $configPath = realpath(PROJECT_ROOT . '/config/' . $config_file);
+  protected function setConfigurationFile() {
+    if ($this->cmdInput->hasArgument('config_file')) {
+      $config_file = $this->cmdInput->getArgument('config_file');
+      $configPath = realpath($config_file);
+      if (!$configPath) {
+        $configPath = realpath(PROJECT_ROOT . '/config/' . $config_file);
+      }
+      if (!$configPath) {
+        throw new \InvalidArgumentException("The configuration file does not exist!");
+      }
+      Configuration::initializeWithConfigurationFile($configPath);
     }
-    if (!$configPath)
-    {
-      throw new \InvalidArgumentException("The configuration file does not exist!");
-    }
-    Configuration::initializeWithConfigurationFile($configPath);
   }
 
   /**
    * @param string $msg
    */
-  public function log($msg)
-  {
+  public function log($msg) {
     $this->cmdOutput->writeln($msg);
   }
 }
