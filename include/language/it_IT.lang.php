@@ -1059,31 +1059,31 @@ $app_strings = array(
     'LBL_TOUR_BACK' => 'Indietro',
     'LBL_TOUR_CLOSE' => 'Chiudi',
     'LBL_TOUR_TAKE_TOUR' => 'Vai alla presentazione',
-    'LBL_MY_AREA_LINKS' => 'La mia area dei link:' /*for 508 compliance fix*/,
-    'LBL_GETTINGAIR' => 'Getting Air' /*for 508 compliance fix*/,
-    'LBL_WELCOMEBAR' => 'Benvenuto' /*for 508 compliance fix*/,
-    'LBL_ADVANCEDSEARCH' => 'Ricerca Avanzata' /*for 508 compliance fix*/,
-    'LBL_MOREDETAIL' => 'Più dettagli' /*for 508 compliance fix*/,
-    'LBL_EDIT_INLINE' => 'Modifica' /*for 508 compliance fix*/,
-    'LBL_VIEW_INLINE' => 'Visualizza' /*for 508 compliance fix*/,
-    'LBL_BASIC_SEARCH' => 'Cerca' /*for 508 compliance fix*/,
-    'LBL_PROJECT_MINUS' => 'Rimuovi' /*for 508 compliance fix*/,
-    'LBL_PROJECT_PLUS' => 'Aggiungi' /*for 508 compliance fix*/,
-    'LBL_Blank' => ' ' /*for 508 compliance fix*/,
-    'LBL_ICON_COLUMN_1' => 'Colonna' /*for 508 compliance fix*/,
-    'LBL_ICON_COLUMN_2' => '2 Colonne' /*for 508 compliance fix*/,
-    'LBL_ICON_COLUMN_3' => '3 Colonne' /*for 508 compliance fix*/,
-    'LBL_ADVANCED_SEARCH' => 'Ricerca Avanzata' /*for 508 compliance fix*/,
-    'LBL_ID_FF_ADD' => 'Aggiungi' /*for 508 compliance fix*/,
-    'LBL_HIDE_SHOW' => 'Nascondi/Mostra' /*for 508 compliance fix*/,
-    'LBL_DELETE_INLINE' => 'Cancella' /*for 508 compliance fix*/,
-    'LBL_PLUS_INLINE' => 'Aggiungi' /*for 508 compliance fix*/,
-    'LBL_ID_FF_CLEAR' => 'Azzera' /*for 508 compliance fix*/,
-    'LBL_ID_FF_VCARD' => 'vCard' /*for 508 compliance fix*/,
-    'LBL_ID_FF_REMOVE' => 'Rimuovi' /*for 508 compliance fix*/,
-    'LBL_ADD' => 'Aggiungi' /*for 508 compliance fix*/,
-    'LBL_COMPANY_LOGO' => 'Logo Azienda' /*for 508 compliance fix*/,
-    'LBL_JS_CALENDAR' => 'Calendario' /*for 508 compliance fix*/,
+    'LBL_MY_AREA_LINKS' => 'La mia area dei link:'/*for 508 compliance fix*/,
+    'LBL_GETTINGAIR' => 'Getting Air'/*for 508 compliance fix*/,
+    'LBL_WELCOMEBAR' => 'Benvenuto'/*for 508 compliance fix*/,
+    'LBL_ADVANCEDSEARCH' => 'Ricerca Avanzata'/*for 508 compliance fix*/,
+    'LBL_MOREDETAIL' => 'Più dettagli'/*for 508 compliance fix*/,
+    'LBL_EDIT_INLINE' => 'Modifica'/*for 508 compliance fix*/,
+    'LBL_VIEW_INLINE' => 'Visualizza'/*for 508 compliance fix*/,
+    'LBL_BASIC_SEARCH' => 'Cerca'/*for 508 compliance fix*/,
+    'LBL_PROJECT_MINUS' => 'Rimuovi'/*for 508 compliance fix*/,
+    'LBL_PROJECT_PLUS' => 'Aggiungi'/*for 508 compliance fix*/,
+    'LBL_Blank' => ' '/*for 508 compliance fix*/,
+    'LBL_ICON_COLUMN_1' => 'Colonna'/*for 508 compliance fix*/,
+    'LBL_ICON_COLUMN_2' => '2 Colonne'/*for 508 compliance fix*/,
+    'LBL_ICON_COLUMN_3' => '3 Colonne'/*for 508 compliance fix*/,
+    'LBL_ADVANCED_SEARCH' => 'Ricerca Avanzata'/*for 508 compliance fix*/,
+    'LBL_ID_FF_ADD' => 'Aggiungi'/*for 508 compliance fix*/,
+    'LBL_HIDE_SHOW' => 'Nascondi/Mostra'/*for 508 compliance fix*/,
+    'LBL_DELETE_INLINE' => 'Cancella'/*for 508 compliance fix*/,
+    'LBL_PLUS_INLINE' => 'Aggiungi'/*for 508 compliance fix*/,
+    'LBL_ID_FF_CLEAR' => 'Azzera'/*for 508 compliance fix*/,
+    'LBL_ID_FF_VCARD' => 'vCard'/*for 508 compliance fix*/,
+    'LBL_ID_FF_REMOVE' => 'Rimuovi'/*for 508 compliance fix*/,
+    'LBL_ADD' => 'Aggiungi'/*for 508 compliance fix*/,
+    'LBL_COMPANY_LOGO' => 'Logo Azienda'/*for 508 compliance fix*/,
+    'LBL_JS_CALENDAR' => 'Calendario'/*for 508 compliance fix*/,
     'LBL_ADVANCED' => 'Avanzata',
     'LBL_BASIC' => 'Base',
     'LBL_MODULE_FILTER' => 'Filtra per',
@@ -1108,7 +1108,7 @@ $app_strings = array(
     'LBL_ROUTING_BREAK' => '-',
     'LBL_ROUTING_BUTTON_CANCEL' => 'Annulla',
     'LBL_ROUTING_BUTTON_SAVE' => 'Salva Regola',
-
+    
     'LBL_ROUTING_ACTIONS_COPY_MAIL' => 'Copia Mail',
     'LBL_ROUTING_ACTIONS_DELETE_BEAN' => 'Elimina Oggetto SuiteCRM',
     'LBL_ROUTING_ACTIONS_DELETE_FILE' => 'Elimina File',
@@ -1120,11 +1120,11 @@ $app_strings = array(
     'LBL_ROUTING_ACTIONS_MOVE_MAIL' => 'Sposta Email',
     'LBL_ROUTING_ACTIONS_PEFORM' => 'Esegui le seguenti azioni',
     'LBL_ROUTING_ACTIONS_REPLY' => 'Rispondi alla Email',
-
+    
     'LBL_ROUTING_CHECK_RULE' => 'E´ stato rilevato un errore:',
     'LBL_ROUTING_CHECK_RULE_DESC' => 'Verifica che tutti i campi siano segnati.',
     'LBL_ROUTING_CONFIRM_DELETE' => 'Sicuro di voler eliminare la regola?\nNon sarà possibile annullare.',
-
+    
     'LBL_ROUTING_FLAGGED' => 'flag set',
     'LBL_ROUTING_FORM_DESC' => 'Le regole salvate sono immediatamente attive.',
     'LBL_ROUTING_FW' => 'FW:',
@@ -1142,7 +1142,7 @@ $app_strings = array(
     'LBL_ROUTING_MATCH_TO_ADDR' => 'A',
     'LBL_ROUTING_MATCH_TYPE_MATCH' => 'Contiene',
     'LBL_ROUTING_MATCH_TYPE_NOT_MATCH' => 'Non contiene',
-
+    
     'LBL_ROUTING_NAME' => 'Nome Regola',
     'LBL_ROUTING_NEW_NAME' => 'Nuova Regola',
     'LBL_ROUTING_ONE_MOMENT' => 'Un momento preso...',
@@ -1175,7 +1175,7 @@ $app_strings = array(
     'LBL_EMAIL_ACCOUNTS_SUBTITLE' => 'Imposta gli account di posta per visualizzare le emails in entrata nei tuoi account di posta.',
     'LBL_EMAIL_ACCOUNTS_OUTBOUND_SUBTITLE' => 'Fornisci informazioni sul server di posta SMTP da utilizzare per le email in uscita negli accounts di posta.',
     'LBL_EMAIL_ADD' => 'Aggiungi indirizzo',
-
+    
     'LBL_EMAIL_ADDRESS_BOOK_ADD' => 'Aggiungi',
     'LBL_EMAIL_ADDRESS_BOOK_CLEAR' => 'Azzera',
     'LBL_EMAIL_ADDRESS_BOOK_ADD_TO' => 'A:',
@@ -1223,7 +1223,7 @@ $app_strings = array(
     'LBL_EMAIL_CLOSE' => 'Chiudi',
     'LBL_EMAIL_COFFEE_BREAK' => 'Controllo nuova posta. <br><br> Un account di posta considerevole potrebbe richiedere molto tempo',
     'LBL_EMAIL_COMMON' => 'Comune',
-
+    
     'LBL_EMAIL_COMPOSE' => 'Componi Email',
     'LBL_EMAIL_COMPOSE_ERR_NO_RECIPIENTS' => 'Inserisci destinatari per questa email.',
     'LBL_EMAIL_COMPOSE_LINK_TO' => 'Associa con',
@@ -1234,11 +1234,11 @@ $app_strings = array(
     'LBL_EMAIL_COMPOSE_SEND_FROM' => 'Invia da Account Email',
     'LBL_EMAIL_COMPOSE_OPTIONS' => 'Opzioni',
     'LBL_EMAIL_COMPOSE_INVALID_ADDRESS' => 'Inserisci un indirizzo valido per i campi To, CC and BCC',
-
+    
     'LBL_EMAIL_CONFIRM_CLOSE' => 'Abbandonare questa email?',
     'LBL_EMAIL_CONFIRM_DELETE' => 'Rimuovi questi elementi dalla tua rubrica?',
     'LBL_EMAIL_CONFIRM_DELETE_SIGNATURE' => 'Sei sicuro di voler eliminare questa firma?',
-
+    
     'LBL_EMAIL_CREATE_NEW' => '--Crea al Salvataggio--',
     'LBL_EMAIL_MULT_GROUP_FOLDER_ACCOUNTS' => 'Multiplo',
     'LBL_EMAIL_MULT_GROUP_FOLDER_ACCOUNTS_EMPTY' => 'Vuoto',
@@ -1256,17 +1256,17 @@ $app_strings = array(
     'LBL_EMAIL_DETAILS' => 'Dettagli',
     'LBL_EMAIL_DISPLAY_MSG' => 'Sto mostrando le email {0} - {1} di {2}',
     'LBL_EMAIL_ADDR_DISPLAY_MSG' => 'Sto mostrando gli indirizzi email {0} - {1} di {2}',
-
+    
     'LBL_EMAIL_EDIT_CONTACT' => 'Modifica Contatto',
     'LBL_EMAIL_EDIT_CONTACT_WARN' => 'Con i contatti vengono usati solamente gli indirizzi primari.',
     'LBL_EMAIL_EDIT_MAILING_LIST' => 'Modifica Mailing List',
-
+    
     'LBL_EMAIL_EMPTYING_TRASH' => 'Sto svuotando il cestino',
     'LBL_EMAIL_DELETING_OUTBOUND' => 'Eliminazione server in uscita',
     'LBL_EMAIL_CLEARING_CACHE_FILES' => 'Eliminazione file di cache',
     'LBL_EMAIL_EMPTY_MSG' => 'Nessuna email da mostrare.',
     'LBL_EMAIL_EMPTY_ADDR_MSG' => 'Nessun indirizzo email da mostrare.',
-
+    
     'LBL_EMAIL_ERROR_ADD_GROUP_FOLDER' => 'Il nome della cartella deve essere univoco e non vuoto. Si prega di riprovare.',
     'LBL_EMAIL_ERROR_DELETE_GROUP_FOLDER' => 'Impossibile cancellare la cartella. O la cartella o un suo figlio hanno una casella di posta elettronica associata ad essa.',
     'LBL_EMAIL_ERROR_CANNOT_FIND_NODE' => 'Impossibile determinare la cartella predisposta dal contesto. Provare ancora.',
@@ -1312,7 +1312,7 @@ $app_strings = array(
     'LBL_EMAIL_FOLDERS_NO_VALID_NODE' => 'Seleziona cartella prima di fare questa azione.',
     'LBL_EMAIL_FOLDERS_TITLE' => 'Gestione delle cartelle di SuiteCRM',
     'LBL_EMAIL_FOLDERS_USING_GROUP_USER' => 'Utilizza Group',
-
+    
     'LBL_EMAIL_FORWARD' => 'Inoltra',
     'LBL_EMAIL_DELIMITER' => '::;::',
     'LBL_EMAIL_DOWNLOAD_STATUS' => 'Scaricate [[count]] di [[total]] email',
@@ -1338,7 +1338,7 @@ $app_strings = array(
     'LBL_EMAIL_MARK_UNFLAGGED' => 'Come non selezionata',
     'LBL_EMAIL_MARK_UNREAD' => 'Come non letta',
     'LBL_EMAIL_ASSIGN_TO' => 'Assegna A',
-
+    
     'LBL_EMAIL_MENU_ADD_FOLDER' => 'Crea Cartella',
     'LBL_EMAIL_MENU_COMPOSE' => 'Componi a',
     'LBL_EMAIL_MENU_DELETE_FOLDER' => 'Elimina Cartella',
@@ -1351,7 +1351,7 @@ $app_strings = array(
     'LBL_EMAIL_MENU_RENAME_FOLDER' => 'Rinomina Cartella',
     'LBL_EMAIL_MENU_RENAMING_FOLDER' => 'Sto rinominando la Cartella',
     'LBL_EMAIL_MENU_MAKE_SELECTION' => 'Si prega di effettuare una selezione prima di provare l´operazione.',
-
+    
     'LBL_EMAIL_MENU_HELP_ADD_FOLDER' => 'Crea una Cartella (remota o in SuiteCRM)',
     'LBL_EMAIL_MENU_HELP_ARCHIVE' => 'Archivia messaggio(i) in SuiteCRM',
     'LBL_EMAIL_MENU_HELP_COMPOSE_TO_LIST' => 'Email verso le Mailing Lists selezionate',
@@ -1370,18 +1370,18 @@ $app_strings = array(
     'LBL_EMAIL_MENU_HELP_RENAME_FOLDER' => 'Rinomina una Cartella (remota o in SuiteCRM)',
     'LBL_EMAIL_MENU_HELP_REPLY' => 'Rispondi a queste email',
     'LBL_EMAIL_MENU_HELP_REPLY_ALL' => 'Rispondi a tutti per queste email',
-
+    
     'LBL_EMAIL_MESSAGES' => 'messaggi',
-
+    
     'LBL_EMAIL_ML_NAME' => 'Elenco Nomi',
     'LBL_EMAIL_ML_ADDRESSES_1' => 'Elenco Indirizzi selezionati.',
     'LBL_EMAIL_ML_ADDRESSES_2' => 'Elenco Indirizzi disponibili',
-
+    
     'LBL_EMAIL_MULTISELECT' => '<b>Ctrl-Click</b> per effettuare una selezione multipla <br />(Per utenti Mac <b>CMD-Click</b>)',
-
+    
     'LBL_EMAIL_NO' => 'No',
     'LBL_EMAIL_NOT_SENT' => 'Il sistema non è in grado di gestire la tua richiesta. Si prega di contattare l´amministratore del sistema.',
-
+    
     'LBL_EMAIL_OK' => 'OK',
     'LBL_EMAIL_ONE_MOMENT' => 'Un momento prego...',
     'LBL_EMAIL_OPEN_ALL' => 'Apri messaggi multipli',
@@ -1394,7 +1394,7 @@ $app_strings = array(
     'LBL_EMAIL_PERFORMING_TASK' => 'In esecuzione',
     'LBL_EMAIL_PRIMARY' => 'Primario',
     'LBL_EMAIL_PRINT' => 'Stampa',
-
+    
     'LBL_EMAIL_QC_BUGS' => 'Gestione Bugs',
     'LBL_EMAIL_QC_CASES' => 'Reclamo',
     'LBL_EMAIL_QC_LEADS' => 'Leads',
@@ -1402,7 +1402,7 @@ $app_strings = array(
     'LBL_EMAIL_QC_TASKS' => 'Compito',
     'LBL_EMAIL_QC_OPPORTUNITIES' => 'Opportunità',
     'LBL_EMAIL_QUICK_CREATE' => 'Creazione Rapida',
-
+    
     'LBL_EMAIL_REBUILDING_FOLDERS' => 'Ricostruzione Cartelle',
     'LBL_EMAIL_RELATE_TO' => 'Collega',
     'LBL_EMAIL_VIEW_RELATIONSHIPS' => 'Visualizza relazioni',
@@ -1418,13 +1418,13 @@ $app_strings = array(
     'LBL_EMAIL_RETURN_TO_VIEW' => 'Ritorna al modulo precedente?',
     'LBL_EMAIL_REVERT' => 'Ripristina',
     'LBL_EMAIL_RELATE_EMAIL' => 'Collegare Email',
-
+    
     'LBL_EMAIL_RULES_TITLE' => 'Gestione regole',
-
+    
     'LBL_EMAIL_SAVE' => 'Salva',
     'LBL_EMAIL_SAVE_AND_REPLY' => 'Salva &amp; Rispondi',
     'LBL_EMAIL_SAVE_DRAFT' => 'Salva Bozza',
-
+    
     'LBL_EMAIL_SEARCHING' => 'Ricerca in corso',
     'LBL_EMAIL_SEARCH' => SugarThemeRegistry::current()->getImage('Search', 'align=absmiddle border=0', null, null, '.gif', ''),
     'LBL_EMAIL_SEARCH_SHORT' => SugarThemeRegistry::current()->getImage('Search', 'align=absmiddle border=0', null, null, '.gif', ''),
@@ -1436,12 +1436,12 @@ $app_strings = array(
     'LBL_EMAIL_SEARCH_RESULTS_TITLE' => 'Risultato Ricerca',
     'LBL_EMAIL_SEARCH_TITLE' => 'Ricerca Semplice',
     'LBL_EMAIL_SEARCH__FROM_ACCOUNTS' => 'Ricerca account email',
-
+    
     'LBL_EMAIL_SELECT' => 'Seleziona',
-
+    
     'LBL_EMAIL_SEND' => 'Invia',
     'LBL_EMAIL_SENDING_EMAIL' => 'Sto inviando la mail',
-
+    
     'LBL_EMAIL_SETTINGS' => 'Impostazioni',
     'LBL_EMAIL_SETTINGS_2_ROWS' => '2 Righe',
     'LBL_EMAIL_SETTINGS_3_COLS' => '3 Colonne',
@@ -1471,9 +1471,9 @@ $app_strings = array(
     'LBL_EMAIL_SETTINGS_GROUP_FOLDERS_CREATE' => 'Creare Cartella di Gruppo',
     'LBL_EMAIL_SETTINGS_GROUP_FOLDERS_Save' => 'Salvataggio Cartella di Gruppo',
     'LBL_EMAIL_SETTINGS_RETRIEVING_GROUP' => 'Recuperare Cartella di Gruppo',
-
+    
     'LBL_EMAIL_SETTINGS_GROUP_FOLDERS_EDIT' => 'Modifica Cartella di Gruppo',
-
+    
     'LBL_EMAIL_SETTINGS_NAME' => 'Nome',
     'LBL_EMAIL_SETTINGS_REQUIRE_REFRESH' => 'Queste modifiche, affinchè vengano attivate richiedono un aggiornamento della pagina.',
     'LBL_EMAIL_SETTINGS_RETRIEVING_ACCOUNT' => 'Recupero Account di posta elettronica',
@@ -1527,7 +1527,7 @@ $app_strings = array(
     'LBL_EMAIL_MESSAGE_NO' => 'Nessun Messaggio',
     'LBL_EMAIL_IMPORT_SUCCESS' => 'Importazione Eseguita',
     'LBL_EMAIL_IMPORT_FAIL' => 'Importazione Fallita perchè il messaggio è già stato importato o eliminato dal server',
-
+    
     'LBL_LINK_NONE' => 'Nessuno',
     'LBL_LINK_ALL' => 'Tutti',
     'LBL_LINK_RECORDS' => 'Record',
@@ -1538,7 +1538,7 @@ $app_strings = array(
     'LBL_CLOSE_ACTIVITY_CONFIRM' => 'Vuoi chiudere questo record?',
     'LBL_CLOSE_ACTIVITY_REMEMBER' => 'Non visualizzare questo messaggio nel futuro:',
     'LBL_INVALID_FILE_EXTENSION' => 'Estensione File non valida',
-
+    
     'ERR_AJAX_LOAD' => 'Si è verificato un errore:',
     'ERR_AJAX_LOAD_FAILURE' => 'C´è stato un errore durante l´elaborazione della richiesta, si prega di riprovare in un secondo momento.',
     'ERR_AJAX_LOAD_FOOTER' => 'Se l´errore persiste, chiedi al tuo amministratore di disabilitare l´Ajax per questo modulo',
@@ -1584,7 +1584,7 @@ $app_strings = array(
     'ERR_EXTERNAL_API_403' => 'Permesso negato. Tipo di file non supportato.',
     'ERR_EXTERNAL_API_NO_OAUTH_TOKEN' => 'Il codice di accesso OAuth non è presente.',
     'ERR_DB_VERSION' => 'I file SuiteCRM {0} possono essere utilizzati solo con un database SuiteCRM {1}.',
-
+    
     'LBL_ACCOUNT' => 'Azienda',
     'LBL_OLD_ACCOUNT_LINK' => 'Vecchie Aziende',
     'LBL_ACCOUNTS' => 'Aziende',
@@ -1746,7 +1746,7 @@ $app_strings = array(
     'LBL_LISTVIEW_OPTION_ENTIRE' => 'Elenco intero',
     'LBL_LISTVIEW_OPTION_SELECTED' => 'Record selezionati',
     'LBL_LISTVIEW_SELECTED_OBJECTS' => 'Selezionato:',
-
+    
     'LBL_LOCALE_NAME_EXAMPLE_FIRST' => 'John',
     'LBL_LOCALE_NAME_EXAMPLE_LAST' => 'Doe',
     'LBL_LOCALE_NAME_EXAMPLE_SALUTATION' => 'Mr.',
@@ -1804,10 +1804,10 @@ $app_strings = array(
     'LBL_PRIMARY_ADDRESS_STREET_3' => 'Indirizzo Primario, Via (3):',
     'LBL_PRIMARY_ADDRESS_STREET' => 'Indirizzo Primario, Via',
     'LBL_PRIMARY_ADDRESS' => 'Indirizzo principale:',
-
+    
     'LBL_BILLING_STREET' => 'Via:',
     'LBL_SHIPPING_STREET' => 'Via:',
-
+    
     'LBL_PROSPECTS' => 'Prospect',
     'LBL_PRODUCT_BUNDLES' => 'Assieme al prodotto',
     'LBL_PRODUCTS' => 'Prodotti',
@@ -1818,7 +1818,7 @@ $app_strings = array(
     'LBL_QUOTE_TO_OPPORTUNITY_TITLE' => 'Crea Opportunità dall´Offerta[Alt+O]',
     'LBL_QUOTES_SHIP_TO' => 'Invia Offerte a',
     'LBL_QUOTES' => 'Offerte',
-
+    
     'LBL_RELATED' => 'Relativi',
     'LBL_RELATED_INFORMATION' => 'Informazioni relative',
     'LBL_RELATED_RECORDS' => 'Records relativi',
@@ -1878,7 +1878,7 @@ $app_strings = array(
     'LBL_ACCESSKEY_CLEAR_FILE_KEY' => ' ',
     'LBL_ACCESSKEY_CLEAR_FILE_TITLE' => 'Cancella File',
     'LBL_ACCESSKEY_CLEAR_FILE_LABEL' => 'Cancella File',
-
+    
     'LBL_ACCESSKEY_SELECT_USERS_KEY' => 'U',
     'LBL_ACCESSKEY_SELECT_USERS_TITLE' => 'Seleziona Utente [Alt+U]',
     'LBL_ACCESSKEY_SELECT_USERS_LABEL' => 'Seleziona utente',
@@ -1927,17 +1927,17 @@ $app_strings = array(
     'LBL_STATUS' => 'Stato:',
     'LBL_STREET' => 'Via',
     'LBL_SUBJECT' => 'Oggetto',
-
+    
     'LBL_INBOUNDEMAIL_ID' => 'ID Email in arrivo',
-
+    
     /* The following version of LBL_SUGAR_COPYRIGHT is intended for Sugar Open Source only. */
-
+    
     'LBL_SUGAR_COPYRIGHT' => '& copy; 2004-2009 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SuiteCRM Inc.</a> All Rights Reserved.',
-
+    
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
-
+    
     'LBL_SUGAR_COPYRIGHT_SUB' => '© 2004-2011 SuiteCRM Inc. All Rights Reserved.<br />SuiteCRM is a trademark of SuiteCRM, Inc. All other company and product names may be trademarks of the respective companies with which they are associated.',
-
+    
     'LBL_SYNC' => 'Sincronizza',
     'LBL_TABGROUP_ALL' => 'Tutto',
     'LBL_TABGROUP_ACTIVITIES' => 'Attività',
@@ -1974,7 +1974,7 @@ $app_strings = array(
     'LBL_VIEW_PDF_BUTTON_KEY' => 'P',
     'LBL_VIEW_PDF_BUTTON_LABEL' => 'Stampa come PDF',
     'LBL_VIEW_PDF_BUTTON_TITLE' => 'Stampa come PDF [Alt+P]',
-
+    
     'LNK_ABOUT' => 'Informazioni',
     'LNK_ADVANCED_SEARCH' => 'Ricerca avanzata',
     'LNK_BASIC_SEARCH' => 'Ricerca',
@@ -2002,7 +2002,7 @@ $app_strings = array(
     'LNK_REMOVE' => 'Canc',
     'LNK_RESUME' => 'Riassumi',
     'LNK_VIEW_CHANGE_LOG' => 'Vedi log cambiamenti',
-
+    
     'NTC_CLICK_BACK' => 'Utilizza il pulsante indietro del browser e correggi il problema, grazie',
     'NTC_DATE_FORMAT' => '(aaaa-mm-gg)',
     'NTC_DATE_TIME_FORMAT' => '(aaaa-mm-gg 24:00)',
@@ -2049,7 +2049,7 @@ $app_strings = array(
     'LBL_REQUEST_PROCESSED' => 'Fatto',
     'LBL_AJAX_FAILURE' => 'Errore Ajax',
     'LBL_MERGE_DUPLICATES' => 'Unisci duplicati',
-    'LBL_SAVED_SEARCH_SHORTCUT' => 'Salva ricerche',
+    'LBL_SAVED_SEARCH_SHORTCUT' => 'Ricerche salvate',
     'LBL_SEARCH_POPULATE_ONLY' => 'Effettuare una ricerca usando lo spazio qui sopra',
     'LBL_DETAILVIEW' => 'Maschera Dettaglio',
     'LBL_LISTVIEW' => 'Vista Elenco',
@@ -2080,7 +2080,7 @@ $app_strings = array(
     'MSG_LIST_VIEW_NO_RESULTS_SUBMSG' => 'Crea come nuovo',
     'MSG_EMPTY_LIST_VIEW_NO_RESULTS' => 'Al momento non hai nessun record salvato.',
     'MSG_EMPTY_LIST_VIEW_NO_RESULTS_SUBMSG' => 'Per avere più informazioni utilizza il menù a tendina che consente di accedere alla guida. Si trova nella barra di navigazione principale.',
-
+    
     'LBL_CLICK_HERE' => 'Clicca qui',
     // contextMenu strings
     'LBL_ADD_TO_FAVORITES' => 'Aggiungi ai Preferiti.',
@@ -2103,7 +2103,7 @@ $app_strings = array(
     'LBL_RELATED_CAMPAIGN_REQUIRED'=>'Missing required field: Related campaign',
     'LBL_TYPE_OF_PERSON_FOR_FORM'=>'Web form to create ',
     'LBL_TYPE_OF_PERSON_FOR_FORM_DESC'=>'Submitting this form will create ',
-
+    
     'LBL_PLEASE_SELECT' => 'Si prega di selezionare',
     'LBL_REDIRECT_URL' => 'Ridireziona URL',
     'LBL_RELATED_CAMPAIGN' => 'Campagna relativa',
@@ -2114,7 +2114,7 @@ $app_strings = array(
     'ERR_DATABASE_CONN_DROPPED' => 'Errore durante l´esecuzione della query. Probabilmente, il database ha fatto cadere la connessione. Prego aggiorna la pagina, potresti aver bisogno di riavviare il web server.',
     'ERR_MSSQL_DB_CONTEXT' => 'Cambia il contesto del database a',
     'ERR_MSSQL_WARNING' => 'Avviso:',
-
+    
     //Meta-Data framework
     'ERR_MISSING_VARDEF_NAME' => 'Attenzione: il campo [[field]] non ha un ingresso mappato nel file [moduleDir] vardefs.php',
     'ERR_CANNOT_CREATE_METADATA_FILE' => 'Errore: il file [[file]] è mancante. Impossibile creare poichè il file HTML non è stato trovato.',
@@ -2122,14 +2122,14 @@ $app_strings = array(
     'LBL_ALT_ADDRESS' => 'Altro indirizzo:',
     'ERR_SMARTY_UNEQUAL_RELATED_FIELD_PARAMETERS' => 'Errore: C´è un numero diverso di argomenti per ´chiave´ e ´copia´ elementi nella lista dei paramentri visualizzati.',
     'ERR_SMARTY_MISSING_DISPLAY_PARAMS' => 'Indice mancante nel displayParams Array per:',
-
+    
     /* MySugar Framework (for Home and Dashboard) */
     'LBL_DASHLET_CONFIGURE_GENERAL' => 'Generale',
     'LBL_DASHLET_CONFIGURE_FILTERS' => 'Filtri',
     'LBL_DASHLET_CONFIGURE_MY_ITEMS_ONLY' => 'Solo i miei elementi',
     'LBL_DASHLET_CONFIGURE_TITLE' => 'Titolo',
     'LBL_DASHLET_CONFIGURE_DISPLAY_ROWS' => 'Mostra righe',
-
+    
     // MySugar status strings
     'LBL_CREATING_NEW_PAGE' => 'Creazione nuova pagina in corso...',
     'LBL_NEW_PAGE_FEEDBACK' => 'Hai creato una nuova pagina. Puoi aggiungere contenuti con l´opzione Aggiungi Dashlet.',
@@ -2142,15 +2142,15 @@ $app_strings = array(
     'LBL_REMOVE_DASHLET_CONFIRM' => 'Sei sicuro di voler eliminare la Dashlet di SuiteCRM?',
     'LBL_REMOVING_DASHLET' => 'Eliminazione Dashlet di SuiteCRM in corso...',
     'LBL_REMOVED_DASHLET' => 'Dashlet di SuiteCRM eliminata',
-
+    
     // MySugar Menu Options
     'LBL_ADD_PAGE' => 'Aggiungi Pagina',
     'LBL_DELETE_PAGE' => 'Elimina Pagina',
     'LBL_CHANGE_LAYOUT' => 'Cambia Layout',
     'LBL_RENAME_PAGE' => 'Rinomina Pagina',
-
+    
     'LBL_LOADING_PAGE' => 'Caricamento Pagina, attendere...',
-
+    
     'LBL_RELOAD_PAGE' => 'Si prega di <a href="javascript: window.location.reload()">ricaricare la finestra</a> per usare questa Dashlet.',
     'LBL_ADD_DASHLETS' => 'Aggiungi Dashlet di SuiteCRM',
     'LBL_CLOSE_DASHLETS' => 'Chiudi',
@@ -2160,7 +2160,7 @@ $app_strings = array(
     'LBL_2_COLUMN' => '2 Colonne',
     'LBL_3_COLUMN' => '3 Colonne',
     'LBL_PAGE_NAME' => 'Titolo Pagina',
-
+    
     'LBL_SEARCH_RESULTS' => 'Risultato ricerche',
     'LBL_SEARCH_MODULES' => 'Moduli',
     'LBL_SEARCH_CHARTS' => 'Grafici',
@@ -2172,27 +2172,27 @@ $app_strings = array(
     'LBL_SEARCH_RESULTS_TIME' => 'ms.',
     'ERR_BLANK_PAGE_NAME' => 'Inserire un titolo alla pagina.',
     /* End MySugar Framework strings */
-
+    
     'LBL_NO_IMAGE' => 'Nessuna immagine',
-
+    
     'LBL_MODULE' => 'Modulo',
-
+    
     //adding a label for address copy from left
     'LBL_COPY_ADDRESS_FROM_LEFT' => 'Copia indirizzo da sinistra:',
     'LBL_SAVE_AND_CONTINUE' => 'Salva e Continua',
-
+    
     'LBL_SEARCH_HELP_TEXT' => '<p><br /><strong>Multiselect controls</strong></p><ul><li>Click on the values to select an attribute.</li><li>Ctrl-click & select multiple. Mac users use CMD-click.</li><li>To select all values between two attributes,&amp;amp;amp;amp;amp;nbsp; click first value & and then shift-click last value.</li></ul><p><strong>Advanced Search & Layout Options</strong><br><br>Using the <b>Saved Search &amp;amp;amp;amp;amp; Layout</b> option, you can save a set of search parameters and/or a custom List View layout in order to quickly obtain the desired search results in the future. You can save an unlimited number of custom searches and layouts. All saved searches appear by name in the Saved Searches list, with the last loaded saved search appearing at the top of the list.<br><br>To customize the List View layout, use the Hide Columns and Display Columns boxes to select which fields to display in the search results. For example, you can view or hide details such as the record name, and assigned user, and assigned team in the search results. To add a column to List View, select the field from the Hide Columns list and use the left arrow to move it to the Display Columns list. To remove a column from List View, select it from the Display Columns list and use the right arrow to move it to the Hide Columns list.<br><br>If you save layout settings, you will be able to load them at any time to view the search results in the custom layout.<br><br>To save and update a search and/or layout:<ol><li>Enter a name for the search results in the <b>Save this search as</b> field and click <b>Save</b>.The name now displays in the Saved Searches list adjacent to the <b>Clear</b> button.</li><li>To view a saved search, select it from the Saved Searches list. The search results are displayed in the List View.</li><li>To update the properties of a saved search, select the saved search from the list, enter the new search criteria and/or layout options in the Advanced Search area, and click <b>Update</b> next to <b>Modify Current Search</b>.</li><li>To delete a saved search, select it in the Saved Searches list, click <b>Delete</b> next to <b>Modify Current Search</b>, and then click <b>OK</b> to confirm the deletion.</li></ol>',
-
+    
     //resource management
     'ERR_QUERY_LIMIT' => 'Errore: Raggiunto il limite di Query di $limit record per modulo $module.',
     'ERROR_NOTIFY_OVERRIDE' => 'Error: ResourceObserver->notify() needs to be overridden.',
-
+    
     //tracker labels
     'ERR_MONITOR_FILE_MISSING' => 'Errore: non è possibile creare un monitor in quanto il file dei metadati è vuoto o non esiste.',
     'ERR_MONITOR_NOT_CONFIGURED' => 'Errore: non c´è nessun monitor configurato per il nome richiesto',
     'ERR_UNDEFINED_METRIC' => 'Errore: impossibile impostare il valore per il parametro indefinito',
     'ERR_STORE_FILE_MISSING' => 'Errore: impossibile trovare il file con le configurazioni salvate',
-
+    
     'LBL_MONITOR_ID' => 'Id Monitor',
     'LBL_USER_ID' => 'Id Utente',
     'LBL_MODULE_NAME' => 'Nome Modulo',
@@ -2203,42 +2203,42 @@ $app_strings = array(
     'LBL_BREADCRUMBSTACK_CREATED' => 'BreadCrumbStack è stato creato per ID utente {0}',
     'LBL_VISIBLE' => 'Record Visibili',
     'LBL_DATE_LAST_ACTION' => 'Data dell´ultima azione',
-
+    
     //jc:#12287 - For javascript validation messages
     'MSG_IS_NOT_BEFORE' => 'non è prima',
     'MSG_IS_MORE_THAN' => 'è più di',
     'MSG_IS_LESS_THAN' => 'è meno di',
     'MSG_SHOULD_BE' => 'dovrebbe essere',
     'MSG_OR_GREATER' => 'o maggiore',
-
+    
     'LBL_PORTAL_WELCOME_TITLE' => 'Benvenuto nel Portale di SuiteCRM Portal',
     'LBL_PORTAL_WELCOME_INFO' => 'Il Portale di SuiteCRM è un sistema che permette ai clienti di vedere in tempo reale lo stato dei reclami, bugs &  newsletters ecc. Si tratta di un´interfaccia esterna di SuiteCRM che può essere implementata all´interno di ogni sito web. Per ulteriori miglioramenti del portale Self Service, come l´introduzione della gestione dei progetti e dei forum, attendete la prossima release.',
     'LBL_LIST' => 'Elenco',
     'LBL_CREATE_BUG' => 'Crea Bug',
     'LBL_NO_RECORDS_FOUND' => '- 0 Record Trovati -',
-
+    
     'DATA_TYPE_DUE' => 'Scadenza:',
     'DATA_TYPE_START' => 'Inizio:',
     'DATA_TYPE_SENT' => 'Inviato:',
     'DATA_TYPE_MODIFIED' => 'Modificato:',
-
+    
     //jchi at 608/06/2008 10913am china time for the bug 12253.
     'LBL_REPORT_NEWREPORT_COLUMNS_TAB_COUNT' => 'Conteggio',
     //jchi #19433
     'LBL_OBJECT_IMAGE' => 'immagine oggetto',
     //jchi #12300
     'LBL_MASSUPDATE_DATE' => 'Seleziona Data',
-
+    
     'LBL_VALIDATE_RANGE' => 'non è all´interno di un valido intervallo',
     'LBL_CHOOSE_START_AND_END_DATES' => 'Si prega di selezionare un intervallo di inizio e uno di fine.',
     'LBL_CHOOSE_START_AND_END_ENTRIES' => 'Si prega di selezionare un valore di inizio e uno di fine per l\'intervallo.',
-
+    
     //jchi #  20776
     'LBL_DROPDOWN_LIST_ALL' => 'Tutto',
-
+    
     'LBL_OPERATOR_IN_TEXT' => 'è uno dei seguenti:',
     'LBL_OPERATOR_NOT_IN_TEXT' => 'non è uno dei seguenti:',
-
+    
     //Connector
     'ERR_CONNECTOR_FILL_BEANS_SIZE_MISMATCH' => 'Error: The Array count of the bean parameter does not match the Array count of the results.',
     'ERR_MISSING_MAPPING_ENTRY_FORM_MODULE' => 'Errore: Manca la voce di mapping per il modulo.',
@@ -2246,14 +2246,14 @@ $app_strings = array(
     'LBL_MERGE_CONNECTORS' => 'Visualizza Dati',
     'LBL_MERGE_CONNECTORS_BUTTON_KEY' => '[D]',
     'LBL_REMOVE_MODULE_ENTRY' => 'Sei sicuro di voler disabilitare l´integrazione del connettore per questo modulo?',
-
+    
     // fastcgi checks
     'LBL_FASTCGI_LOGGING' => 'Per una prestazione ottimale dell´utilizzo di IIS/FastCGI sapi, imposta fastcgi.logging a 0 nel file php.ini.',
-
+    
     //cma
     'LBL_MASSUPDATE_DELETE_GLOBAL_TEAM' => 'Non è possibile cancellare il gruppo globale. Annullamento in corso',
     'LBL_MASSUPDATE_DELETE_USER_EXISTS' => 'Questo gruppo privato [{0}] non può essere cancellato finché l´utente [{1}] non viene cancellato.',
-
+    
     //martin #25548
     'LBL_NO_FLASH_PLAYER' => 'Hello, you either have Flash turned off or an old version of Adobe´s Flash Player. Please <a href="http://www.adobe.com/go/getflashplayer/">get the latest Flash player</a> or turn on the flash.',
     //Collection Field
@@ -2261,11 +2261,11 @@ $app_strings = array(
     'LBL_COLLECTION_PRIMARY' => 'Primario',
     'ERROR_MISSING_COLLECTION_SELECTION' => 'Campo obbligatorio vuoto',
     'LBL_COLLECTION_EXACT' => 'Esatto',
-
+    
     //MB -Fixed Bug #32812 -Max
     'LBL_ASSIGNED_TO_NAME' => 'Assegnato a',
     'LBL_DESCRIPTION' => 'Descrizione',
-
+    
     'LBL_YESTERDAY' => 'Ieri',
     'LBL_TODAY' => 'Oggi',
     'LBL_TOMORROW' => 'Domani',
@@ -2279,36 +2279,36 @@ $app_strings = array(
     'LBL_SIXMONTHS' => 'Sei mesi',
     'LBL_NEXT_YEAR' => 'Anno prossimo',
     'LBL_FILTERED' => 'Filtrato',
-
+    
     //Datetimecombo fields
     'LBL_HOURS' => 'Ore',
     'LBL_MINUTES' => 'Minuti',
     'LBL_MERIDIEM' => 'Meridiano',
     'LBL_DATE' => 'Data',
     'LBL_DASHLET_CONFIGURE_AUTOREFRESH' => 'Aggiornamento automatico',
-
+    
     'LBL_DURATION_DAY' => 'giorno',
     'LBL_DURATION_HOUR' => 'ora',
     'LBL_DURATION_MINUTE' => 'minuto',
     'LBL_DURATION_DAYS' => 'giorni',
     'LBL_DURATION_HOURS' => 'ore',
     'LBL_DURATION_MINUTES' => 'minuti',
-
+    
     //Calendar widget labels
     'LBL_CHOOSE_MONTH' => 'Scegli il Mese',
     'LBL_ENTER_YEAR' => 'Inserisci Anno',
     'LBL_ENTER_VALID_YEAR' => 'Si prega di inserire un anno valido',
-
+    
     //SugarFieldPhone labels
     'LBL_INVALID_USA_PHONE_FORMAT' => 'Si prega di inserire un numero di telefono degli Stati Uniti numerico, comprensivo di prefisso.',
-
+    
     //File write error label
     'ERR_FILE_WRITE' => 'Errore: impossibile scrivere il file {0}. Si prega di controllare i permessi di sistema e del web server.',
     'ERR_FILE_NOT_FOUND' => 'Errore: impossibile caricare il file {0}. Si prega di controllare i permessi di sistema e del web server.',
-
+    
     'LBL_AND' => 'E',
     'LBL_BEFORE' => 'Prima',
-
+    
     // File fields
     'LBL_UPLOAD_FROM_COMPUTER' => 'Carica dal tuo Computer',
     'LBL_SEARCH_EXTERNAL_API' => 'File su Sorgente Esterna.',
@@ -2317,16 +2317,16 @@ $app_strings = array(
     'LBL_SHARE_COMPANY' => 'Azienda',
     'LBL_SHARE_LINKABLE' => 'Linkable',
     'LBL_SHARE_PUBLIC' => 'Pubblico',
-
+    
     // Web Services REST RSS
     'LBL_RSS_FEED' => 'Feed RSS',
     'LBL_RSS_RECORDS_FOUND' => 'record(s) trovati',
     'ERR_RSS_INVALID_INPUT' => 'RSS non è un input_type valido',
     'ERR_RSS_INVALID_RESPONSE' => 'RSS non è un response_type valido per questo metodo',
-
+    
     //External API Error Messages
     'ERR_GOOGLE_API_415' => 'Google Docs non supporta il formato di file che hai fornito.',
-
+    
     'LBL_EMPTY' => 'Vuoto',
     'LBL_IS_EMPTY' => 'è vuoto',
     'LBL_IS_NOT_EMPTY' => 'Non è vuoto',
@@ -2340,9 +2340,9 @@ $app_strings = array(
     'LBL_EXPORT_TEAM_ID' => 'ID Gruppo',
     'LBL_EXPORT_TEAM_NAME' => 'Gruppi',
     'LBL_EXPORT_TEAM_SET_ID' => 'ID Set Gruppo',
-
+    
     'LBL_QUICKEDIT_NODEFS_NAVIGATION' => 'Navigazione...',
-
+    
     'LBL_PENDING_NOTIFICATIONS' => 'Notifiche',
     'LBL_NOTIFICATIONS_NONE' => 'Nessuna Notifica Recente',
     'LBL_ALT_ADD_TEAM_ROW' => 'Aggiungi nuovo Gruppo',
@@ -2368,14 +2368,14 @@ $app_strings = array(
     'LBL_SELECT_THIS_ROW_TITLE' => 'Seleziona questa riga',
     'LBL_TEAM_SELECTED_TITLE' => 'Team Selezionati',
     'LBL_TEAM_SELECT_AS_PRIM_TITLE' => 'Seleziona per rendere questo team primario',
-
+    
     //for upload errors
     'UPLOAD_ERROR_TEXT' => 'ERRORE: si è verificato un errore durante il caricamento. Codice Errore: {0} - {1}',
     'UPLOAD_ERROR_TEXT_SIZEINFO' => 'ERRORE: si è verificato un errore durante il caricamento. Codice Errore: {0} - {1}. La dimensione massima di upload è {2}',
     'UPLOAD_ERROR_HOME_TEXT' => 'ERRORE: si è verificato un errore durante il caricamento, si prega di contattare l´amministratore del sistema per un aiuto.',
     'UPLOAD_MAXIMUM_EXCEEDED' => 'Dimensione Upload ({0} bytes) ha superato la massima consentita: {1} bytes',
     'UPLOAD_REQUEST_ERROR' => 'Si è verificato un errore. Si prega di ricaricare la pagina e riprovare.',
-
+    
     //508 used Access Keys
     'LBL_EDIT_BUTTON_KEY' => 'E',
     'LBL_EDIT_BUTTON_LABEL' => 'Modifica',
@@ -2398,7 +2398,7 @@ $app_strings = array(
     'LBL_GLOBAL_SEARCH_LNK_KEY' => '0',
     'LBL_KEYBOARD_SHORTCUTS_HELP_TITLE' => 'Tasti di scelta rapida',
     'LBL_KEYBOARD_SHORTCUTS_HELP' => '<p><strong>Form Functionality - Alt+</strong><br/> I = ed<b>I</b>t (detailview)<br/> U = d<b>U</b>plicate (detailview)<br/> D = <b>D</b>elete (detailview)<br/> A = s<b>A</b>ve (editview)<br/> L = cance<b>L</b> (editview) <br/><br/></p><p><strong>Search and Navigation  - Alt+</strong><br/> 7 = first input on Edit form<br/> 8 = Advanced Search link<br/> 9 = First Search Form input<br/> 0 = Unified search input<br></p>',
-
+    
     'ERR_CONNECTOR_NOT_ARRAY' => 'il connettore array in {0} è stato definito non correttamente o è vuoto e non può essere usato.',
     'ERR_SUHOSIN' => 'Il flusso di upload viene bloccato da Suhosin, si prega di aggiungere "upload" a suhosin.executor.include.whitelist (per maggiori informazioni vedi sugarcrm.log)',
     'ERR_BAD_RESPONSE_FROM_SERVER' => 'Risposta imprevista da parte del server.',
@@ -2411,7 +2411,7 @@ $app_strings = array(
         '30' => 'Ogni 30 minuti',
         '60' => 'Ogni ora',
     ),
-
+    
     'ERR_A_REMINDER_IS_EMPTY_OR_INCORRECT' => 'Un promemoria è vuoto o non corretto.',
     'ERR_REMINDER_IS_NOT_SET_POPUP_OR_EMAIL' => 'Non è stato impostato almeno un promemoria via Popup o Email.',
     'ERR_NO_INVITEES_FOR_REMINDER' => 'Non sono stati specificati gli invitati per il promemoria.',
