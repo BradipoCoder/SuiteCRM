@@ -43,8 +43,11 @@ require_once('include/ListView/ListViewSmarty.php');
 require_once('include/TemplateHandler/TemplateHandler.php');
 require_once('include/EditView/EditView2.php');
 
-
- class SearchForm{
+/**
+ * Class SearchForm
+ */
+class SearchForm
+{
  	var $seed = null;
  	var $module = '';
  	var $action = 'index';
@@ -54,12 +57,12 @@ require_once('include/EditView/EditView2.php');
  	var $th;
     var $tpl;
     var $view = 'SearchForm';
-    var $displayView = 'basic_search';
+    var $displayView = 'advanced_search';
     var $formData;
     var $fieldDefs;
     var $customFieldDefs;
     var $tabs;
-    var $parsedView = 'basic';
+    var $parsedView = 'advanced';
     //may remove
     var $searchFields;
     var $displaySavedSearch = true;
@@ -93,11 +96,12 @@ require_once('include/EditView/EditView2.php');
                             'key'    => $module . '|basic_search',
                             'name'   => 'basic',
                             'displayDiv'   => ''),
-                      array('title'  => $GLOBALS['app_strings']['LNK_ADVANCED_SEARCH'],
-                            'link'   => $module . '|advanced_search',
-                            'key'    => $module . '|advanced_search',
-                            'name'   => 'advanced',
-                            'displayDiv'   => 'display:none'),
+                            array('title'  => $GLOBALS['app_strings']['LNK_ADVANCED_SEARCH'],
+                                  'link'   => $module . '|advanced_search',
+                                  'key'    => $module . '|advanced_search',
+                                  'name'   => 'advanced',
+                                  'displayDiv' => ''
+                            ),
                        );
         $this->searchColumns = array () ;
         $this->setOptions($options);
@@ -116,9 +120,13 @@ require_once('include/EditView/EditView2.php');
         }
         self::__construct($seed, $module, $action, $options);
     }
+    
+    
+    function setup($searchdefs, $searchFields = array(), $tpl, $displayView = 'advanced_search',
+                   $listViewDefs = array())
+    {
+        $displayView = 'advanced_search';
 
-
- 	function setup($searchdefs, $searchFields = array(), $tpl, $displayView = 'basic_search', $listViewDefs = array()){
 		$this->searchdefs =  $searchdefs[$this->module];
  		$this->tpl = $tpl;
  		//used by advanced search
@@ -149,7 +157,8 @@ require_once('include/EditView/EditView2.php');
                                 'link'   => $this->module . '|advanced_search',
                                 'key'    => $this->module . '|advanced_search',
                                 'name'   => 'advanced',
-                                'displayDiv' => 'display:none');
+                                'displayDiv' => ''
+            );
         }
         if(isset($this->showCustom) && is_array($this->showCustom)){
             foreach($this->showCustom as $v){
@@ -272,7 +281,7 @@ require_once('include/EditView/EditView2.php');
  	/**
  	 * Set options
  	 * @param array $options
- 	 * @return SearchForm2
+     * @return SearchForm
  	 */
     public function setOptions($options = null)
     {
@@ -480,6 +489,24 @@ require_once('include/EditView/EditView2.php');
 
 
 		}
+        
+        //JACK'S MOD
+        //echo '<pre>' . print_r($this->searchdefs, true) . '</pre>';
+        foreach ($this->formData as &$v)
+        {
+            $fieldName = isset($v["field"]["name"]) ? $v["field"]["name"] : FALSE;
+            $v["is_basic"] = TRUE;
+            if ($fieldName)
+            {
+                $originalFieldName = str_replace('_' . $this->parsedView, '', $fieldName);
+                $v["original_name"] = $originalFieldName;
+                if (isset($this->searchdefs["layout"]["basic_search"]))
+                {
+                    $isBasic = array_key_exists($originalFieldName, $this->searchdefs["layout"]["basic_search"]);
+                    $v["is_basic"] = $isBasic;
+                }
+            }
+        }
 
 	}
 
