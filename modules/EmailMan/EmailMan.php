@@ -1202,6 +1202,7 @@ class EmailMan extends SugarBean
             $tmp_Subject = $mail->Subject;
             $mail->prepForOutbound();
 
+            //Do send
             $success = $mail->send();
 
             //Do not save the encoded subject.
