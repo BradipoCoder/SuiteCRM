@@ -72,6 +72,9 @@ class Campaign extends SugarBean {
 	var $tracker_count;
 	var $refer_url;
     var $impressions;
+    
+    /** @var  \Link */
+    public $tracked_urls;
 
 	// These are related
 	var $assigned_user_name;

@@ -1283,14 +1283,16 @@ EOQ;
 	/**
 	 * returns opening <a href=xxxx for a contact, account, etc
 	 * cascades from User set preference to System-wide default
-	 * @return string	link
-	 * @param attribute the email addy
-	 * @param focus the parent bean
-	 * @param contact_id
-	 * @param return_module
-	 * @param return_action
-	 * @param return_id
-	 * @param class
+	 *
+	 * @param string        $attribute
+	 * @param \SugarBean    $focus
+	 * @param string        $contact_id
+	 * @param string        $ret_module
+	 * @param string        $ret_action
+	 * @param string        $ret_id
+	 * @param string        $class
+     * 
+     * @return string
 	 */
 	function getEmailLink($attribute, &$focus, $contact_id='', $ret_module='', $ret_action='DetailView', $ret_id='', $class='') {
 	    $emailLink = '';
