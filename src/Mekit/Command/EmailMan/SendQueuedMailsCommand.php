@@ -54,9 +54,9 @@ class SendQueuedMailsCommand extends Command implements CommandInterface
     {
         parent::_execute($input, $output);
         $this->loggerManager = new LoggerManager($this->cmdOutput);
-        $this->log("Starting command " . static::COMMAND_NAME . "...");
+        $this->log("Starting command " . static::COMMAND_NAME . "...", 'info');
         $this->executeCommand();
-        $this->log("Command " . static::COMMAND_NAME . " done.");
+        $this->log("Command " . static::COMMAND_NAME . " done.", 'info');
     }
 
     /**
@@ -103,6 +103,8 @@ class SendQueuedMailsCommand extends Command implements CommandInterface
         $locale = new \Localization();
 
         $mail = new \SugarPHPMailer();
+        $mail->SMTPDebug = \SMTP::DEBUG_CONNECTION;
+        $mail->Debugoutput = [$this, 'log'];
 
         if (empty($current_language))
         {
@@ -115,13 +117,6 @@ class SendQueuedMailsCommand extends Command implements CommandInterface
         $current_user = new \User();
         $current_user->getSystemUser();
 
-        //$this->log("CFG: " . json_encode($sugar_config, JSON_PRETTY_PRINT));
-        //$this->log("BL: " . json_encode($beanList, JSON_PRETTY_PRINT));
-        //$this->log("BF: " . json_encode($beanFiles, JSON_PRETTY_PRINT));
-        //$this->log("LANG: " . $current_language);
-        //$this->log("APP-LST-STR: " . json_encode($app_list_strings, JSON_PRETTY_PRINT));
-        //$this->log("APP-STR: " . json_encode($app_strings, JSON_PRETTY_PRINT));
-
         //FROM : modules/EmailMan/EmailManDelivery.php
         $admin = new \Administration();
         $admin->retrieveSettings();
@@ -131,14 +126,14 @@ class SendQueuedMailsCommand extends Command implements CommandInterface
         {
             $max_emails_per_run = $admin->settings['massemailer_campaign_emails_per_run'];
         }
-        $this->log("max_emails_per_run: " . $max_emails_per_run);
+        $this->log("max_emails_per_run: " . $max_emails_per_run, 'info');
 
         $massemailer_email_copy = 0;
         if (isset($admin->settings['massemailer_email_copy']))
         {
             $massemailer_email_copy = $admin->settings['massemailer_email_copy'];
         }
-        $this->log("massemailer_email_copy: " . $massemailer_email_copy);
+        $this->log("massemailer_email_copy: " . $massemailer_email_copy, 'info');
 
         $db = \DBManagerFactory::getInstance();
         $emailman = new \EmailMan();
@@ -155,9 +150,8 @@ class SendQueuedMailsCommand extends Command implements CommandInterface
             $this->log("PROCESSING({$count}/{$max_emails_per_run}): " . $row["id"]);
             $this->log(str_repeat("-", 120));
 
-            //$emailman = new \EmailMan();
+            // Retrieve EmailMan element from db by id
             $emailman->retrieve($row["id"]);
-            //$this->log("EMAILMAN: " . print_r($emailman, true));
 
             if (empty($emailman->campaign_id))
             {
@@ -218,8 +212,12 @@ class SendQueuedMailsCommand extends Command implements CommandInterface
             $mail->Host = $outboundEmailAccount->mail_smtpserver;
             $mail->Port = $outboundEmailAccount->mail_smtpport;
             $mail->SMTPAuth = $outboundEmailAccount->mail_smtpauth_req;
-            //@todo: calculate this from mail_smtpssl
-            $mail->SMTPSecure = 'ssl';
+            $mail->SMTPSecure = '';
+            if($outboundEmailAccount->mail_smtpssl == 1) {
+                $mail->SMTPSecure =  'ssl';
+            } else if($outboundEmailAccount->mail_smtpssl == 2) {
+                $mail->SMTPSecure =  'tls';
+            }
 
             $mail->oe->mail_smtpauth_req = $outboundEmailAccount->mail_smtpauth_req;
             $mail->oe->mail_smtpuser = $outboundEmailAccount->mail_smtpuser;
@@ -229,10 +227,12 @@ class SendQueuedMailsCommand extends Command implements CommandInterface
             $mail->oe->mail_smtpssl = $outboundEmailAccount->mail_smtpssl;
 
             $mail->Timeout = 20;
-            //$mail->SMTPDebug = \SMTP::DEBUG_CONNECTION;
-            //$mail->Debugoutput = [$this->loggerManager, 'log'];
             $mail->SMTPKeepAlive = true;
 
+            //$mail->clearCustomHeaders();
+            //$mail->addCustomHeader('Return-Path', 'marketing@mekit.it');
+            //$mail->clearReplyTos();
+            //$mail->addReplyTo('marketing@mekit.it');
 
             try
             {
@@ -267,7 +267,7 @@ class SendQueuedMailsCommand extends Command implements CommandInterface
         if($forcedQuit) {
             $this->log("Sending of E-mails was forced to quit due to: " . $forcedQuitReason, 'fatal');
         } else {
-            $this->log("Completed.");
+            $this->log("Processed #$count mails");
         }
     }
 
@@ -343,9 +343,9 @@ class SendQueuedMailsCommand extends Command implements CommandInterface
     {
         /** @var \DBManager $db */
         $db = \DBManagerFactory::getInstance();
-        $sql = "SELECT *" . " FROM $tableName" . " WHERE send_date_time <= " . $db->now() . " AND deleted = 0"
+        $sql = "SELECT id FROM $tableName"
+               . " WHERE send_date_time <= " . $db->now()
                . " ORDER BY in_queue_date ASC";//send_date_time ASC
-        //$this->log("SQL: " . $sql);
         return $db->limitQuery($sql, 0, $max_emails_per_run);
     }
 
@@ -364,7 +364,7 @@ class SendQueuedMailsCommand extends Command implements CommandInterface
         }
         if (!$classExists)
         {
-            $this->log("Loading class($className): $classFilePath");
+            $this->log("Loading class($className): $classFilePath", 'info');
             if ($once)
             {
                 require_once $classFilePath;
@@ -382,6 +382,10 @@ class SendQueuedMailsCommand extends Command implements CommandInterface
      */
     public function log($msg, $level = 'warn')
     {
+        //fix for SugarPHPMailer debug level (use -vv to see)
+        if(!array_key_exists($level, $this->loggerManager->getLoggerLevels())) {
+            $level = 'info';
+        }
         $this->loggerManager->log($msg, $level);
     }
 }
