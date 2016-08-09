@@ -39,3 +39,15 @@
 
 
 $app_list_strings['moduleList']['mkt_Worklogs'] = 'Lavorazioni';
+$app_list_strings['worklogs_operation_type'][''] = '';
+$app_list_strings['worklogs_operation_type'][1] = 'Fotografia';
+$app_list_strings['worklogs_operation_type'][2] = 'Corrispondenza';
+$app_list_strings['worklogs_operation_type'][3] = 'Creazione Contenuti';
+$app_list_strings['worklogs_operation_type'][4] = 'Grafica';
+$app_list_strings['worklogs_operation_type'][5] = 'Inserimento Contenuti';
+$app_list_strings['worklogs_operation_type'][7] = 'Rinunione';
+$app_list_strings['worklogs_operation_type'][8] = 'Strategia e Ricerca';
+$app_list_strings['worklogs_operation_type'][9] = 'Sviluppo Web';
+$app_list_strings['worklogs_operation_type'][10] = 'Video';
+$app_list_strings['worklogs_operation_type'][11] = 'Amministrazione';
+$app_list_strings['worklogs_operation_type'][12] = 'Altro';
