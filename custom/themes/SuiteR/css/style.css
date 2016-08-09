@@ -140,13 +140,11 @@ form#search_form .search.advanced .form-fields .form-group {
     min-width: 350px;
     vertical-align: top;
 }
-
 form#search_form .search.advanced .form-fields .form-group label {
     max-width: 100px;
     width: 100px;
     text-align: right;
 }
-
 form#search_form .search.advanced .form-fields .form-group input[type=text],
 form#search_form .search.advanced .form-fields .form-group select {
     max-width: 250px;
