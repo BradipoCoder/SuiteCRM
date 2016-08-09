@@ -39,7 +39,7 @@
 
 
 $app_list_strings['moduleList']['mkt_Worklogs'] = 'Lavorazioni';
-$app_list_strings['worklogs_operation_type'][0] = '';
+$app_list_strings['worklogs_operation_type'][''] = '';
 $app_list_strings['worklogs_operation_type'][1] = 'Fotografia';
 $app_list_strings['worklogs_operation_type'][2] = 'Corrispondenza';
 $app_list_strings['worklogs_operation_type'][3] = 'Creazione Contenuti';
