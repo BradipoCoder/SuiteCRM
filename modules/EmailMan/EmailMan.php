@@ -563,12 +563,11 @@ class EmailMan extends SugarBean
                               $sender_id, $notes, $macro_nv, $newmessage, $from_address_name)
     {
 
-        global $mod_strings, $timedate;
-
-        if ($newmessage or empty($this->ref_email->id))
-        {
-            $this->ref_email = new Email();
-            $this->ref_email->retrieve($marketing_id, TRUE, FALSE);
+       global $mod_strings, $timedate;
+       $upd_ref_email=false;
+       if ($newmessage or empty($this->ref_email->id)) {
+           $this->ref_email = new Email();
+           $this->ref_email->retrieve($marketing_id, true, false);
 
             //the reference email should be updated when user swithces from test mode to regular mode,and, for every run in test mode, and is user
             //switches back to test mode.
@@ -1245,29 +1244,16 @@ class EmailMan extends SugarBean
             $success = FALSE;
             $this->target_tracker_key = create_guid();
 
-            if (isset($module->email_opt_out)
-                && ($module->email_opt_out === 'on'
-                    || $module->email_opt_out == '1'
-                    || $module->email_opt_out == 1)
-            )
-            {
-                $this->set_as_sent($module->email1, TRUE, NULL, NULL, 'removed');
-            }
-            else
-            {
-                if (isset($module->invalid_email)
-                    && ($module->invalid_email == 1
-                        || $module->invalid_email == '1')
-                )
-                {
-                    $this->set_as_sent($module->email1, TRUE, NULL, NULL, 'invalid email');
-                }
-                else
-                {
-                    $this->set_as_sent($module->email1, TRUE, NULL, NULL, 'send error');
-                }
-            }
-        }
+			if (isset($module->email_opt_out) && ($module->email_opt_out === 'on' || $module->email_opt_out == '1' || $module->email_opt_out == 1)) {
+				$this->set_as_sent($module->email1,true,null,null,'blocked');
+			} else {
+				if (isset($module->invalid_email) && ($module->invalid_email == 1 || $module->invalid_email == '1')) {
+					$this->set_as_sent($module->email1,true,null,null,'invalid email');
+				} else {
+					$this->set_as_sent($module->email1,true, null,null,'send error');
+				}
+			}
+		}
 
         return $success;
     }

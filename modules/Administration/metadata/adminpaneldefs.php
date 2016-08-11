@@ -141,6 +141,7 @@ $admin_option_defs['Emails']['mass_Email_config']= array('EmailMan','LBL_MASS_EM
 $admin_option_defs['Campaigns']['campaignconfig']= array('Campaigns','LBL_CAMPAIGN_CONFIG_TITLE','LBL_CAMPAIGN_CONFIG_DESC','./index.php?module=EmailMan&action=campaignconfig');
 
 $admin_option_defs['Emails']['mailboxes']= array('InboundEmail','LBL_MANAGE_MAILBOX','LBL_MAILBOX_DESC','./index.php?module=InboundEmail&action=index');
+$admin_option_defs['Emails']['mailboxes_outbound']= array('EmailMan','LBL_MANAGE_MAILBOX_OUTBOUND','LBL_MAILBOX_OUTBOUND_DESC','./index.php?module=OutboundEmailAccounts&action=index');
 $admin_option_defs['Campaigns']['mass_Email']= array('EmailMan','LBL_MASS_EMAIL_MANAGER_TITLE','LBL_MASS_EMAIL_MANAGER_DESC','./index.php?module=EmailMan&action=index');
 
 
@@ -173,24 +174,6 @@ $admin_option_defs['any']['dropdowneditor']= array('Dropdown','LBL_DROPDOWN_EDIT
 $admin_group_header[]= array('LBL_STUDIO_TITLE','',false,$admin_option_defs, 'LBL_TOOLS_DESC');
 
 $admin_option_defs=array();
-$admin_option_defs['Administration']['aos'] = array(
-    'edit',
-    'LBL_AOS_SETTINGS',
-    'LBL_CHANGE_SETTINGS',
-    './index.php?module=Administration&action=AOSAdmin'
-);
-
-if (isset($admin_group_header['sagility'])) $admin_option_defs['Administration'] = array_merge((array)$admin_option_defs['Administration'], (array)$admin_group_header['sagility'][3]['Administration']);
-
-$admin_group_header['sagility'] = array(
-    'LBL_SALESAGILITY_ADMIN',
-    '',
-    false,
-    $admin_option_defs,
-    ''
-);
-
-$admin_option_defs=array();
 
 $admin_option_defs['jjwg_Maps']['config'] = array(
     'Administration',
@@ -215,12 +198,6 @@ $admin_option_defs['jjwg_Maps']['geocode_addresses'] = array(
     'LBL_JJWG_MAPS_ADMIN_GEOCODE_ADDRESSES_TITLE',
     'LBL_JJWG_MAPS_ADMIN_GEOCODE_ADDRESSES_DESC',
     './index.php?module=jjwg_Maps&action=geocode_addresses'
-);
-$admin_option_defs['jjwg_Maps']['donate'] = array(
-    'Opportunities',
-    'LBL_JJWG_MAPS_ADMIN_DONATE_TITLE',
-    'LBL_JJWG_MAPS_ADMIN_DONATE_DESC',
-    './index.php?module=jjwg_Maps&action=donate'
 );
 $admin_option_defs['jjwg_Maps']['address_cache'] = array(
     'Contacts',
@@ -249,32 +226,34 @@ $admin_option_defs['Administration'] = array_merge((array)$admin_group_header[0]
 $admin_group_header[0] = array('LBL_USERS_TITLE', '', false, array_merge((array)$admin_group_header[0][3], (array)$admin_option_defs), 'LBL_USERS_DESC');
 
 
-$admin_option_defs = array();
+$admin_option_defs=array();
+$admin_option_defs['Administration']['aos'] = array(
+    'edit',
+    'LBL_AOS_SETTINGS',
+    'LBL_CHANGE_SETTINGS',
+    './index.php?module=Administration&action=AOSAdmin'
+);
+
 $admin_option_defs['Administration']['aod'] = array(
     'edit',
     'LBL_AOD_SETTINGS',
     'LBL_CHANGE_SETTINGS_AOD',
     './index.php?module=Administration&action=AODAdmin'
 );
-if (isset($admin_group_header['sagility'])) $admin_option_defs['Administration'] = array_merge((array)$admin_option_defs['Administration'], (array)$admin_group_header['sagility'][3]['Administration']);
 
-$admin_group_header['sagility'] = array(
-    'LBL_SALESAGILITY_ADMIN',
-    '',
-    false,
-    $admin_option_defs,
-    ''
-);
-
-$admin_option_defs = array();
 $admin_option_defs['Administration']['aop'] = array(
     'edit',
     'LBL_AOP_SETTINGS',
     'LBL_CHANGE_SETTINGS_AOP',
     './index.php?module=Administration&action=AOPAdmin'
 );
-if (isset($admin_group_header['sagility'])) $admin_option_defs['Administration'] = array_merge((array)$admin_option_defs['Administration'], (array)$admin_group_header['sagility'][3]['Administration']);
 
+$admin_option_defs['Administration']['business_hours'] = array(
+    'edit',
+    'LBL_BUSINESS_HOURS',
+    'LBL_BUSINESS_HOURS_DESC',
+    './index.php?module=Administration&action=BusinessHours'
+);
 $admin_group_header['sagility'] = array(
     'LBL_SALESAGILITY_ADMIN',
     '',
@@ -287,10 +266,6 @@ $admin_group_header['sagility'] = array(
 $admin_option_defs=array();
 $admin_option_defs['Bugs']['bug_tracker']= array('Releases','LBL_MANAGE_RELEASES','LBL_RELEASE','./index.php?module=Releases&action=index');
 $admin_group_header[]= array('LBL_BUG_TITLE','',false,$admin_option_defs, 'LBL_BUG_DESC');
-
-
-
-
 
 
 if(file_exists('custom/modules/Administration/Ext/Administration/administration.ext.php')){

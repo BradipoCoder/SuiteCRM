@@ -38,31 +38,30 @@
  * reasonably feasible for  technical reasons, the Appropriate Legal Notices must
  * display the words  "Powered by SugarCRM" and "Supercharged by SuiteCRM".
  */
-class AOR_Report extends Basic
-{
-  var $new_schema = TRUE;
-  var $module_dir = 'AOR_Reports';
-  var $object_name = 'AOR_Report';
-  var $table_name = 'aor_reports';
-  var $importable = TRUE;
-  var $disable_row_level_security = TRUE;
+class AOR_Report extends Basic {
+	var $new_schema = true;
+	var $module_dir = 'AOR_Reports';
+	var $object_name = 'AOR_Report';
+	var $table_name = 'aor_reports';
+	var $importable = true;
+	var $disable_row_level_security = true ;
 
-  var $id;
-  var $name;
-  var $date_entered;
-  var $date_modified;
-  var $modified_user_id;
-  var $modified_by_name;
-  var $created_by;
-  var $created_by_name;
-  var $description;
-  var $deleted;
-  var $created_by_link;
-  var $modified_user_link;
-  var $assigned_user_id;
-  var $assigned_user_name;
-  var $assigned_user_link;
-  var $report_module;
+	var $id;
+	var $name;
+	var $date_entered;
+	var $date_modified;
+	var $modified_user_id;
+	var $modified_by_name;
+	var $created_by;
+	var $created_by_name;
+	var $description;
+	var $deleted;
+	var $created_by_link;
+	var $modified_user_link;
+	var $assigned_user_id;
+	var $assigned_user_name;
+	var $assigned_user_link;
+	var $report_module;
 
   /** @var  string */
   protected $report_sql;
@@ -78,22 +77,19 @@ class AOR_Report extends Basic
     require_once('modules/AOR_Reports/aor_utils.php');
   }
 
-  /**
-   * @deprecated deprecated since version 7.6, PHP4 Style Constructors are deprecated and will be remove in 7.8, please update your code, use __construct instead
-   */
-  function AOR_Report()
-  {
-    $deprecatedMessage = 'PHP4 Style Constructors are deprecated and will be remove in 7.8, please update your code';
-    if (isset($GLOBALS['log']))
-    {
-      $GLOBALS['log']->deprecated($deprecatedMessage);
+    /**
+     * @deprecated deprecated since version 7.6, PHP4 Style Constructors are deprecated and will be remove in 7.8, please update your code, use __construct instead
+     */
+    function AOR_Report(){
+        $deprecatedMessage = 'PHP4 Style Constructors are deprecated and will be remove in 7.8, please update your code';
+        if(isset($GLOBALS['log'])) {
+            $GLOBALS['log']->deprecated($deprecatedMessage);
+        }
+        else {
+            trigger_error($deprecatedMessage, E_USER_DEPRECATED);
+        }
+        self::__construct();
     }
-    else
-    {
-      trigger_error($deprecatedMessage, E_USER_DEPRECATED);
-    }
-    self::__construct();
-  }
 
   /**
    * @return string
@@ -122,548 +118,450 @@ class AOR_Report extends Basic
     return FALSE;
   }
 
-  function save($check_notify = FALSE)
-  {
+    function save($check_notify = FALSE){
 
-    // TODO: process of saveing the fields and conditions is too long so we will have to make some optimization on save_lines functions
-    set_time_limit(3600);
+        // TODO: process of saveing the fields and conditions is too long so we will have to make some optimization on save_lines functions
+        set_time_limit(3600);
 
-    if (empty($this->id))
-    {
-      unset($_POST['aor_conditions_id']);
-      unset($_POST['aor_fields_id']);
-    }
-
-    parent::save($check_notify);
-
-    require_once('modules/AOR_Fields/AOR_Field.php');
-    $field = new AOR_Field();
-    $field->save_lines($_POST, $this, 'aor_fields_');
-
-    require_once('modules/AOR_Conditions/AOR_Condition.php');
-    $condition = new AOR_Condition();
-    $condition->save_lines($_POST, $this, 'aor_conditions_');
-
-    require_once('modules/AOR_Charts/AOR_Chart.php');
-    $chart = new AOR_Chart();
-    $chart->save_lines($_POST, $this, 'aor_chart_');
-  }
-
-  function load_report_beans()
-  {
-    global $beanList, $app_list_strings;
-
-    $app_list_strings['aor_moduleList'] = $app_list_strings['moduleList'];
-
-    foreach ($app_list_strings['aor_moduleList'] as $mkey => $mvalue)
-    {
-      if (!isset($beanList[$mkey]) || str_begin($mkey, 'AOR_') || str_begin($mkey, 'AOW_'))
-      {
-        unset($app_list_strings['aor_moduleList'][$mkey]);
-      }
-    }
-
-    $app_list_strings['aor_moduleList'] = array_merge((array) array('' => ''), (array) $app_list_strings['aor_moduleList']);
-
-    asort($app_list_strings['aor_moduleList']);
-  }
-
-
-  function getReportFields()
-  {
-    $fields = array();
-    foreach ($this->get_linked_beans('aor_fields', 'AOR_Fields') as $field)
-    {
-      $fields[] = $field;
-    }
-    usort(
-      $fields, function ($a, $b)
-    {
-      return $a->field_order - $b->field_order;
-    }
-    );
-    return $fields;
-  }
-
-  const CHART_TYPE_PCHART = 'pchart';
-  const CHART_TYPE_CHARTJS = 'chartjs';
-  const CHART_TYPE_RGRAPH = 'rgraph';
-
-
-  function build_report_chart($chartIds = NULL, $chartType = self::CHART_TYPE_PCHART)
-  {
-    global $beanList;
-    $linkedCharts = $this->get_linked_beans('aor_charts', 'AOR_Charts');
-    if (!$linkedCharts)
-    {
-      //No charts to display
-      return '';
-    }
-
-    $sql = "SELECT id FROM aor_fields WHERE aor_report_id = '" . $this->id
-           . "' AND deleted = 0 ORDER BY field_order ASC";
-    $result = $this->db->query($sql);
-
-    $fields = array();
-    $i = 0;
-
-    $mainGroupField = NULL;
-
-    while ($row = $this->db->fetchByAssoc($result))
-    {
-
-      $field = new AOR_Field();
-      $field->retrieve($row['id']);
-
-      $path = unserialize(base64_decode($field->module_path));
-
-      $field_bean = new $beanList[$this->report_module]();
-
-      $field_module = $this->report_module;
-      $field_alias = $field_bean->table_name;
-      if ($path[0] != $this->report_module)
-      {
-        foreach ($path as $rel)
-        {
-          if (empty($rel))
-          {
-            continue;
-          }
-          $field_module = getRelatedModule($field_module, $rel);
-          $field_alias = $field_alias . ':' . $rel;
-        }
-      }
-      $label = str_replace(' ', '_', $field->label) . $i;
-      $fields[$label]['field'] = $field->field;
-      $fields[$label]['label'] = $field->label;
-      $fields[$label]['display'] = $field->display;
-      $fields[$label]['function'] = $field->field_function;
-      $fields[$label]['module'] = $field_module;
-      $fields[$label]['alias'] = $field_alias;
-      $fields[$label]['link'] = $field->link;
-      $fields[$label]['total'] = $field->total;
-
-
-      $fields[$label]['params'] = array("date_format" => $field->format);
-
-      // get the main group
-
-      if ($field->group_display)
-      {
-
-        // if we have a main group already thats wrong cause only one main grouping field possible
-        if (!is_null($mainGroupField))
-        {
-          $GLOBALS['log']->fatal('main group already found');
+        if (empty($this->id)){
+            unset($_POST['aor_conditions_id']);
+            unset($_POST['aor_fields_id']);
         }
 
-        $mainGroupField = $field;
-      }
+        parent::save($check_notify);
 
-      ++$i;
+        require_once('modules/AOR_Fields/AOR_Field.php');
+        $field = new AOR_Field();
+        $field->save_lines($_POST, $this, 'aor_fields_');
+
+        require_once('modules/AOR_Conditions/AOR_Condition.php');
+        $condition = new AOR_Condition();
+        $condition->save_lines($_POST, $this, 'aor_conditions_');
+
+        require_once('modules/AOR_Charts/AOR_Chart.php');
+        $chart = new AOR_Chart();
+        $chart->save_lines($_POST, $this, 'aor_chart_');
     }
 
+    function load_report_beans(){
+        global $beanList, $app_list_strings;
 
-    $query = $this->build_report_query();
-    $result = $this->db->query($query);
-    $data = array();
-    while ($row = $this->db->fetchByAssoc($result, FALSE))
-    {
-      foreach ($fields as $name => $att)
-      {
+        $app_list_strings['aor_moduleList'] = $app_list_strings['moduleList'];
 
-        $currency_id = isset($row[$att['alias'] . '_currency_id']) ? $row[$att['alias'] . '_currency_id'] : '';
-
-        switch ($att['function'])
-        {
-          case 'COUNT':
-            break;
-          default:
-            if (!is_numeric($row[$name]))
-            {
-              $row[$name] = trim(strip_tags(getModuleField($att['module'], $att['field'], $att['field'], 'DetailView', $row[$name], '', $currency_id, $att['params'])));
-
+        foreach($app_list_strings['aor_moduleList'] as $mkey => $mvalue){
+            if(!isset($beanList[$mkey]) || str_begin($mkey, 'AOR_') || str_begin($mkey, 'AOW_')){
+                unset($app_list_strings['aor_moduleList'][$mkey]);
             }
-            break;
-        }
-      }
-      $data[] = $row;
-    }
-    $fields = $this->getReportFields();
-
-    switch ($chartType)
-    {
-      case self::CHART_TYPE_PCHART:
-        $html = '<script src="modules/AOR_Charts/lib/pChart/imagemap.js"></script>';
-        break;
-      case self::CHART_TYPE_CHARTJS:
-        $html = '<script src="modules/AOR_Reports/js/Chart.js"></script>';
-        break;
-      case self::CHART_TYPE_RGRAPH:
-        if ($_REQUEST['module']
-            != 'Home'
-        )//Need the require_once for the rgraphincludes as they are only loaded when the home page is hit
-        {
-          require_once('include/SuiteGraphs/RGraphIncludes.php');
         }
 
-        break;
+        $app_list_strings['aor_moduleList'] = array_merge((array)array(''=>''), (array)$app_list_strings['aor_moduleList']);
+
+        asort($app_list_strings['aor_moduleList']);
     }
-    $x = 0;
-    foreach ($linkedCharts as $chart)
-    {
-      if ($chartIds !== NULL && !in_array($chart->id, $chartIds))
-      {
-        continue;
-      }
-      $html .= $chart->buildChartHTML($data, $fields, $x, $chartType, $mainGroupField);
-      $x++;
+
+
+    function getReportFields(){
+        $fields = array();
+        foreach($this->get_linked_beans('aor_fields','AOR_Fields') as $field){
+            $fields[] = $field;
+        }
+        usort($fields,function($a,$b){
+            return $a->field_order - $b->field_order;
+        });
+        return $fields;
     }
-    return $html;
-  }
+
+    const CHART_TYPE_PCHART = 'pchart';
+    const CHART_TYPE_CHARTJS = 'chartjs';
+    const CHART_TYPE_RGRAPH = 'rgraph';
 
 
-  public function buildMultiGroupReport($offset = -1, $links = TRUE, $level = 2, $path = array())
-  {
-    global $beanList;
+    function build_report_chart($chartIds = null, $chartType = self::CHART_TYPE_PCHART){
+        global $beanList;
+        $linkedCharts = $this->get_linked_beans('aor_charts','AOR_Charts');
+	if(!$linkedCharts){
+            //No charts to display
+            return '';
+        }
 
-    $rows = $this->getGroupDisplayFieldByReportId($this->id, $level);
+        $sql = "SELECT id FROM aor_fields WHERE aor_report_id = '".$this->id."' AND deleted = 0 ORDER BY field_order ASC";
+        $result = $this->db->query($sql);
 
-    if (count($rows) > 1)
-    {
-      $GLOBALS['log']->fatal('ambiguous group display for report ' . $this->id);
-    }
-    else if (count($rows) == 1)
-    {
-      $rows[0]['module_path'] = unserialize(base64_decode($rows[0]['module_path']));
-      if (!$rows[0]['module_path'][0])
-      {
-        $module = new $beanList[$this->report_module]();
-        $rows[0]['field_id_name'] = $module->field_defs[$rows[0]['field']]['id_name'] ? $module->field_defs[$rows[0]['field']]['id_name'] : $module->field_defs[$rows[0]['field']]['name'];
-        $rows[0]['module_path'][0] = $module->table_name;
-      }
-      else
-      {
-        $rows[0]['field_id_name'] = $rows[0]['field'];
-      }
-      $path[] = $rows[0];
+        $fields = array();
+        $i = 0;
 
-      if ($level > 10)
-      {
-        $msg = 'Too many nested groups';
-        $GLOBALS['log']->fatal($msg);
-        return NULL;
-      }
+        $mainGroupField = null;
 
-      return $this->buildMultiGroupReport($offset, $links, $level + 1, $path);
-    }
-    else if (!$rows)
-    {
-      if ($path)
-      {
-        $html = '';
-        foreach ($path as $pth)
+        while ($row = $this->db->fetchByAssoc($result)) {
+
+            $field = new AOR_Field();
+            $field->retrieve($row['id']);
+
+            $path = unserialize(base64_decode($field->module_path));
+
+            $field_bean = new $beanList[$this->report_module]();
+
+            $field_module = $this->report_module;
+            $field_alias = $field_bean->table_name;
+            if($path[0] != $this->report_module){
+                foreach($path as $rel){
+                    if(empty($rel)){
+                        continue;
+                    }
+                    $field_module = getRelatedModule($field_module,$rel);
+                    $field_alias = $field_alias . ':'.$rel;
+                }
+            }
+            $label = str_replace(' ','_',$field->label).$i;
+            $fields[$label]['field'] = $field->field;
+            $fields[$label]['label'] = $field->label;
+            $fields[$label]['display'] = $field->display;
+            $fields[$label]['function'] = $field->field_function;
+            $fields[$label]['module'] = $field_module;
+            $fields[$label]['alias'] = $field_alias;
+            $fields[$label]['link'] = $field->link;
+            $fields[$label]['total'] = $field->total;
+
+
+            $fields[$label]['params'] = array("date_format" => $field->format);
+
+            // get the main group
+
+            if($field->group_display) {
+
+                // if we have a main group already thats wrong cause only one main grouping field possible
+                if(!is_null($mainGroupField)) {
+                    $GLOBALS['log']->fatal('main group already found');
+                }
+
+                $mainGroupField = $field;
+            }
+
+            ++$i;
+        }
+
+
+
+        $query = $this->build_report_query();
+        $result = $this->db->query($query);
+        $data = array();
+        while($row = $this->db->fetchByAssoc($result, false))
         {
-          $_fieldIdName = $this->db->quoteIdentifier($pth['field_id_name']);
-          $query = "SELECT $_fieldIdName FROM " . $this->db->quoteIdentifier($pth['module_path'][0])
-                   . " GROUP BY $_fieldIdName;";
-          $values = $this->dbSelect($query);
+            foreach($fields as $name => $att){
 
-          foreach ($values as $value)
-          {
+                $currency_id = isset($row[$att['alias'].'_currency_id']) ? $row[$att['alias'].'_currency_id'] : '';
 
-            //$where = [ $this->db->quote($pth['module_path'][0]) . '.' . $_fieldIdName . ' = \'' . $this->db->quote($value[$pth['field_id_name']]) . '\'' ];
+                switch ($att['function']){
+                    case 'COUNT':
+                        break;
+                    default:
+                        if(!is_numeric($row[$name])) {
+                            $row[$name] = trim(strip_tags(getModuleField($att['module'], $att['field'], $att['field'], 'DetailView', $row[$name], '', $currency_id,$att['params'])));
 
-            $moduleFieldByGroupValue = $this->getModuleFieldByGroupValue($beanList, $value[$pth['field_id_name']]);
-            $moduleFieldByGroupValue = $this->addDataIdValueToInnertext($moduleFieldByGroupValue);
-            $html .= $this->getMultiGroupFrameHTML($moduleFieldByGroupValue, $this->build_group_report($offset, $links/*, ['where' => $where]*/));
-          }
+                        }
+                        break;
+                }
+            }
+            $data[] = $row;
+        }
+        $fields = $this->getReportFields();
+
+        switch($chartType) {
+            case self::CHART_TYPE_PCHART:
+                $html = '<script src="modules/AOR_Charts/lib/pChart/imagemap.js"></script>';
+                break;
+            case self::CHART_TYPE_CHARTJS:
+                $html = '<script src="modules/AOR_Reports/js/Chart.js"></script>';
+                break;
+            case self::CHART_TYPE_RGRAPH:
+                if($_REQUEST['module']!= 'Home')//Need the require_once for the rgraphincludes as they are only loaded when the home page is hit
+                    require_once('include/SuiteGraphs/RGraphIncludes.php');
+
+                break;
+        }
+        $x = 0;
+        foreach($linkedCharts as $chart){
+            if($chartIds !== null && !in_array($chart->id,$chartIds)){
+                continue;
+            }
+            $html .= $chart->buildChartHTML($data,$fields,$x, $chartType, $mainGroupField);
+            $x++;
         }
         return $html;
-      }
-      else
-      {
-        return $this->build_group_report($offset, $links);
-      }
-    }
-    else
-    {
-      throw new Exception('incorrect results');
-    }
-    throw new Exception('incorrect state');
-  }
-
-  private function getGroupDisplayFieldByReportId($reportId = NULL, $level = 1)
-  {
-
-    // set the default values
-
-    if (is_null($reportId))
-    {
-      $reportId = $this->id;
     }
 
-    if (!$level)
-    {
-      $level = 1;
+
+    public function buildMultiGroupReport($offset = -1, $links = true, $level = 2, $path = array()) {
+        global $beanList;
+
+        $rows = $this->getGroupDisplayFieldByReportId($this->id, $level);
+
+        if(count($rows) > 1) {
+            $GLOBALS['log']->fatal('ambiguous group display for report ' . $this->id);
+        }
+        else if(count($rows) == 1){
+            $rows[0]['module_path'] = unserialize(base64_decode($rows[0]['module_path']));
+            if(!$rows[0]['module_path'][0]) {
+                $module = new $beanList[$this->report_module]();
+                $rows[0]['field_id_name'] = $module->field_defs[$rows[0]['field']]['id_name'] ? $module->field_defs[$rows[0]['field']]['id_name'] : $module->field_defs[$rows[0]['field']]['name'];
+                $rows[0]['module_path'][0] = $module->table_name;
+            }
+            else {
+                $rows[0]['field_id_name'] = $rows[0]['field'];
+            }
+            $path[] = $rows[0];
+
+            if($level>10) {
+                $msg = 'Too many nested groups';
+                $GLOBALS['log']->fatal($msg);
+                return null;
+            }
+
+            return $this->buildMultiGroupReport($offset, $links, $level+1, $path);
+        }
+        else if(!$rows) {
+            if($path) {
+                $html = '';
+                foreach ($path as $pth) {
+                    $_fieldIdName = $this->db->quoteIdentifier($pth['field_id_name']);
+                    $query = "SELECT $_fieldIdName FROM " . $this->db->quoteIdentifier($pth['module_path'][0]) . " GROUP BY $_fieldIdName;";
+                    $values = $this->dbSelect($query);
+
+                    foreach($values as $value) {
+
+                        //$where = [ $this->db->quote($pth['module_path'][0]) . '.' . $_fieldIdName . ' = \'' . $this->db->quote($value[$pth['field_id_name']]) . '\'' ];
+
+                        $moduleFieldByGroupValue = $this->getModuleFieldByGroupValue($beanList, $value[$pth['field_id_name']]);
+                        $moduleFieldByGroupValue = $this->addDataIdValueToInnertext($moduleFieldByGroupValue);
+                        $html .= $this->getMultiGroupFrameHTML($moduleFieldByGroupValue, $this->build_group_report($offset, $links/*, ['where' => $where]*/));
+                    }
+                }
+                return $html;
+            }
+            else {
+                return $this->build_group_report($offset, $links);
+            }
+        }
+        else {
+            throw new Exception('incorrect results');
+        }
+        throw new Exception('incorrect state');
     }
 
-    // escape values for query
+    private function getGroupDisplayFieldByReportId($reportId = null, $level = 1) {
 
-    $_id = $this->db->quote($reportId);
-    $_level = (int) $level;
+        // set the default values
 
-    // get results array
+        if (is_null($reportId)) {
+            $reportId = $this->id;
+        }
 
-    $query = "SELECT id, field, module_path FROM aor_fields WHERE aor_report_id = '$_id' AND group_display = $_level AND deleted = 0;";
-    $rows = $this->dbSelect($query);
+        if (!$level) {
+            $level = 1;
+        }
 
-    return $rows;
-  }
+        // escape values for query
 
+        $_id = $this->db->quote($reportId);
+        $_level = (int) $level;
 
-  private function dbSelect($query)
-  {
-    $results = $this->db->query($query);
+        // get results array
 
-    $rows = array();
-    while ($row = $this->db->fetchByAssoc($results))
-    {
-      $rows[] = $row;
+        $query = "SELECT id, field, module_path FROM aor_fields WHERE aor_report_id = '$_id' AND group_display = $_level AND deleted = 0;";
+        $rows = $this->dbSelect($query);
+
+        return $rows;
     }
 
-    return $rows;
-  }
 
-  private function getMultiGroupFrameHTML($header, $body)
-  {
-    $html = '<div class="multi-group-list" style="border: 1px solid black; padding: 10px;">
+    private function dbSelect($query) {
+        $results = $this->db->query($query);
+
+        $rows = array();
+        while($row = $this->db->fetchByAssoc($results)) {
+            $rows[] = $row;
+        }
+
+        return $rows;
+    }
+
+    private function getMultiGroupFrameHTML($header, $body) {
+        $html = '<div class="multi-group-list" style="border: 1px solid black; padding: 10px;">
                     <h3>' . $header . '</h3>
                     <div class="multi-group-list-inner">' . $body . '</div>
                 </div>';
-    return $html;
-  }
-
-  private function addDataIdValueToInnertext($html)
-  {
-    preg_match('/\sdata-id-value\s*=\s*"([^"]*)"/', $html, $match);
-    $html = preg_replace('/(>)([^<]*)(<\/\w+>$)/', '$1$2' . $match[1] . '$3', $html);
-    return $html;
-  }
-
-
-  function build_group_report($offset = -1, $links = TRUE, $extra = array())
-  {
-    global $beanList;
-
-    $html = '';
-    $query = '';
-    $query_array = array();
-    $module = new $beanList[$this->report_module]();
-
-    $sql = "SELECT id FROM aor_fields WHERE aor_report_id = '" . $this->id
-           . "' AND group_display = 1 AND deleted = 0 ORDER BY field_order ASC";
-    $field_id = $this->db->getOne($sql);
-
-    if (!$field_id)
-    {
-      $query_array['select'][] = $module->table_name . ".id AS '" . $module->table_name . "_id'";
+        return $html;
     }
 
-    if ($field_id != '')
-    {
-      $field = new AOR_Field();
-      $field->retrieve($field_id);
-
-      $field_label = str_replace(' ', '_', $field->label);
-
-      $path = unserialize(base64_decode($field->module_path));
-
-      $field_module = $module;
-      $table_alias = $field_module->table_name;
-      if (!empty($path[0]) && $path[0] != $module->module_dir)
-      {
-        foreach ($path as $rel)
-        {
-          $new_field_module = new $beanList[getRelatedModule($field_module->module_dir, $rel)];
-          $oldAlias = $table_alias;
-          $table_alias = $table_alias . ":" . $rel;
-
-          $query_array = $this->build_report_query_join($rel, $table_alias, $oldAlias, $field_module, 'relationship', $query_array, $new_field_module);
-          $field_module = $new_field_module;
-
-          // ?
-          //$table_alias = $rel;
-        }
-      }
-
-      $data = $field_module->field_defs[$field->field];
-
-      if ($data['type'] == 'relate' && isset($data['id_name']))
-      {
-        $field->field = $data['id_name'];
-      }
-
-      if ($data['type'] == 'currency' && !stripos($field->field, '_USD')
-          && isset($field_module->field_defs['currency_id'])
-      )
-      {
-        if ((isset($field_module->field_defs['currency_id']['source'])
-             && $field_module->field_defs['currency_id']['source'] == 'custom_fields')
-        )
-        {
-          $query['select'][$table_alias . '_currency_id'] = $table_alias . '_cstm' . ".currency_id AS '" . $table_alias
-                                                            . "_currency_id'";
-        }
-        else
-        {
-          $query_array['select'][$table_alias . '_currency_id'] = $table_alias . ".currency_id AS '" . $table_alias
-                                                                  . "_currency_id'";
-        }
-      }
-
-      if ((isset($data['source']) && $data['source'] == 'custom_fields'))
-      {
-        $select_field = $this->db->quoteIdentifier($table_alias . '_cstm') . '.' . $field->field;
-        // Fix for #1251 - added a missing parameter to the function call
-        $query_array = $this->build_report_query_join(
-          $table_alias . '_cstm', $table_alias . '_cstm', $table_alias, $field_module, 'custom', $query
-        );
-      }
-      else
-      {
-        $select_field = $this->db->quoteIdentifier($table_alias) . '.' . $field->field;
-      }
-
-      if ($field->sort_by != '')
-      {
-        $query_array['sort_by'][] = $field_label . ' ' . $field->sort_by;
-      }
-
-      if ($field->group_by == 1)
-      {
-        $query_array['group_by'][] = $select_field;
-      }
-
-      if ($field->field_function != NULL)
-      {
-        $select_field = $field->field_function . '(' . $select_field . ')';
-      }
-
-      $query_array['select'][] = $select_field . " AS '" . $field_label . "'";
-      if (isset($extra['select']) && $extra['select'])
-      {
-        foreach ($extra['select'] as $selectField => $selectAlias)
-        {
-          if ($selectAlias)
-          {
-            $query_array['select'][] = $selectField . " AS " . $selectAlias;
-          }
-          else
-          {
-            $query_array['select'][] = $selectField;
-          }
-        }
-      }
-      $query_array['where'][] = $select_field . " IS NOT NULL AND ";
-      if (isset($extra['where']) && $extra['where'])
-      {
-        $query_array['where'][] = implode(' AND ', $extra['where']) . ' AND ';
-      }
-
-      $query_array = $this->build_report_query_where($query_array);
-
-      foreach ($query_array['select'] as $select)
-      {
-        $query .= ($query == '' ? 'SELECT ' : ', ') . $select;
-      }
-
-      $query .= ' FROM ' . $module->table_name . ' ';
-
-      if (isset($query_array['join']))
-      {
-        foreach ($query_array['join'] as $join)
-        {
-          $query .= $join;
-        }
-      }
-      if (isset($query_array['where']))
-      {
-        $query_where = '';
-        foreach ($query_array['where'] as $where)
-        {
-          $query_where .= ($query_where == '' ? 'WHERE ' : ' ') . $where;
-        }
-
-        $query_where = $this->queryWhereRepair($query_where);
-
-        $query .= ' ' . $query_where;
-      }
-
-      if (isset($query_array['group_by']))
-      {
-        $query_group_by = '';
-        foreach ($query_array['group_by'] as $group_by)
-        {
-          $query_group_by .= ($query_group_by == '' ? 'GROUP BY ' : ', ') . $group_by;
-        }
-        $query .= ' ' . $query_group_by;
-      }
-
-      if (isset($query_array['sort_by']))
-      {
-        $query_sort_by = '';
-        foreach ($query_array['sort_by'] as $sort_by)
-        {
-          $query_sort_by .= ($query_sort_by == '' ? 'ORDER BY ' : ', ') . $sort_by;
-        }
-        $query .= ' ' . $query_sort_by;
-      }
-      $result = $this->db->query($query);
-
-      while ($row = $this->db->fetchByAssoc($result))
-      {
-        if ($html != '')
-        {
-          $html .= '<br />';
-        }
-
-        $html .= $this->build_report_html($offset, $links, $row[$field_label], '', $extra);
-
-      }
+    private function addDataIdValueToInnertext($html) {
+        preg_match('/\sdata-id-value\s*=\s*"([^"]*)"/', $html, $match);
+        $html = preg_replace('/(>)([^<]*)(<\/\w+>$)/', '$1$2' . $match[1] . '$3', $html);
+        return $html;
     }
 
-    if ($html == '')
-    {
-      $html = $this->build_report_html($offset, $links);
+
+    function build_group_report($offset = -1, $links = true, $extra = array()){
+        global $beanList;
+
+        $html = '';
+        $query = '';
+        $query_array = array();
+        $module = new $beanList[$this->report_module]();
+
+        $sql = "SELECT id FROM aor_fields WHERE aor_report_id = '".$this->id."' AND group_display = 1 AND deleted = 0 ORDER BY field_order ASC";
+        $field_id = $this->db->getOne($sql);
+
+        if(!$field_id) {
+            $query_array['select'][] = $module->table_name . ".id AS '" . $module->table_name . "_id'";
+        }
+
+        if($field_id != ''){
+            $field = new AOR_Field();
+            $field->retrieve($field_id);
+
+            $field_label = str_replace(' ','_',$field->label);
+
+            $path = unserialize(base64_decode($field->module_path));
+
+            $field_module = $module;
+            $table_alias = $field_module->table_name;
+            if(!empty($path[0]) && $path[0] != $module->module_dir){
+                foreach($path as $rel){
+                    $new_field_module = new $beanList[getRelatedModule($field_module->module_dir,$rel)];
+                    $oldAlias = $table_alias;
+                    $table_alias = $table_alias.":".$rel;
+
+                    $query_array = $this->build_report_query_join($rel, $table_alias, $oldAlias, $field_module, 'relationship', $query_array, $new_field_module);
+                    $field_module = $new_field_module;
+
+                    // ?
+                    //$table_alias = $rel;
+                }
+            }
+
+            $data = $field_module->field_defs[$field->field];
+
+            if($data['type'] == 'relate' && isset($data['id_name'])) {
+                $field->field = $data['id_name'];
+            }
+
+            if($data['type'] == 'currency' && !stripos($field->field, '_USD') && isset($field_module->field_defs['currency_id'])) {
+                if((isset($field_module->field_defs['currency_id']['source']) && $field_module->field_defs['currency_id']['source'] == 'custom_fields')) {
+                    $query['select'][$table_alias.'_currency_id'] = $table_alias.'_cstm'.".currency_id AS '".$table_alias."_currency_id'";
+                } else {
+                    $query_array['select'][$table_alias . '_currency_id'] = $table_alias . ".currency_id AS '" . $table_alias . "_currency_id'";
+                }
+            }
+
+            if(  (isset($data['source']) && $data['source'] == 'custom_fields')) {
+                $select_field = $this->db->quoteIdentifier($table_alias.'_cstm').'.'.$field->field;
+                // Fix for #1251 - added a missing parameter to the function call
+                $query_array = $this->build_report_query_join($table_alias.'_cstm', $table_alias.'_cstm', $table_alias, $field_module, 'custom', $query);
+            } else {
+                $select_field= $this->db->quoteIdentifier($table_alias).'.'.$field->field;
+            }
+
+            if($field->sort_by != ''){
+                $query_array['sort_by'][] = $field_label.' '.$field->sort_by;
+            }
+
+            if($field->group_by == 1){
+                $query_array['group_by'][] = $select_field;
+            }
+
+            if($field->field_function != null){
+                $select_field = $field->field_function.'('.$select_field.')';
+            }
+
+            $query_array['select'][] = $select_field ." AS '".$field_label."'";
+            if(isset($extra['select']) && $extra['select']) {
+                foreach($extra['select'] as $selectField => $selectAlias) {
+                    if($selectAlias) {
+                        $query_array['select'][] = $selectField . " AS " . $selectAlias;
+                    }
+                    else {
+                        $query_array['select'][] = $selectField;
+                    }
+                }
+            }
+            $query_array['where'][] = $select_field ." IS NOT NULL AND ";
+            if(isset($extra['where']) && $extra['where']) {
+                $query_array['where'][] = implode(' AND ', $extra['where']) . ' AND ';
+            }
+
+            $query_array = $this->build_report_query_where($query_array);
+
+            foreach ($query_array['select'] as $select){
+                $query .=  ($query == '' ? 'SELECT ' : ', ').$select;
+            }
+
+            $query .= ' FROM '.$module->table_name.' ';
+
+            if(isset($query_array['join'])){
+                foreach ($query_array['join'] as $join){
+                    $query .= $join;
+                }
+            }
+            if(isset($query_array['where'])){
+                $query_where = '';
+                foreach ($query_array['where'] as $where){
+                    $query_where .=  ($query_where == '' ? 'WHERE ' : ' ').$where;
+                }
+
+                $query_where = $this->queryWhereRepair($query_where);
+
+                $query .= ' '.$query_where;
+            }
+
+            if(isset($query_array['group_by'])){
+                $query_group_by = '';
+                foreach ($query_array['group_by'] as $group_by){
+                    $query_group_by .=  ($query_group_by == '' ? 'GROUP BY ' : ', ').$group_by;
+                }
+                $query .= ' '.$query_group_by;
+            }
+
+            if(isset($query_array['sort_by'])){
+                $query_sort_by = '';
+                foreach ($query_array['sort_by'] as $sort_by){
+                    $query_sort_by .=  ($query_sort_by == '' ? 'ORDER BY ' : ', ').$sort_by;
+                }
+                $query .= ' '.$query_sort_by;
+            }
+            $result = $this->db->query($query);
+
+            while ($row = $this->db->fetchByAssoc($result)) {
+                if($html != '') $html .= '<br />';
+
+               $html .= $this->build_report_html($offset, $links, $row[$field_label], '', $extra);
+
+            }
+        }
+
+        if($html == '') $html = $this->build_report_html($offset, $links);
+        return $html;
+
     }
-    return $html;
-
-  }
 
 
-  function build_report_html($offset = -1, $links = TRUE, $group_value = '', $tableIdentifier = '', $extra = array())
-  {
+    function build_report_html($offset = -1, $links = true, $group_value = '', $tableIdentifier = '', $extra = array()){
 
-    global $beanList, $sugar_config;
+        global $beanList, $sugar_config;
 
-    $_group_value = $this->db->quote($group_value);
+        $_group_value = $this->db->quote($group_value);
 
-    $report_sql = $this->build_report_query($_group_value, $extra);
+        $report_sql = $this->build_report_query($_group_value, $extra);
 
-    // Fix for issue 1232 - items listed in a single report, should adhere to the same standard as ListView items.
-    if ($sugar_config['list_max_entries_per_page'] != '')
-    {
-      $max_rows = $sugar_config['list_max_entries_per_page'];
-    }
-    else
-    {
-      $max_rows = 20;
-    }
-
-    $total_rows = 0;
-    $count_sql = explode('ORDER BY', $report_sql);
-    $count_query = 'SELECT count(*) c FROM (' . $count_sql[0] . ') as n';
+        // Fix for issue 1232 - items listed in a single report, should adhere to the same standard as ListView items.
+        if($sugar_config['list_max_entries_per_page']!='') {
+            $max_rows = $sugar_config['list_max_entries_per_page'];
+        } else {
+            $max_rows = 20;
+        }
+        
+        $total_rows = 0;
+        $count_sql = explode('ORDER BY', $report_sql);
+        $count_query = 'SELECT count(*) c FROM ('.$count_sql[0].') as n';
 
     // We have a count query.  Run it and get the results.
     $result = $this->db->query($count_query);
@@ -679,58 +577,48 @@ class AOR_Report extends Basic
       $total_rows = $assoc['c'];
     }
 
-    $html = "<table class='list' id='report_table" . $group_value
-            . "' width='100%' cellspacing='0' cellpadding='0' border='0' repeat_header='1'>";
+        $html = "<table class='list' id='report_table".$group_value."' width='100%' cellspacing='0' cellpadding='0' border='0' repeat_header='1'>";
 
-    if ($offset >= 0)
-    {
-      $start = 0;
-      $end = 0;
-      $previous_offset = 0;
-      $next_offset = 0;
-      $last_offset = 0;
+        if($offset >= 0){
+            $start = 0;
+            $end = 0;
+            $previous_offset = 0;
+            $next_offset = 0;
+            $last_offset = 0;
 
-      if ($total_rows > 0)
-      {
-        $start = $offset + 1;
-        $end = (($offset + $max_rows) < $total_rows) ? $offset + $max_rows : $total_rows;
-        $previous_offset = ($offset - $max_rows) < 0 ? 0 : $offset - $max_rows;
-        $next_offset = $offset + $max_rows;
-        if (is_int($total_rows / $max_rows))
-        {
-          $last_offset = $max_rows * ($total_rows / $max_rows - 1);
-        }
-        else
-        {
-          $last_offset = $max_rows * floor($total_rows / $max_rows);
-        }
+            if($total_rows > 0){
+                $start = $offset +1;
+                $end = (($offset + $max_rows) < $total_rows) ? $offset + $max_rows : $total_rows;
+                $previous_offset = ($offset - $max_rows) < 0 ? 0 : $offset - $max_rows;
+                $next_offset = $offset + $max_rows;
+                if(is_int($total_rows / $max_rows)){
+                    $last_offset = $max_rows * ($total_rows / $max_rows -1);
+                } else {
+                    $last_offset = $max_rows * floor($total_rows / $max_rows);
+                }
 
-      }
+            }
 
-      $html .= "<thead><tr class='pagination'>";
+            $html .= "<thead><tr class='pagination'>";
+            
 
+            $moduleFieldByGroupValue = $this->getModuleFieldByGroupValue($beanList, $group_value);
 
-      $moduleFieldByGroupValue = $this->getModuleFieldByGroupValue($beanList, $group_value);
-
-      $html .= "<td colspan='18'>
+            $html .="<td colspan='18'>
                        <table class='paginationTable' border='0' cellpadding='0' cellspacing='0' width='100%'>
                         <td style='text-align:left' ><H3><a href=\"javascript:void(0)\" class=\"collapseLink\" onclick=\"groupedReportToggler.toggleList(this);\"><img border=\"0\" id=\"detailpanel_1_img_hide\" src=\"themes/SuiteR/images/basic_search.gif\"></a>$moduleFieldByGroupValue</H3></td>
                         <td class='paginationChangeButtons' align='right' nowrap='nowrap' width='1%'>";
 
-      if ($offset == 0)
-      {
-        $html .= "<button type='button' id='listViewStartButton_top' name='listViewStartButton' title='Start' class='button' disabled='disabled'>
-                    <img src='" . SugarThemeRegistry::current()->getImageURL('start_off.gif') . "' alt='Start' align='absmiddle' border='0'>
+            if($offset == 0){
+                $html .="<button type='button' id='listViewStartButton_top' name='listViewStartButton' title='Start' class='button' disabled='disabled'>
+                    <img src='".SugarThemeRegistry::current()->getImageURL('start_off.gif')."' alt='Start' align='absmiddle' border='0'>
                 </button>
                 <button type='button' id='listViewPrevButton_top' name='listViewPrevButton' class='button' title='Previous' disabled='disabled'>
-                    <img src='" . SugarThemeRegistry::current()->getImageURL('previous_off.gif') . "' alt='Previous' align='absmiddle' border='0'>
+                    <img src='".SugarThemeRegistry::current()->getImageURL('previous_off.gif')."' alt='Previous' align='absmiddle' border='0'>
                 </button>";
-      }
-      else
-      {
-        $html .= "<button type='button' id='listViewStartButton_top' name='listViewStartButton' title='Start' class='button' onclick='changeReportPage(\""
-                 . $this->id . "\",0,\"" . $group_value . "\",\"" . $tableIdentifier . "\")'>
-                    <img src='" . SugarThemeRegistry::current()->getImageURL('start.gif') . "' alt='Start' align='absmiddle' border='0'>
+            } else {
+                $html .="<button type='button' id='listViewStartButton_top' name='listViewStartButton' title='Start' class='button' onclick='changeReportPage(\"".$this->id."\",0,\"".$group_value."\",\"".$tableIdentifier."\")'>
+                    <img src='".SugarThemeRegistry::current()->getImageURL('start.gif')."' alt='Start' align='absmiddle' border='0'>
                 </button>
                 <button type='button' id='listViewPrevButton_top' name='listViewPrevButton' class='button' title='Previous' onclick='changeReportPage(\""
                  . $this->id . "\"," . $previous_offset . ",\"" . $group_value . "\",\"" . $tableIdentifier . "\")'>
@@ -1353,40 +1241,18 @@ class AOR_Report extends Basic
           $select_field = $this->db->quoteIdentifier($table_alias) . '.' . $field->field;
         }
 
-        if ($field->group_by == 1)
-        {
-          if ($field->format)
-          {
-            $query['group_by'][] = str_replace(
-              '(%1)', '(' . $select_field . ')', preg_replace(
-                      array(
-                        '/\s+/',
-                        '/Y/',
-                        '/m/',
-                        '/d/'
-                      ), array(
-                        ', ',
-                        'YEAR(%1)',
-                        'MONTH(%1)',
-                        'DAY(%1)'
-                      ), trim(preg_replace('/[^Ymd]/', ' ', $field->format))
-                    )
-            );
-            $query['second_group_by'][] = $select_field;
-          }
-          else
-          {
-            $query['group_by'][] = $select_field;
-          }
-        }
-        elseif ($field->field_function != NULL)
-        {
-          $select_field = $field->field_function . '(' . $select_field . ')';
-        }
-        else
-        {
-          $query['second_group_by'][] = $select_field;
-        }
+                if ($field->group_by == 1) {
+                    if ($field->format) {
+                        $query['group_by'][] = str_replace('(%1)', '(' . $select_field . ')', preg_replace(array('/\s+/', '/Y/', '/m/', '/d/'), array(', ', 'YEAR(%1)', 'MONTH(%1)', 'DAY(%1)'), trim(preg_replace('/[^Ymd]/', ' ', $field->format))));
+                        $query['second_group_by'][] = $select_field;
+                    } else {
+                        $query['group_by'][] = $select_field;
+                    }
+                } elseif ($field->field_function != null) {
+                    $select_field = $field->field_function . '(' . $select_field . ')';
+                } else {
+                    $query['second_group_by'][] = $select_field;
+                }
 
         if ($field->sort_by != '')
         {
@@ -1583,25 +1449,19 @@ class AOR_Report extends Basic
             $query = $this->build_report_query_join($data['relationship'], $table_alias, $oldAlias, $condition_module, 'relationship', $query, $new_field_module);
             $condition_module = $new_field_module;
 
-            // Debugging: security groups conditions - It's a hack to just get the query working
-            if ($condition_module->module_dir = 'SecurityGroups' && count($path) > 1)
-            {
-              //                            $table_alias = 'opportunities:assigned_user_link:SecurityGroups' ;
-              $table_alias = $oldAlias . ':' . $rel;
-            }
-            $condition->field = 'id';
-          }
-          if ((isset($data['source']) && $data['source'] == 'custom_fields'))
-          {
-            $field = $this->db->quoteIdentifier($table_alias . '_cstm') . '.' . $condition->field;
-            $query = $this->build_report_query_join(
-              $table_alias . '_cstm', $table_alias . '_cstm', $oldAlias, $condition_module, 'custom', $query
-            );
-          }
-          else
-          {
-            $field = $this->db->quoteIdentifier($table_alias) . '.' . $condition->field;
-          }
+                        // Debugging: security groups conditions - It's a hack to just get the query working
+                        if($condition_module->module_dir = 'SecurityGroups' && count($path) > 1) {
+//                            $table_alias = 'opportunities:assigned_user_link:SecurityGroups' ;
+                            $table_alias = $oldAlias. ':' .$rel;
+                        }
+                        $condition->field = 'id';
+                    }
+                    if ((isset($data['source']) && $data['source'] == 'custom_fields')) {
+                        $field = $this->db->quoteIdentifier($table_alias . '_cstm') . '.' . $condition->field;
+                        $query = $this->build_report_query_join($table_alias . '_cstm', $table_alias . '_cstm', $table_alias, $condition_module, 'custom', $query);
+                    } else {
+                        $field = $this->db->quoteIdentifier($table_alias) . '.' . $condition->field;
+                    }
 
           if (!empty($this->user_parameters[$condition->id]) && $condition->parameter)
           {
