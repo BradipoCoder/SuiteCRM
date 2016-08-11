@@ -719,7 +719,7 @@ class AOR_Report extends Basic {
         while ($row = $this->db->fetchByAssoc($result)) {
             $html .= "<tr class='".$row_class."' height='20'>";
             
-            print_r($row);
+            //print_r($row);
             //jack's temporary solution
             $linkRecordId = false;
             if(array_key_exists('Id0', $row)) {
@@ -728,7 +728,7 @@ class AOR_Report extends Basic {
             
             
             foreach($fields as $name => $att){
-                print_r($att);
+                //print_r($att);
                 if($att['display']){
                     $html .= "<td class='' valign='top' align='left'>";
                     if($att['link'] && $links && $linkRecordId){
