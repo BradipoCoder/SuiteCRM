@@ -1,53 +1,72 @@
 <?php
-$searchdefs ['Cases'] = 
+$searchdefs ['Cases'] =
 array (
-  'layout' => 
+  'layout' =>
   array (
-    'basic_search' => 
+    'basic_search' =>
     array (
-      0 => 'name',
-      1 => 
+        'current_user_only'        =>
       array (
-        'name' => 'current_user_only',
-        'label' => 'LBL_CURRENT_USER_FILTER',
-        'type' => 'bool',
+          'name'    => 'current_user_only',
+          'label'   => 'LBL_CURRENT_USER_FILTER',
+          'type'    => 'bool',
+          'width'   => '10%',
+          'default' => true,
       ),
-      2 => 
+        'name'                     =>
       array (
-        'name' => 'open_only',
-        'label' => 'LBL_OPEN_ITEMS',
-        'type' => 'bool',
-        'default' => false,
-        'width' => '10%',
+          'name'    => 'name',
+          'default' => true,
+          'width'   => '10%',
       ),
-      3 => 
+        'state'                    =>
       array (
-        'name' => 'favorites_only',
-        'label' => 'LBL_FAVORITES_FILTER',
-        'type' => 'bool',
+          'type'    => 'enum',
+          'default' => true,
+          'label'   => 'LBL_STATE',
+          'width'   => '10%',
+          'name'    => 'state',
       ),
-    ),
-    'advanced_search' => 
-    array (
-      'case_number' => 
+        'type'                     =>
       array (
-        'name' => 'case_number',
-        'default' => true,
-        'width' => '10%',
+          'type'    => 'enum',
+          'label'   => 'LBL_TYPE',
+          'width'   => '10%',
+          'default' => true,
+          'name'    => 'type',
       ),
-      'name' => 
+        'priority'                 =>
       array (
-        'name' => 'name',
-        'default' => true,
-        'width' => '10%',
+          'name'    => 'priority',
+          'default' => true,
+          'width'   => '10%',
       ),
-      'account_name' => 
+        'account_name'             =>
       array (
         'name' => 'account_name',
         'default' => true,
         'width' => '10%',
       ),
-      'current_user_only' => 
+        'ref_part_number_c'        =>
+            array(
+                'type'    => 'varchar',
+                'default' => true,
+                'label'   => 'LBL_REF_PART_NUMBER',
+                'width'   => '10%',
+                'name'    => 'ref_part_number_c',
+            ),
+        'ref_part_unique_number_c' =>
+            array(
+                'type'    => 'varchar',
+                'default' => true,
+                'label'   => 'LBL_REF_PART_UNIQUE_NUMBER',
+                'width'   => '10%',
+                'name'    => 'ref_part_unique_number_c',
+            ),
+    ),
+    'advanced_search' =>
+        array(
+            'current_user_only'        =>
       array (
         'label' => 'LBL_CURRENT_USER_FILTER',
         'type' => 'bool',
@@ -55,23 +74,27 @@ array (
         'default' => true,
         'name' => 'current_user_only',
       ),
-      'favorites_only' => 
+            'name'                     =>
       array (
-        'label' => 'LBL_FAVORITES_FILTER',
-        'type' => 'bool',
-        'width' => '10%',
-        'default' => true,
-        'name' => 'favorites_only',
+          'name'    => 'name',
+          'default' => true,
+          'width'   => '10%',
       ),
-      'date_close_prg_c' => 
+            'case_number'              =>
+                array(
+                    'name'    => 'case_number',
+                    'default' => true,
+                    'width'   => '10%',
+      ),
+            'state'                    =>
       array (
-        'type' => 'date',
-        'default' => true,
-        'label' => 'LBL_DATE_CLOSE_PRG',
-        'width' => '10%',
-        'name' => 'date_close_prg_c',
+          'type'    => 'enum',
+          'default' => true,
+          'label'   => 'LBL_STATE',
+          'width'   => '10%',
+          'name'    => 'state',
       ),
-      'type' => 
+            'type'                     =>
       array (
         'type' => 'enum',
         'label' => 'LBL_TYPE',
@@ -79,43 +102,34 @@ array (
         'default' => true,
         'name' => 'type',
       ),
-      'state' => 
+            'status'                   =>
       array (
-        'type' => 'enum',
-        'default' => true,
-        'label' => 'LBL_STATE',
-        'width' => '10%',
-        'name' => 'state',
+          'name'    => 'status',
+          'default' => true,
+          'width'   => '10%',
       ),
-      'status' => 
+            'priority'                 =>
       array (
-        'name' => 'status',
-        'default' => true,
-        'width' => '10%',
+          'name'    => 'priority',
+          'default' => true,
+          'width'   => '10%',
       ),
-      'assigned_user_id' => 
+            'origine_c'                =>
       array (
-        'name' => 'assigned_user_id',
-        'type' => 'enum',
-        'label' => 'LBL_ASSIGNED_TO',
-        'function' => 
-        array (
-          'name' => 'get_user_array',
-          'params' => 
-          array (
-            0 => false,
-          ),
-        ),
-        'default' => true,
-        'width' => '10%',
+          'type'    => 'enum',
+          'default' => true,
+          'studio'  => 'visible',
+          'label'   => 'LBL_ORIGINE',
+          'width'   => '10%',
+          'name'    => 'origine_c',
       ),
-      'priority' => 
+            'account_name'             =>
       array (
-        'name' => 'priority',
-        'default' => true,
-        'width' => '10%',
+          'name'    => 'account_name',
+          'default' => true,
+          'width'   => '10%',
       ),
-      'area_dinteresse_imp_c' => 
+            'area_dinteresse_imp_c'    =>
       array (
         'type' => 'enum',
         'default' => true,
@@ -124,7 +138,7 @@ array (
         'width' => '10%',
         'name' => 'area_dinteresse_imp_c',
       ),
-      'case_area_c' => 
+            'case_area_c'              =>
       array (
         'type' => 'enum',
         'default' => true,
@@ -133,22 +147,69 @@ array (
         'width' => '10%',
         'name' => 'case_area_c',
       ),
-      'origine_c' => 
+            'ref_part_number_c'        =>
       array (
-        'type' => 'enum',
-        'default' => true,
-        'studio' => 'visible',
-        'label' => 'LBL_ORIGINE',
-        'width' => '10%',
-        'name' => 'origine_c',
+          'type'    => 'varchar',
+          'default' => true,
+          'label'   => 'LBL_REF_PART_NUMBER',
+          'width'   => '10%',
+          'name'    => 'ref_part_number_c',
+      ),
+            'ref_part_description_c'   =>
+                array(
+                    'type'    => 'varchar',
+                    'default' => true,
+                    'label'   => 'LBL_REF_PART_DESCRIPTION',
+                    'width'   => '10%',
+                    'name'    => 'ref_part_description_c',
+                ),
+            'ref_part_unique_number_c' =>
+                array(
+                    'type'    => 'varchar',
+                    'default' => true,
+                    'label'   => 'LBL_REF_PART_UNIQUE_NUMBER',
+                    'width'   => '10%',
+                    'name'    => 'ref_part_unique_number_c',
+                ),
+            'assigned_user_id'         =>
+                array(
+                    'name'     => 'assigned_user_id',
+                    'type'     => 'enum',
+                    'label'    => 'LBL_ASSIGNED_TO',
+                    'function' =>
+                        array(
+                            'name'   => 'get_user_array',
+                            'params' =>
+                                array(
+                                    0 => false,
+                                ),
+                        ),
+                    'default'  => true,
+                    'width'    => '10%',
+                ),
+            'date_entered'             =>
+                array(
+                    'type'    => 'datetime',
+                    'label'   => 'LBL_DATE_ENTERED',
+                    'width'   => '10%',
+                    'default' => true,
+                    'name'    => 'date_entered',
+                ),
+            'created_by'               =>
+                array(
+                    'type'    => 'assigned_user_name',
+                    'label'   => 'LBL_CREATED',
+                    'width'   => '10%',
+                    'default' => true,
+                    'name'    => 'created_by',
       ),
     ),
   ),
-  'templateMeta' => 
+  'templateMeta' =>
   array (
     'maxColumns' => '3',
     'maxColumnsBasic' => '4',
-    'widths' => 
+    'widths' =>
     array (
       'label' => '10',
       'field' => '30',

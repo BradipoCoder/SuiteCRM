@@ -1,5 +1,5 @@
 <?php
- // created: 2016-02-12 15:53:48
+// created: 2016-07-15 10:40:24
 $dictionary['Case']['fields']['date_close_prg_c']['inline_edit']='1';
 $dictionary['Case']['fields']['date_close_prg_c']['labelValue']='Data Chiusura Prevista';
 

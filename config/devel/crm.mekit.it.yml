@@ -1,0 +1,44 @@
+imports: ~
+configuration:
+  title: "MEKIT CRM SYNC DOWN CONFIG"
+  global:
+      log_to_console: true
+  sync:
+    file:
+      sync_command: rsync
+      sync_arguments:
+        # - '--dry-run'
+        - --recursive
+        - --compress
+        - --quiet
+        - --checksum
+        - --cvs-exclude
+        - --exclude-from="config/devel/excludes.txt"
+        - --filter="protect .idea"
+      sync_source:        -e ssh crm.mekit.it@vhsrv3.mekit.it:/home/crm.mekit.it/httpdocs/
+      sync_destination:   /home/jack/domains/suitecrm.bradipo/httpdocs
+    database:
+      temp_file:          /home/jack/domains/suitecrm.bradipo/httpdocs/cache/db.sql
+      dump:
+        sync_command: mysqldump
+        sync_arguments:
+          - --defaults-group-suffix=vhsrv3
+          - --add-drop-table
+          - --skip-comments
+          - --compress
+          - --no-create-db
+          - --quick
+          # The database
+          - crm_mekit_it
+          # The tables
+          - fields_meta_data
+          - relationships
+          - users_cstm
+      restore:
+        sync_command: mysql
+        sync_arguments:
+          - --defaults-group-suffix=localhost
+          # The database
+          - suitecrm_bradipo_test
+
+

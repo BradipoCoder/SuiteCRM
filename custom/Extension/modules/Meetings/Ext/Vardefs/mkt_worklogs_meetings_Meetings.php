@@ -1,5 +1,5 @@
 <?php
-// created: 2016-03-02 08:12:49
+// created: 2016-08-09 09:56:37
 $dictionary["Meeting"]["fields"]["mkt_worklogs_meetings"] = array (
   'name' => 'mkt_worklogs_meetings',
   'type' => 'link',

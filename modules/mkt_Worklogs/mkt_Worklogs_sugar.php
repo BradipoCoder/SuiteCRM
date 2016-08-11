@@ -67,6 +67,8 @@ class mkt_Worklogs_sugar extends Basic {
 	var $assigned_user_id;
 	var $assigned_user_name;
 	var $assigned_user_link;
+    
+    var $SecurityGroups;
 	var $completed;
 	var $duration_min;
 	var $duration_hrs;
