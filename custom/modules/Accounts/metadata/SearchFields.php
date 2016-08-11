@@ -1,123 +1,123 @@
 <?php
-// created: 2016-05-10 12:00:42
+// created: 2016-08-10 07:56:59
 $searchFields['Accounts'] = array (
-  'name' => 
+    'name' =>
   array (
     'query_type' => 'default',
   ),
-  'account_type' => 
+    'account_type' =>
   array (
     'query_type' => 'default',
     'options' => 'account_type_dom',
     'template_var' => 'ACCOUNT_TYPE_OPTIONS',
   ),
-  'industry' => 
+    'industry' =>
   array (
     'query_type' => 'default',
     'options' => 'industry_dom',
     'template_var' => 'INDUSTRY_OPTIONS',
   ),
-  'annual_revenue' => 
+    'annual_revenue' =>
   array (
     'query_type' => 'default',
   ),
-  'address_street' => 
+    'address_street' =>
   array (
     'query_type' => 'default',
-    'db_field' => 
+    'db_field' =>
     array (
       0 => 'billing_address_street',
       1 => 'shipping_address_street',
     ),
   ),
-  'address_city' => 
+    'address_city' =>
   array (
     'query_type' => 'default',
-    'db_field' => 
+    'db_field' =>
     array (
       0 => 'billing_address_city',
       1 => 'shipping_address_city',
     ),
     'vname' => 'LBL_CITY',
   ),
-  'address_state' => 
+    'address_state' =>
   array (
     'query_type' => 'default',
-    'db_field' => 
+    'db_field' =>
     array (
       0 => 'billing_address_state',
       1 => 'shipping_address_state',
     ),
     'vname' => 'LBL_STATE',
   ),
-  'address_postalcode' => 
+    'address_postalcode' =>
   array (
     'query_type' => 'default',
-    'db_field' => 
+    'db_field' =>
     array (
       0 => 'billing_address_postalcode',
       1 => 'shipping_address_postalcode',
     ),
     'vname' => 'LBL_POSTAL_CODE',
   ),
-  'address_country' => 
+    'address_country' =>
   array (
     'query_type' => 'default',
-    'db_field' => 
+    'db_field' =>
     array (
       0 => 'billing_address_country',
       1 => 'shipping_address_country',
     ),
     'vname' => 'LBL_COUNTRY',
   ),
-  'rating' => 
+    'rating' =>
   array (
     'query_type' => 'default',
   ),
-  'phone' => 
+    'phone' =>
   array (
     'query_type' => 'default',
-    'db_field' => 
+    'db_field' =>
     array (
       0 => 'phone_office',
     ),
     'vname' => 'LBL_ANY_PHONE',
   ),
-  'email' => 
+    'email' =>
   array (
     'query_type' => 'default',
     'operator' => 'subquery',
     'subquery' => 'SELECT eabr.bean_id FROM email_addr_bean_rel eabr JOIN email_addresses ea ON (ea.id = eabr.email_address_id) WHERE eabr.deleted=0 AND ea.email_address LIKE',
-    'db_field' => 
+    'db_field' =>
     array (
       0 => 'id',
     ),
     'vname' => 'LBL_ANY_EMAIL',
   ),
-  'website' => 
+    'website' =>
   array (
     'query_type' => 'default',
   ),
-  'ownership' => 
+    'ownership' =>
   array (
     'query_type' => 'default',
   ),
-  'employees' => 
+    'employees' =>
   array (
     'query_type' => 'default',
   ),
-  'sic_code' => 
+    'sic_code' =>
   array (
     'query_type' => 'default',
   ),
-  'ticker_symbol' => 
+    'ticker_symbol' =>
   array (
     'query_type' => 'default',
   ),
-  'current_user_only' => 
+    'current_user_only' =>
   array (
     'query_type' => 'default',
-    'db_field' => 
+    'db_field' =>
     array (
       0 => 'assigned_user_id',
     ),
@@ -125,47 +125,47 @@ $searchFields['Accounts'] = array (
     'vname' => 'LBL_CURRENT_USER_FILTER',
     'type' => 'bool',
   ),
-  'assigned_user_id' => 
+    'assigned_user_id' =>
   array (
     'query_type' => 'default',
   ),
-  'range_date_entered' => 
-  array (
-    'query_type' => 'default',
-    'enable_range_search' => true,
-    'is_date_field' => true,
-  ),
-  'start_range_date_entered' => 
+    'range_date_entered' =>
   array (
     'query_type' => 'default',
     'enable_range_search' => true,
     'is_date_field' => true,
   ),
-  'end_range_date_entered' => 
+    'start_range_date_entered' =>
   array (
     'query_type' => 'default',
     'enable_range_search' => true,
     'is_date_field' => true,
   ),
-  'range_date_modified' => 
+    'end_range_date_entered' =>
   array (
     'query_type' => 'default',
     'enable_range_search' => true,
     'is_date_field' => true,
   ),
-  'start_range_date_modified' => 
+    'range_date_modified' =>
   array (
     'query_type' => 'default',
     'enable_range_search' => true,
     'is_date_field' => true,
   ),
-  'end_range_date_modified' => 
+    'start_range_date_modified' =>
   array (
     'query_type' => 'default',
     'enable_range_search' => true,
     'is_date_field' => true,
   ),
-  'favorites_only' => 
+    'end_range_date_modified' =>
+  array (
+    'query_type' => 'default',
+    'enable_range_search' => true,
+    'is_date_field' => true,
+  ),
+    'favorites_only' =>
   array (
     'query_type' => 'format',
     'operator' => 'subquery',
@@ -173,103 +173,175 @@ $searchFields['Accounts'] = array (
 			                    WHERE favorites.deleted = 0
 			                        and favorites.parent_type = "Accounts"
 			                        and favorites.assigned_user_id = "1") OR NOT ({0}',
-    'db_field' => 
+    'db_field' =>
     array (
       0 => 'id',
     ),
   ),
-  'billing_address_country' => 
+    'billing_address_country' =>
   array (
     'query_type' => 'default',
   ),
-  'shipping_address_country' => 
+    'shipping_address_country' =>
   array (
     'query_type' => 'default',
   ),
-  'range_ft_periodo_attuale' => 
+    'range_ft_periodo_attuale' =>
   array (
     'query_type' => 'default',
     'enable_range_search' => true,
   ),
-  'start_range_ft_periodo_attuale' => 
+    'start_range_ft_periodo_attuale' =>
   array (
     'query_type' => 'default',
     'enable_range_search' => true,
   ),
-  'end_range_ft_periodo_attuale' => 
+    'end_range_ft_periodo_attuale' =>
   array (
     'query_type' => 'default',
     'enable_range_search' => true,
   ),
-  'range_ft_periodo_attuale_c' => 
+    'range_ft_periodo_attuale_c' =>
   array (
     'query_type' => 'default',
     'enable_range_search' => true,
   ),
-  'start_range_ft_periodo_attuale_c' => 
+    'start_range_ft_periodo_attuale_c' =>
   array (
     'query_type' => 'default',
     'enable_range_search' => true,
   ),
-  'end_range_ft_periodo_attuale_c' => 
+    'end_range_ft_periodo_attuale_c' =>
   array (
     'query_type' => 'default',
     'enable_range_search' => true,
   ),
-  'shipping_address_state' => 
+    'shipping_address_state' =>
   array (
     'query_type' => 'default',
   ),
-  'billing_address_state' => 
+    'billing_address_state' =>
   array (
     'query_type' => 'default',
   ),
-  'billing_address_postalcode' => 
+    'billing_address_postalcode' =>
   array (
     'query_type' => 'default',
   ),
-  'billing_address_city' => 
+    'billing_address_city' =>
   array (
     'query_type' => 'default',
   ),
-  'date_entered' => 
+    'date_entered' =>
   array (
     'query_type' => 'default',
   ),
-  'description' => 
+    'description' =>
   array (
     'query_type' => 'default',
   ),
-  'email1' => 
+    'email1' =>
   array (
     'query_type' => 'default',
   ),
-  'phone_fax' => 
+    'phone_fax' =>
   array (
     'query_type' => 'default',
   ),
-  'billing_address_street' => 
+    'billing_address_street' =>
   array (
     'query_type' => 'default',
   ),
-  'phone_office' => 
+    'phone_office' =>
   array (
     'query_type' => 'default',
   ),
-  'phone_alternate' => 
+    'phone_alternate' =>
   array (
     'query_type' => 'default',
   ),
-  'shipping_address_street' => 
+    'shipping_address_street' =>
   array (
     'query_type' => 'default',
   ),
-  'shipping_address_city' => 
+    'shipping_address_city' =>
   array (
     'query_type' => 'default',
   ),
-  'shipping_address_postalcode' => 
+    'shipping_address_postalcode' =>
   array (
     'query_type' => 'default',
+  ),
+    'range_imp_acc_sleep_date_c' =>
+        array(
+            'query_type'          => 'default',
+            'enable_range_search' => true,
+            'is_date_field'       => true,
+        ),
+    'start_range_imp_acc_sleep_date_c' =>
+        array(
+            'query_type'          => 'default',
+            'enable_range_search' => true,
+            'is_date_field'       => true,
+        ),
+    'end_range_imp_acc_sleep_date_c' =>
+        array(
+            'query_type'          => 'default',
+            'enable_range_search' => true,
+            'is_date_field'       => true,
+        ),
+    'range_imp_acc_start_date_c' =>
+        array(
+            'query_type'          => 'default',
+            'enable_range_search' => true,
+            'is_date_field'       => true,
+        ),
+    'start_range_imp_acc_start_date_c' =>
+        array(
+            'query_type'          => 'default',
+            'enable_range_search' => true,
+            'is_date_field'       => true,
+        ),
+    'end_range_imp_acc_start_date_c' =>
+        array(
+            'query_type'          => 'default',
+            'enable_range_search' => true,
+            'is_date_field'       => true,
+        ),
+    'range_mkt_acc_sleep_date_c' =>
+        array(
+            'query_type'          => 'default',
+            'enable_range_search' => true,
+            'is_date_field'       => true,
+        ),
+    'start_range_mkt_acc_sleep_date_c' =>
+        array(
+            'query_type'          => 'default',
+            'enable_range_search' => true,
+            'is_date_field'       => true,
+        ),
+    'end_range_mkt_acc_sleep_date_c' =>
+        array(
+            'query_type'          => 'default',
+            'enable_range_search' => true,
+            'is_date_field'       => true,
+        ),
+    'range_mkt_acc_start_date_c' =>
+        array(
+            'query_type'          => 'default',
+            'enable_range_search' => true,
+            'is_date_field'       => true,
+        ),
+    'start_range_mkt_acc_start_date_c' =>
+        array(
+            'query_type'          => 'default',
+            'enable_range_search' => true,
+            'is_date_field'       => true,
+        ),
+    'end_range_mkt_acc_start_date_c' =>
+        array(
+            'query_type'          => 'default',
+            'enable_range_search' => true,
+            'is_date_field'       => true,
   ),
 );

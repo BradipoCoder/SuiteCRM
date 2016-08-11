@@ -100,11 +100,66 @@ class SyncDownDeployedCrmCommand extends Command implements CommandInterface
         $this->log("Starting command " . static::COMMAND_NAME . "...");
         //$this->log("CFG: " . json_encode(Configuration::getConfiguration(), JSON_PRETTY_PRINT));
         $this->downloadRemoteFiles();
-        $this->log("Command " . static::COMMAND_NAME . " done.");
+        $this->dumpRemoteDatabase();
+        $this->restoreFromRemoteDatabase();
+        $this->log("done.");
     }
     
     /**
      * @return array
+     * @throws \Exception
+     */
+    protected function restoreFromRemoteDatabase()
+    {
+        $cfg = Configuration::getConfiguration();
+        $cmd = $cfg["sync"]["database"]["restore"]["sync_command"];
+        $args = $cfg["sync"]["database"]["restore"]["sync_arguments"];
+        $tempFile = $cfg["sync"]["database"]["temp_file"];
+        array_push($args, '< ' . $tempFile);
+        
+        if (!is_file($tempFile))
+        {
+            throw new \Exception("Dumped sql file does not exist!");
+        }
+        
+        $this->log("Restoring database...");
+        $executor = new CommandExecutor();
+        $execResults = $executor->execute($cmd, $args);
+        if ($execResults["return_value"] != 0)
+        {
+            throw new \Exception("Database restore failed:\n" . json_encode($execResults, JSON_PRETTY_PRINT));
+        }
+        
+        return $execResults;
+    }
+    
+    /**
+     * @return array
+     * @throws \Exception
+     */
+    protected function dumpRemoteDatabase()
+    {
+        $cfg = Configuration::getConfiguration();
+        $cmd = $cfg["sync"]["database"]["dump"]["sync_command"];
+        $args = $cfg["sync"]["database"]["dump"]["sync_arguments"];
+        $tempFile = $cfg["sync"]["database"]["temp_file"];
+        array_push($args, '> ' . $tempFile);
+        
+        $this->log("Dumping database...");
+        $executor = new CommandExecutor();
+        $execResults = $executor->execute($cmd, $args);
+        if ($execResults["return_value"] != 0)
+        {
+            throw new \Exception("Database dump failed:\n" . json_encode($execResults, JSON_PRETTY_PRINT));
+        }
+        
+        return $execResults;
+    }
+    
+    /**
+     * Executes rsync and updates files in current branch from remote deployment
+     *
+*@return array
      * @throws \Exception
      */
     protected function downloadRemoteFiles()

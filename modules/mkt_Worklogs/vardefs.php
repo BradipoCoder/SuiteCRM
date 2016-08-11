@@ -43,7 +43,7 @@ $dictionary['mkt_Worklogs'] = array(
     'inline_edit'=>true,
 		'duplicate_merge'=>true,
 		'fields'=>array (
-  'completed' => 
+  'completed' =>
   array (
     'required' => false,
     'name' => 'completed',
@@ -65,7 +65,7 @@ $dictionary['mkt_Worklogs'] = array(
     'len' => '255',
     'size' => '20',
   ),
-  'duration_min' => 
+  'duration_min' =>
   array (
     'required' => true,
     'name' => 'duration_min',
@@ -91,7 +91,7 @@ $dictionary['mkt_Worklogs'] = array(
     'min' => false,
     'max' => false,
   ),
-  'duration_hrs' => 
+  'duration_hrs' =>
   array (
     'required' => true,
     'name' => 'duration_hrs',
@@ -117,7 +117,7 @@ $dictionary['mkt_Worklogs'] = array(
     'min' => false,
     'max' => false,
   ),
-  'parent_name' => 
+  'parent_name' =>
   array (
     'required' => false,
     'source' => 'non-db',
@@ -144,7 +144,7 @@ $dictionary['mkt_Worklogs'] = array(
     'id_name' => 'parent_id',
     'parent_type' => 'record_type_display',
   ),
-  'parent_type' => 
+  'parent_type' =>
   array (
     'required' => false,
     'name' => 'parent_type',
@@ -167,7 +167,7 @@ $dictionary['mkt_Worklogs'] = array(
     'dbType' => 'varchar',
     'studio' => 'hidden',
   ),
-  'parent_id' => 
+  'parent_id' =>
   array (
     'required' => false,
     'name' => 'parent_id',
@@ -188,14 +188,13 @@ $dictionary['mkt_Worklogs'] = array(
     'len' => 36,
     'size' => '20',
   ),
-  'operation_type' => 
+  'operation_type' =>
   array (
     'required' => false,
     'name' => 'operation_type',
     'vname' => 'LBL_OPERATION_TYPE',
     'type' => 'enum',
     'massupdate' => 0,
-    'default' => '0',
     'no_default' => false,
     'comments' => '',
     'help' => '',
@@ -213,7 +212,7 @@ $dictionary['mkt_Worklogs'] = array(
     'studio' => 'visible',
     'dependency' => false,
   ),
-  'date_entered' => 
+  'date_entered' =>
   array (
     'name' => 'date_entered',
     'vname' => 'LBL_DATE_ENTERED',
@@ -239,7 +238,7 @@ $dictionary['mkt_Worklogs'] = array(
     'dbType' => 'datetime',
     'display_default' => 'now&08:00am',
   ),
-  'execution_date' => 
+  'execution_date' =>
   array (
     'required' => true,
     'name' => 'execution_date',
@@ -270,4 +269,4 @@ $dictionary['mkt_Worklogs'] = array(
 if (!class_exists('VardefManager')){
         require_once('include/SugarObjects/VardefManager.php');
 }
-VardefManager::createVardef('mkt_Worklogs','mkt_Worklogs', array('basic','assignable'));
+VardefManager::createVardef('mkt_Worklogs', 'mkt_Worklogs', array('basic', 'assignable', 'security_groups'));

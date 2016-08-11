@@ -227,7 +227,7 @@ class SendQueuedMailsCommand extends Command implements CommandInterface
             $mail->oe->mail_smtpssl = $outboundEmailAccount->mail_smtpssl;
 
             $mail->Timeout = 20;
-            $mail->SMTPKeepAlive = true;
+            $mail->SMTPKeepAlive = false;
 
             //$mail->clearCustomHeaders();
             //$mail->addCustomHeader('Return-Path', 'marketing@mekit.it');

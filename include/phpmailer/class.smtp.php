@@ -201,9 +201,16 @@ class SMTP
      */
     protected function edebug($str, $level = 0)
     {
+        //CUSTOM POLICY VIOLATION MANAGEMENT
+        if (preg_match('#policy violation#', $str))
+        {
+            throw new \Exception("POLICY VIOLATION!", 999);
+        }
+
         if ($level > $this->do_debug) {
             return;
         }
+    
         //Avoid clash with built-in function names
         if (!in_array($this->Debugoutput, array('error_log', 'html', 'echo')) and is_callable($this->Debugoutput)) {
             call_user_func($this->Debugoutput, $str, $this->do_debug);

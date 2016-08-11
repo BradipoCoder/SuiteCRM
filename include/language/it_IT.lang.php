@@ -1054,60 +1054,85 @@ $app_list_strings = array(
 );
 
 $app_strings = array(
-    'LBL_TOUR_NEXT' => 'Avanti',
-    'LBL_TOUR_SKIP' => 'Salta',
-    'LBL_TOUR_BACK' => 'Indietro',
-    'LBL_TOUR_CLOSE' => 'Chiudi',
-    'LBL_TOUR_TAKE_TOUR' => 'Vai alla presentazione',
-    'LBL_MY_AREA_LINKS' => 'La mia area dei link:'/*for 508 compliance fix*/,
-    'LBL_GETTINGAIR' => 'Getting Air'/*for 508 compliance fix*/,
-    'LBL_WELCOMEBAR' => 'Benvenuto'/*for 508 compliance fix*/,
-    'LBL_ADVANCEDSEARCH' => 'Ricerca Avanzata'/*for 508 compliance fix*/,
-    'LBL_MOREDETAIL' => 'Più dettagli'/*for 508 compliance fix*/,
-    'LBL_EDIT_INLINE' => 'Modifica'/*for 508 compliance fix*/,
-    'LBL_VIEW_INLINE' => 'Visualizza'/*for 508 compliance fix*/,
-    'LBL_BASIC_SEARCH' => 'Cerca'/*for 508 compliance fix*/,
-    'LBL_PROJECT_MINUS' => 'Rimuovi'/*for 508 compliance fix*/,
-    'LBL_PROJECT_PLUS' => 'Aggiungi'/*for 508 compliance fix*/,
-    'LBL_Blank' => ' '/*for 508 compliance fix*/,
-    'LBL_ICON_COLUMN_1' => 'Colonna'/*for 508 compliance fix*/,
-    'LBL_ICON_COLUMN_2' => '2 Colonne'/*for 508 compliance fix*/,
-    'LBL_ICON_COLUMN_3' => '3 Colonne'/*for 508 compliance fix*/,
-    'LBL_ADVANCED_SEARCH' => 'Ricerca Avanzata'/*for 508 compliance fix*/,
-    'LBL_ID_FF_ADD' => 'Aggiungi'/*for 508 compliance fix*/,
-    'LBL_HIDE_SHOW' => 'Nascondi/Mostra'/*for 508 compliance fix*/,
-    'LBL_DELETE_INLINE' => 'Cancella'/*for 508 compliance fix*/,
-    'LBL_PLUS_INLINE' => 'Aggiungi'/*for 508 compliance fix*/,
-    'LBL_ID_FF_CLEAR' => 'Azzera'/*for 508 compliance fix*/,
-    'LBL_ID_FF_VCARD' => 'vCard'/*for 508 compliance fix*/,
-    'LBL_ID_FF_REMOVE' => 'Rimuovi'/*for 508 compliance fix*/,
-    'LBL_ADD' => 'Aggiungi'/*for 508 compliance fix*/,
-    'LBL_COMPANY_LOGO' => 'Logo Azienda'/*for 508 compliance fix*/,
-    'LBL_JS_CALENDAR' => 'Calendario'/*for 508 compliance fix*/,
-    'LBL_ADVANCED' => 'Avanzata',
-    'LBL_BASIC' => 'Base',
-    'LBL_MODULE_FILTER' => 'Filtra per',
-    'LBL_CONNECTORS_POPUPS' => 'Connettori Popups',
-    'LBL_CLOSEINLINE' => 'Chiudi',
-    'LBL_EDITINLINE' => 'Modifica',
-    'LBL_VIEWINLINE' => 'Visualizza',
-    'LBL_INFOINLINE' => 'Info',
-    'LBL_POWERED_BY_SUGARCRM' => 'Basato su SugarCRM',
-    'LBL_PRINT' => 'Stampa',
-    'LBL_HELP' => 'Aiuto',
-    'LBL_ID_FF_SELECT' => 'Seleziona',
-    'DEFAULT' => 'Base',
-    'LBL_SORT' => 'Tipo',
+    'LBL_TOUR_NEXT'                 => 'Avanti',
+    'LBL_TOUR_SKIP'                 => 'Salta',
+    'LBL_TOUR_BACK'                 => 'Indietro',
+    'LBL_TOUR_CLOSE'                => 'Chiudi',
+    'LBL_TOUR_TAKE_TOUR'            => 'Vai alla presentazione',
+    'LBL_MY_AREA_LINKS'             => 'La mia area dei link:'
+    /*for 508 compliance fix*/,
+    'LBL_GETTINGAIR'                => 'Getting Air'
+    /*for 508 compliance fix*/,
+    'LBL_WELCOMEBAR'                => 'Benvenuto'
+    /*for 508 compliance fix*/,
+    'LBL_ADVANCEDSEARCH'            => 'Ricerca Avanzata'
+    /*for 508 compliance fix*/,
+    'LBL_MOREDETAIL'                => 'Più dettagli'
+    /*for 508 compliance fix*/,
+    'LBL_EDIT_INLINE'               => 'Modifica'
+    /*for 508 compliance fix*/,
+    'LBL_VIEW_INLINE'               => 'Visualizza'
+    /*for 508 compliance fix*/,
+    'LBL_BASIC_SEARCH'              => 'Cerca'
+    /*for 508 compliance fix*/,
+    'LBL_PROJECT_MINUS'             => 'Rimuovi'
+    /*for 508 compliance fix*/,
+    'LBL_PROJECT_PLUS'              => 'Aggiungi'
+    /*for 508 compliance fix*/,
+    'LBL_Blank'                     => ' '
+    /*for 508 compliance fix*/,
+    'LBL_ICON_COLUMN_1'             => 'Colonna'
+    /*for 508 compliance fix*/,
+    'LBL_ICON_COLUMN_2'             => '2 Colonne'
+    /*for 508 compliance fix*/,
+    'LBL_ICON_COLUMN_3'             => '3 Colonne'
+    /*for 508 compliance fix*/,
+    'LBL_ADVANCED_SEARCH'           => 'Ricerca Avanzata'
+    /*for 508 compliance fix*/,
+    'LBL_ID_FF_ADD'                 => 'Aggiungi'
+    /*for 508 compliance fix*/,
+    'LBL_HIDE_SHOW'                 => 'Nascondi/Mostra'
+    /*for 508 compliance fix*/,
+    'LBL_DELETE_INLINE'             => 'Cancella'
+    /*for 508 compliance fix*/,
+    'LBL_PLUS_INLINE'               => 'Aggiungi'
+    /*for 508 compliance fix*/,
+    'LBL_ID_FF_CLEAR'               => 'Azzera'
+    /*for 508 compliance fix*/,
+    'LBL_ID_FF_VCARD'               => 'vCard'
+    /*for 508 compliance fix*/,
+    'LBL_ID_FF_REMOVE'              => 'Rimuovi'
+    /*for 508 compliance fix*/,
+    'LBL_ADD'                       => 'Aggiungi'
+    /*for 508 compliance fix*/,
+    'LBL_COMPANY_LOGO'              => 'Logo Azienda'
+    /*for 508 compliance fix*/,
+    'LBL_JS_CALENDAR'               => 'Calendario'
+    /*for 508 compliance fix*/,
+    'LBL_ADVANCED'                  => 'Avanzata',
+    'LBL_BASIC'                     => 'Base',
+    'LBL_MODULE_FILTER'             => 'Filtra per',
+    'LBL_CONNECTORS_POPUPS'         => 'Connettori Popups',
+    'LBL_CLOSEINLINE'               => 'Chiudi',
+    'LBL_EDITINLINE'                => 'Modifica',
+    'LBL_VIEWINLINE'                => 'Visualizza',
+    'LBL_INFOINLINE'                => 'Info',
+    'LBL_POWERED_BY_SUGARCRM'       => 'Basato su SugarCRM',
+    'LBL_PRINT'                     => 'Stampa',
+    'LBL_HELP'                      => 'Aiuto',
+    'LBL_ID_FF_SELECT'              => 'Seleziona',
+    'DEFAULT'                       => 'Base',
+    'LBL_SORT'                      => 'Tipo',
     'LBL_OUTBOUND_EMAIL_ADD_SERVER' => 'Aggiungi Server...',
-    'LBL_EMAIL_SMTP_SSL_OR_TLS' => 'Attiva SMTP con SSL o TLS?',
-    'LBL_NO_ACTION' => 'Non c´è azione dal nome.',
-    'LBL_NO_DATA' => 'Nessun Dato',
-    'LBL_ROUTING_ADD_RULE' => 'Aggiungi Regola',
-    'LBL_ROUTING_ALL' => 'Tutti',
-    'LBL_ROUTING_ANY' => 'Qualsiasi',
-    'LBL_ROUTING_BREAK' => '-',
-    'LBL_ROUTING_BUTTON_CANCEL' => 'Annulla',
-    'LBL_ROUTING_BUTTON_SAVE' => 'Salva Regola',
+    'LBL_EMAIL_SMTP_SSL_OR_TLS'     => 'Attiva SMTP con SSL o TLS?',
+    'LBL_NO_ACTION'                 => 'Non c´è azione dal nome.',
+    'LBL_NO_DATA'                   => 'Nessun Dato',
+    'LBL_ROUTING_ADD_RULE'          => 'Aggiungi Regola',
+    'LBL_ROUTING_ALL'               => 'Tutti',
+    'LBL_ROUTING_ANY'               => 'Qualsiasi',
+    'LBL_ROUTING_BREAK'             => '-',
+    'LBL_ROUTING_BUTTON_CANCEL'     => 'Annulla',
+    'LBL_ROUTING_BUTTON_SAVE'       => 'Salva Regola',
     
     'LBL_ROUTING_ACTIONS_COPY_MAIL' => 'Copia Mail',
     'LBL_ROUTING_ACTIONS_DELETE_BEAN' => 'Elimina Oggetto SuiteCRM',
