@@ -850,16 +850,22 @@ class AOR_Report extends Basic
     while ($row = $this->db->fetchByAssoc($result))
     {
       $html .= "<tr class='" . $row_class . "' height='20'>";
+    
+        //jack's temporary solution
+        $linkRecordId = false;
+        if(array_key_exists('Id0', $row)) {
+            $linkRecordId = $row["Id0"];
+        }
 
       foreach ($fields as $name => $att)
       {
         if ($att['display'])
         {
           $html .= "<td class='' valign='top' align='left'>";
-          if ($att['link'] && $links)
+          if ($att['link'] && $links && $linkRecordId)
           {
             $html .= "<a href='" . $sugar_config['site_url'] . "/index.php?module=" . $att['module']
-                     . "&action=DetailView&record=" . $row[$att['alias'] . '_id'] . "'>";
+                     . "&action=DetailView&record=" . $linkRecordId . "'>";
           }
 
           $currency_id = isset($row[$att['alias'] . '_currency_id']) ? $row[$att['alias'] . '_currency_id'] : '';
@@ -879,7 +885,7 @@ class AOR_Report extends Basic
           {
             $totals[$name][] = $row[$name];
           }
-          if ($att['link'] && $links)
+          if ($att['link'] && $links && $linkRecordId)
           {
             $html .= "</a>";
           }
