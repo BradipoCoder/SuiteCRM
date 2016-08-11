@@ -3,94 +3,115 @@
 /* STRUCTURE (structure.less) */
 /**********************************************************************************************************************/
 body {
-  font-size: 11px;
+    font-size: 11px;
 }
+
 select[name="display_tabs[]"],
 select[name="hide_tabs[]"] {
-  height: 500px;
+    height: 500px;
 }
+
 #bootstrap-container {
-  background: #fff;
+    background: #fff;
 }
+
 #buttontoggle {
-  bottom: 0;
-  top: auto;
+    bottom: 0;
+    top: auto;
 }
+
 .dropdown-menu {
-  border-top: none;
-  margin-top: 2px;
+    border-top: none;
+    margin-top: 2px;
 }
+
 .sidebar {
-  background: #efefef;
-  border-right: 1px solid #dadada;
+    background: #efefef;
+    border-right: 1px solid #dadada;
 }
+
 li.topnav {
-  padding: 15px 0;
+    padding: 15px 0;
 }
+
 /* Button */
 .button,
 input[type=submit],
 input[type=button] {
-  background: #e2eaf3;
-  color: #2a5995;
+    background: #e2eaf3;
+    color: #2a5995;
 }
+
 /* Titolo scheda */
 .moduleTitle h2 {
-  font-size: 18px;
+    font-size: 18px;
 }
+
 #pagecontent {
-  font-size: 12px;
+    font-size: 12px;
 }
+
 /**********************************************************************************************************************/
 /* INDEX VIEW (indexView.less) */
 /**********************************************************************************************************************/
 /*SEARCH FORMS*/
 .search.basic {
-  border-top: 1px solid #ababab;
-  border-bottom: 1px solid #ababab;
+    border-top: 1px solid #ababab;
+    border-bottom: 1px solid #ababab;
 }
+
 .search.advanced {
-  border-top: 1px solid #ababab;
-  border-bottom: 1px solid #ababab;
+    border-top: 1px solid #ababab;
+    border-bottom: 1px solid #ababab;
 }
+
 /* LIST TABLE */
 table.list.view thead tr {
-  background-color: #e2eaf3;
-  color: #2a5995;
+    background-color: #e2eaf3;
+    color: #2a5995;
 }
+
 table.list.view thead tr th {
-  background-color: #e2eaf3;
-  color: #2a5995;
+    background-color: #e2eaf3;
+    color: #2a5995;
 }
+
 table.list.view thead tr th a {
-  color: #2a5995;
-  font-weight: bold;
+    color: #2a5995;
+    font-weight: bold;
 }
+
 table.list.view thead tr#pagination {
-  background-color: white;
+    background-color: white;
 }
+
 table.list.view thead tr#pagination td table.paginationTable th,
 table.list.view thead tr#pagination td table.paginationTable td {
-  background-color: white;
-  color: #444444;
+    background-color: white;
+    color: #444444;
 }
+
 table.list.view thead tr#pagination td table.paginationTable th a,
 table.list.view thead tr#pagination td table.paginationTable td a {
-  color: #444444;
+    color: #444444;
 }
+
 /* SUBPANELS */
 ul#subpanel_list li.noBullet {
-  border-top: 1px solid #ababab;
+    border-top: 1px solid #ababab;
 }
+
 ul#subpanel_list li.noBullet table.formHeader td {
-  background-color: #448fce;
-  padding: 10px 5px 2px 11px;
+    background-color: #448fce;
+    padding: 10px 5px 2px 11px;
 }
+
 /* MASS ASSIGN */
 #massassign_form {
-  margin-top: 20px;
-  border: 1px solid #ababab;
+    margin-top: 20px;
+    border: 1px solid #ababab;
 }
+
 /**********************************************************************************************************************/
 /* SEARCH FORM (searchForm.less) */
 /**********************************************************************************************************************/
@@ -101,29 +122,35 @@ form#search_form .search.advanced {
     margin: 0 !important;
     padding: 0 !important;
 }
+
 form#search_form .search.advanced .search-form-buttons {
     text-align: right;
     background: #d7dcef;
     padding: 5px 5px;
 }
+
 form#search_form .search.advanced .search-form-buttons input.button {
     font-size: 16px !important;
     margin: 0 !important;
 }
+
 form#search_form .search.advanced .search-form-buttons input.button.clear {
     background: #e7ecff;
 }
+
 form#search_form .search.advanced .search-form-buttons input.button.search {
     background: #6ca85d;
     font-size: 18px !important;
     font-weight: bold;
     padding: 5px 20px;
 }
+
 form#search_form .search.advanced .saved-searches {
     padding: 5px 5px;
     border-top: 1px solid #bababa;
     border-bottom: 1px solid #bababa;
 }
+
 form#search_form .search.advanced .saved-searches input.button {
     background: #e7ecff;
     color: #2a5995;
@@ -132,19 +159,23 @@ form#search_form .search.advanced .saved-searches input.button {
     border: 1px solid #bababa;
     border-radius: 2px;
 }
+
 form#search_form .search.advanced .form-fields {
     padding: 5px 5px;
 }
+
 form#search_form .search.advanced .form-fields .form-group {
     margin-right: 10px;
 }
+
 /**********************************************************************************************************************/
 /* DETAILS VIEW (detailsView.less) */
 /**********************************************************************************************************************/
 .yui-navset .yui-nav,
 .yui-navset .yui-navset-top .yui-nav {
-  overflow: hidden;
+    overflow: hidden;
 }
+
 /**********************************************************************************************************************/
 /* EDIT VIEW (editView.less) */
 /**********************************************************************************************************************/
@@ -156,25 +187,29 @@ form#search_form .search.advanced .form-fields .form-group {
 /* EMAILS (emails.less) */
 /**********************************************************************************************************************/
 .email #dt-pag-nav .pagination {
-  margin: 0 0 10px 0;
+    margin: 0 0 10px 0;
 }
+
 .email #dt-pag-nav .pagination .button {
-  padding: 0 5px;
-  margin: 0 5px;
+    padding: 0 5px;
+    margin: 0 5px;
 }
+
 .email #dt-pag-nav .pagination .paginator-start,
 .email #dt-pag-nav .pagination .paginator-end,
 .email #dt-pag-nav .pagination .paginator-previous,
 .email #dt-pag-nav .pagination .paginator-next {
-  width: 47px;
-  height: 22px;
-  background-position: center center;
+    width: 47px;
+    height: 22px;
+    background-position: center center;
 }
+
 .email #dt-pag-nav .pagination .yui-pg-pages {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
 }
+
 .email #dt-pag-nav .pagination .yui-pg-pages .yui-pg-page {
-  margin: 0;
-  padding: 5px;
+    margin: 0;
+    padding: 5px;
 }
