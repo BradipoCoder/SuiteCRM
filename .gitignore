@@ -75,6 +75,8 @@ Desktop.ini
 lang_cmp.php
 .kdev4/
 SuiteCRM.kdev4
+.directory
+
 
 # IMP/MEKIT CRM CUSTOM STUFF
 vendor/
