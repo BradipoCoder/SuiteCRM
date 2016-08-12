@@ -756,6 +756,7 @@ class EmailTest extends PHPUnit_Framework_TestCase
     public function testget_list_view_data()
     {
         $email = new Email();
+        $current_theme = SugarThemeRegistry::current();
 
         $email->from_addr_name = 'Admin';
         $email->id = 1;
@@ -799,11 +800,11 @@ class EmailTest extends PHPUnit_Framework_TestCase
     public function testquickCreateForm()
     {
         $email = new Email();
+        $sugar_theme = SugarThemeRegistry::current();
 
-        $expected = '~' . preg_quote(
-                translate('LBL_QUICK_CREATE', 'Emails')
-                . "&nbsp;<a id='' onclick='return quick_create_overlib(\"\", \"SuiteR\", this);' href=\"#\" ><img src=\"themes/SuiteR/images/advanced_search.gif?v="
-            )
+        $expected = '~'
+            . preg_quote(translate('LBL_QUICK_CREATE', 'Emails')
+            . "&nbsp;<a id='' onclick='return quick_create_overlib(\"\", \"$sugar_theme\", this);' href=\"#\" ><img src=\"themes/".$sugar_theme."/images/advanced_search.gif?v=")
             .'[\w-]+'
                     . preg_quote(
                         "\"    border='0' align='absmiddle' alt=\"" . translate('LBL_QUICK_CREATE', 'Emails')
