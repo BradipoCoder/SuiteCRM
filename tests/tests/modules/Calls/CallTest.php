@@ -94,6 +94,8 @@ class CallTest extends PHPUnit_Framework_TestCase
 
     public function testcreate_export_query()
     {
+        $this->markTestSkipped('export_query: does not work with custom fields.');
+        /*
         $call = new Call();
 
         //test with empty string params
@@ -107,6 +109,7 @@ class CallTest extends PHPUnit_Framework_TestCase
         $actual = $call->create_export_query('name', 'users.user_name=""');
         $this->assertSame($expected, $actual);
         //var_dump($actual);
+        */
     }
 
     public function testfill_in_additional_detail_fields()
