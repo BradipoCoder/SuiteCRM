@@ -802,7 +802,9 @@ class EmailTest extends PHPUnit_Framework_TestCase
         $email = new Email();
         $sugar_theme = SugarThemeRegistry::current();
 
-        $expected = '~'.preg_quote("Quick Create&nbsp;<a id='' onclick='return quick_create_overlib(\"\", \"$sugar_theme\", this);' href=\"#\" ><img src=\"themes/".$sugar_theme."/images/advanced_search.gif?v=")
+        $expected = '~'
+            . preg_quote(translate('LBL_QUICK_CREATE', 'Emails')
+            . "&nbsp;<a id='' onclick='return quick_create_overlib(\"\", \"$sugar_theme\", this);' href=\"#\" ><img src=\"themes/".$sugar_theme."/images/advanced_search.gif?v=")
             .'[\w-]+'
                     . preg_quote(
                         "\"    border='0' align='absmiddle' alt=\"" . translate('LBL_QUICK_CREATE', 'Emails')
