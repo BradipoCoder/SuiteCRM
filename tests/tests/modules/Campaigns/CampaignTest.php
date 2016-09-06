@@ -128,6 +128,7 @@ class CampaignTest extends PHPUnit_Framework_TestCase
     {
         $campaign = new Campaign();
 
+        $current_theme = SugarThemeRegistry::current();
         //execute the method and verify that it retunrs expected results
 
         $expected = array(
