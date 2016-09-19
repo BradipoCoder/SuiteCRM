@@ -141,7 +141,7 @@ class TaskTest extends PHPUnit_Framework_TestCase
                 'CONTACT_PHONE' => '1234567',
                 'PRIORITY' => translate('task_priority_dom', 'Tasks', 'Medium'),
                 'PARENT_MODULE' => 'Accounts',
-                'SET_COMPLETE' => '~'.preg_quote("<a id='' onclick='SUGAR.util.closeActivityPanel.show(\"Tasks\",\"\",\"Completed\",\"listview\",\"1\");'><img src=\"themes/$current_theme/images/close_inline.png?v=")
+                'SET_COMPLETE' => '~'.preg_quote("<a id='' onclick='SUGAR.util.closeActivityPanel.show(\"Tasks\",\"\",\"Completed\",\"listview\",\"1\");'><img src=\"themes/$current_theme/images/close_inline")."\.\w+\?v="
                     .'[\w-]+'
                                   . preg_quote(
                                       "\"    title=" . translate('LBL_LIST_CLOSE', 'Tasks') . " border='0' alt=\""

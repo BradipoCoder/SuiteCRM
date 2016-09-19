@@ -20,7 +20,7 @@ class CallTest extends PHPUnit_Framework_TestCase
         $this->assertAttributeEquals(true, 'importable', $call);
         $this->assertAttributeEquals(false, 'syncing', $call);
         $this->assertAttributeEquals(true, 'update_vcal', $call);
-        $this->assertSame($GLOBALS['app_list_strings']['duration_intervals'], $call->minutes_values);
+        $this->assertAttributeEquals(array(0 => '00', 15 => '15', 30 => '30', 45 => '45'), 'minutes_values', $call);
     }
 
     public function testACLAccess()
@@ -79,8 +79,6 @@ class CallTest extends PHPUnit_Framework_TestCase
 
     public function testcreate_list_query()
     {
-        $this->markTestSkipped('export_query: does not work with custom fields.');
-        /*
         $call = new Call();
 
         //test with empty string params
@@ -92,69 +90,68 @@ class CallTest extends PHPUnit_Framework_TestCase
         $expected = "SELECT \n			calls.*,\n			users.user_name as assigned_user_name FROM calls \n			LEFT JOIN users\n			ON calls.assigned_user_id=users.id where users.user_name=\"\" AND  calls.deleted=0   ORDER BY calls.name";
         $actual = $call->create_list_query('name', 'users.user_name=""');
         $this->assertSame($expected, $actual);
-        */
     }
 
     public function testcreate_export_query()
     {
-        $this->markTestSkipped('export_query: does not work with custom fields.');
-        /*
         $call = new Call();
 
         //test with empty string params
         $expected = 'SELECT calls.*, users.user_name as assigned_user_name  FROM calls   LEFT JOIN users ON calls.assigned_user_id=users.id where calls.deleted=0 ORDER BY calls.name';
         $actual = $call->create_export_query('', '');
         $this->assertSame($expected, $actual);
-        //var_dump($actual);
+        //var_dump($actual);	
 
         //test with empty string params
         $expected = 'SELECT calls.*, users.user_name as assigned_user_name  FROM calls   LEFT JOIN users ON calls.assigned_user_id=users.id where users.user_name="" AND calls.deleted=0 ORDER BY calls.name';
         $actual = $call->create_export_query('name', 'users.user_name=""');
         $this->assertSame($expected, $actual);
         //var_dump($actual);
-        */
     }
 
     public function testfill_in_additional_detail_fields()
     {
         $call = new Call();
+
+        //execute the method and verify it sets up the intended fields
         $call->fill_in_additional_detail_fields();
 
         $this->assertEquals('0', $call->duration_hours);
-        //$this->assertEquals($call->minutes_value_default, $call->duration_minutes);
+        $this->assertEquals('15', $call->duration_minutes);
         $this->assertEquals(-1, $call->reminder_time);
         $this->assertEquals(false, $call->reminder_checked);
         $this->assertEquals(-1, $call->email_reminder_time);
         $this->assertEquals(false, $call->email_reminder_checked);
-        $this->assertEquals($GLOBALS['app_list_strings']['record_type_default_key'], $call->parent_type);
+        $this->assertEquals('Accounts', $call->parent_type);
     }
 
     public function testget_list_view_data()
     {
-        $admin = new \User();
-        $adminId = 1;
-        $admin->retrieve($adminId);
-
         $call = new Call();
-        $call->assigned_user_id = $adminId;
-        $call->created_by = $adminId;
-        $call->modified_user_id = $adminId;
+
+        $current_theme = SugarThemeRegistry::current();
+
+        $call->assigned_user_id = 1;
+        $call->created_by = 1;
+        $call->modified_user_id = 1;
 
         //execute the method and verify that it retunrs expected results
         $expected = array(
-            'MODIFIED_USER_ID' => $adminId,
-            'CREATED_BY' => $adminId,
+                'MODIFIED_USER_ID' => 1,
+                'CREATED_BY' => 1,
                 'DELETED' => 0,
-            'ASSIGNED_USER_ID' => $adminId,
-                /*'STATUS' => 'Planned',*/
+                'ASSIGNED_USER_ID' => 1,
+                'STATUS' => 'Planned',
                 'REMINDER_TIME' => '-1',
                 'EMAIL_REMINDER_TIME' => '-1',
                 'EMAIL_REMINDER_SENT' => '0',
                 'REPEAT_INTERVAL' => '1',
-                /*'SET_COMPLETE' => '~'
-                                  .preg_quote('<a id=\'\' onclick=\'SUGAR.util.closeActivityPanel.show("Calls","","Held","listview","1");\'><img src="themes/SuiteR/images/close_inline.png?v=')
+                'SET_COMPLETE' => '~'
+                                  .preg_quote('<a id=\'\' onclick=\'SUGAR.util.closeActivityPanel.show("Calls","","Held","listview","1");\'><img src="themes/'
+                                    .$current_theme
+                                    .'/images/close_inline'). '\.\w+\?v='
                                   .'[\w-]+'
-                                  .preg_quote('"     border=\'0\' alt="Close" /></a>').'~',*/
+                                  .preg_quote('"     border=\'0\' alt="Close" /></a>').'~',
                 'DATE_START' => '<font class=\'overdueTask\'></font>',
                 'CONTACT_ID' => null,
                 'CONTACT_NAME' => null,
@@ -166,15 +163,15 @@ class CallTest extends PHPUnit_Framework_TestCase
         $actual = $call->get_list_view_data();
         foreach ($expected as $expectedKey => $expectedVal) {
             if ($expectedKey == 'SET_COMPLETE') {
-                $this->assertRegExp($expectedVal, $actual[$expectedKey]);
+                $this->assertRegExp($expected[$expectedKey], $actual[$expectedKey]);
             } else {
-                $this->assertSame($expectedVal, $actual[$expectedKey]);
+                $this->assertSame($expected[$expectedKey], $actual[$expectedKey]);
             }
         }
 
-        $this->assertEquals($admin->name, $call->assigned_user_name);
-        $this->assertEquals($admin->name, $call->created_by_name);
-        $this->assertEquals($admin->name, $call->modified_by_name);
+        $this->assertEquals('Administrator', $call->assigned_user_name);
+        $this->assertEquals('Administrator', $call->created_by_name);
+        $this->assertEquals('Administrator', $call->modified_by_name);
     }
 
     public function testset_notification_body()
@@ -198,7 +195,7 @@ class CallTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($call->current_notify_user->new_assigned_user_name, $result->_tpl_vars['CALL_TO']);
         $this->assertEquals($call->duration_hours, $result->_tpl_vars['CALL_HOURS']);
         $this->assertEquals($call->duration_minutes, $result->_tpl_vars['CALL_MINUTES']);
-        $this->assertEquals(translate('call_status_dom', 'Calls', $call->status), $result->_tpl_vars['CALL_STATUS']);
+        $this->assertEquals($call->status, $result->_tpl_vars['CALL_STATUS']);
         $this->assertEquals('09/01/2015 00:02 UTC(+00:00)', $result->_tpl_vars['CALL_STARTDATE']);
         $this->assertEquals($call->description, $result->_tpl_vars['CALL_DESCRIPTION']);
     }
@@ -288,6 +285,6 @@ class CallTest extends PHPUnit_Framework_TestCase
     {
         $call = new Call();
         $result = $call->getDefaultStatus();
-        $this->assertTrue(in_array($result, ['Planned', 'Held']));
+        $this->assertEquals('Planned', $result);
     }
 }
