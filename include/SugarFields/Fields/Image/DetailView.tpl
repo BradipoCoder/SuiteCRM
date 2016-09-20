@@ -37,7 +37,33 @@
  * display the words  "Powered by SugarCRM" and "Supercharged by SuiteCRM".
  ********************************************************************************/
 *}
-<span class="sugar_field" id="{{if empty($displayParams.idName)}}{{sugarvar key='name'}}{{else}}{{$displayParams.idName}}{{/if}}">
 
-<img src="index.php?entryPoint=download&id={$fields.{{$vardef.fileId}}.value}_{{if empty($displayParams.idName)}}{{sugarvar key='name'}}{{else}}{{$displayParams.idName}}{{/if}}{$fields.width.value}&type={{$vardef.linkModule}}" style="max-width: {if !$vardef.width}{{$vardef.width}}{else}200{/if}px;" height="{if !$vardef.height}{{$vardef.height}}{else}50{/if}">
+{* By setting an image field width and height to 1 (cannot do 0 in studio) you will have a reponsive display *}
+
+{if {{$vardef.width}} == "1" && {{$vardef.height}} == "1"}
+    {assign var="img_class" value="img-responsive"}
+    {assign var="img_style" value=""}
+{else}
+    {if !$vardef.width}
+        {assign var="img_width" value={{$vardef.width}} }
+    {else}
+        {assign var="img_width" value="320" }
+    {/if}
+    {if !$vardef.height}
+        {assign var="img_height" value={{$vardef.height}} }
+    {else}
+        {assign var="img_height" value="240" }
+    {/if}
+
+    {assign var="img_class" value=""}
+    {assign var="img_style" value="max-width:`$img_width`px; height:`$img_height`px;"}
+{/if}
+
+
+<span class="sugar_field"
+      id="{{if empty($displayParams.idName)}}{{sugarvar key='name'}}{{else}}{{$displayParams.idName}}{{/if}}">
+<img
+        src="index.php?entryPoint=download&id={$fields.{{$vardef.fileId}}.value}_{{if empty($displayParams.idName)}}{{sugarvar key='name'}}{{else}}{{$displayParams.idName}}{{/if}}{$fields.width.value}&type={{$vardef.linkModule}}"
+        class="{$img_class}" style="{$img_style}"/>
+
 </span>
