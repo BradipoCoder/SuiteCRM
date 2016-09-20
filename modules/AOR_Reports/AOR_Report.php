@@ -38,7 +38,10 @@
  * reasonably feasible for  technical reasons, the Appropriate Legal Notices must
  * display the words  "Powered by SugarCRM" and "Supercharged by SuiteCRM".
  */
-class AOR_Report extends Basic {
+
+require_once("modules/AOR_Reports/AOR_Report_Mods.php");
+
+class AOR_Report extends AOR_Report_Mods {
     var $new_schema = true;
     var $module_dir = 'AOR_Reports';
     var $object_name = 'AOR_Report';
@@ -525,6 +528,7 @@ class AOR_Report extends Basic {
         $_group_value = $this->db->quote($group_value);
 
         $report_sql = $this->build_report_query($_group_value, $extra);
+        $this->report_sql = $report_sql;
 
         // Fix for issue 1232 - items listed in a single report, should adhere to the same standard as ListView items.
         if($sugar_config['list_max_entries_per_page']!='') {
@@ -539,6 +543,12 @@ class AOR_Report extends Basic {
 
         // We have a count query.  Run it and get the results.
         $result = $this->db->query($count_query);
+        
+        if ($this->db->lastDbError() !== FALSE)
+        {
+            $this->report_error = $this->db->lastDbError();
+        }
+        
         $assoc = $this->db->fetchByAssoc($result);
         if(!empty($assoc['c']))
         {
