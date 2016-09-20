@@ -1,4 +1,4 @@
-##SuiteCRM(7.7.1) - IMP/MEKIT FORK
+##SuiteCRM - IMP/MEKIT FORK
 
 [![Build Status](https://travis-ci.org/adamjakab/SuiteCRM.svg?branch=IMP-MEKIT-CRM)](https://travis-ci.org/adamjakab/SuiteCRM)
 
