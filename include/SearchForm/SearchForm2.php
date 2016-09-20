@@ -43,11 +43,8 @@ require_once('include/ListView/ListViewSmarty.php');
 require_once('include/TemplateHandler/TemplateHandler.php');
 require_once('include/EditView/EditView2.php');
 
-/**
- * Class SearchForm
- */
-class SearchForm
-{
+
+ class SearchForm{
  	var $seed = null;
  	var $module = '';
  	var $action = 'index';
@@ -57,12 +54,12 @@ class SearchForm
  	var $th;
     var $tpl;
     var $view = 'SearchForm';
-    var $displayView = 'advanced_search';
+    var $displayView = 'basic_search';
     var $formData;
     var $fieldDefs;
     var $customFieldDefs;
     var $tabs;
-    var $parsedView = 'advanced';
+    var $parsedView = 'basic';
     //may remove
     var $searchFields;
     var $displaySavedSearch = true;
@@ -96,12 +93,11 @@ class SearchForm
                             'key'    => $module . '|basic_search',
                             'name'   => 'basic',
                             'displayDiv'   => ''),
-                            array('title'  => $GLOBALS['app_strings']['LNK_ADVANCED_SEARCH'],
-                                  'link'   => $module . '|advanced_search',
-                                  'key'    => $module . '|advanced_search',
-                                  'name'   => 'advanced',
-                                  'displayDiv' => ''
-                            ),
+                      array('title'  => $GLOBALS['app_strings']['LNK_ADVANCED_SEARCH'],
+                            'link'   => $module . '|advanced_search',
+                            'key'    => $module . '|advanced_search',
+                            'name'   => 'advanced',
+                            'displayDiv'   => 'display:none'),
                        );
         $this->searchColumns = array () ;
         $this->setOptions($options);
@@ -120,22 +116,18 @@ class SearchForm
         }
         self::__construct($seed, $module, $action, $options);
     }
-    
-    
-    function setup($searchdefs, $searchFields = array(), $tpl, $displayView = 'advanced_search',
-                   $listViewDefs = array())
-    {
-        $displayView = 'advanced_search';
 
-		$this->searchdefs =  $searchdefs[$this->module];
+
+ 	function setup($searchdefs, $searchFields = array(), $tpl, $displayView = 'basic_search', $listViewDefs = array()){
+		$this->searchdefs =  isset($searchdefs[$this->module]) ? $searchdefs[$this->module] : null;
  		$this->tpl = $tpl;
  		//used by advanced search
  		$this->listViewDefs = $listViewDefs;
  		$this->displayView = $displayView;
  		$this->view = $this->view.'_'.$displayView;
  		$tokens = explode('_', $this->displayView);
+        $this->searchFields = $searchFields[$this->module];
  		$this->parsedView = $tokens[0];
-                $this->searchFields = $searchFields[$this->module];
  		if($this->displayView != 'saved_views'){
  			$this->_build_field_defs();
  		}
@@ -157,8 +149,7 @@ class SearchForm
                                 'link'   => $this->module . '|advanced_search',
                                 'key'    => $this->module . '|advanced_search',
                                 'name'   => 'advanced',
-                                'displayDiv' => ''
-            );
+                                'displayDiv' => 'display:none');
         }
         if(isset($this->showCustom) && is_array($this->showCustom)){
             foreach($this->showCustom as $v){
@@ -281,7 +272,7 @@ class SearchForm
  	/**
  	 * Set options
  	 * @param array $options
-     * @return SearchForm
+ 	 * @return SearchForm2
  	 */
     public function setOptions($options = null)
     {
@@ -386,7 +377,7 @@ class SearchForm
 	function _build_field_defs(){
 		$this->formData = array();
 		$this->fieldDefs = array();
-		foreach($this->searchdefs['layout'][$this->displayView] as $data){
+		foreach((array) $this->searchdefs['layout'][$this->displayView] as $data){
 			if(is_array($data)){
 				//Fields may be listed but disabled so that when they are enabled, they have the correct custom display data.
 				if (isset($data['enabled']) && $data['enabled'] == false)
@@ -489,24 +480,6 @@ class SearchForm
 
 
 		}
-        
-        //JACK'S MOD
-        //echo '<pre>' . print_r($this->searchdefs, true) . '</pre>';
-        foreach ($this->formData as &$v)
-        {
-            $fieldName = isset($v["field"]["name"]) ? $v["field"]["name"] : FALSE;
-            $v["is_basic"] = TRUE;
-            if ($fieldName)
-            {
-                $originalFieldName = str_replace('_' . $this->parsedView, '', $fieldName);
-                $v["original_name"] = $originalFieldName;
-                if (isset($this->searchdefs["layout"]["basic_search"]))
-                {
-                    $isBasic = array_key_exists($originalFieldName, $this->searchdefs["layout"]["basic_search"]);
-                    $v["is_basic"] = $isBasic;
-                }
-            }
-        }
 
 	}
 
@@ -685,7 +658,7 @@ class SearchForm
 
          //rrs check for team_id
 
-         foreach($this->searchFields as $field=>$parms) {
+         foreach((array) $this->searchFields as $field=>$parms) {
              $customField = false;
              // Jenny - Bug 7462: We need a type check here to avoid database errors
              // when searching for numeric fields. This is a temporary fix until we have
