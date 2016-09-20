@@ -40,6 +40,7 @@ class FixAccountCommand extends Command implements CommandInterface
           'config_file', InputArgument::REQUIRED,
           'The yaml(.yml) configuration file inside the "' . $this->configDir . '" subfolder.'
         ),
+        //@todo: add --force option to override dry mode
       ]
     );
   }
