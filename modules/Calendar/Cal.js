@@ -36,8 +36,6 @@
  * display the words  "Powered by SugarCRM" and "Supercharged by SuiteCRM".
  ********************************************************************************/
 
-console.log("JACK'S MOD");
-
 var CAL = {};
 CAL.slot_height = 14;
 CAL.dropped = 0;
@@ -479,6 +477,7 @@ CAL.enable_buttons = function () {
         CAL.get("btn-remove-all-recurrences").removeAttribute("disabled");
     }
 }
+
 CAL.dialog_create = function (date, end_date, user_id) {
     var e, user_id, user_name;
     CAL.get("title-cal-edit").innerHTML = CAL.lbl_loading;
@@ -548,6 +547,7 @@ CAL.dialog_save = function () {
                 var newEvent = new Object();
                 $("#calendar" + res.user_id).fullCalendar("removeEvents", res['record']);
                 newEvent.module = res['module_name'];
+
                 newEvent.title = res['name'];
                 newEvent.record = res['record'];
                 newEvent.id = res['record'];
@@ -757,7 +757,10 @@ $(document).ready(function () {
             valueToPush["title"] = element['name'];
             valueToPush["id"] = element['record'];
             valueToPush["record"] = element['record'];
+
+            valueToPush["description"] = 'This is a cool event';
             valueToPush['module'] = element['module_name'];
+
             valueToPush["start"] = new Date(moment.unix(element['ts_start']).format("MM/DD/YYYY") + " " + moment(element['time_start'], 'hh:mma').format("HH:mm"));
             valueToPush["end"] = moment(new Date(moment.unix(element['ts_start']).format("MM/DD/YYYY") + " " + moment(element['time_start'], 'hh:mma').format("HH:mm"))).add(element['duration_hours'], 'hours').add(element['duration_minutes'], 'minutes');
             if (element.module_name != "Meetings" && element.module_name != "Calls") {
@@ -853,13 +856,17 @@ $(document).ready(function () {
                     element.qtip({
                         content: {
                             title: {text: event.title},
-                            text: '<span class="title">' + SUGAR.language.get('Calendar', 'LBL_DATE') + '</span>: ' + (event.start.format(global_datetime_format)) + '<br><span class="title">' + SUGAR.language.get('Calendar', 'LBL_SUBJECT') + ': </span>' + ((event.title) ? event.title : '')
+                            text: ''
+                                + '<span class="title">' + SUGAR.language.get('Calendar', 'LBL_DATE') + '</span>: ' + (event.start.format(global_datetime_format))
+                                + '<br><span class="title">' + SUGAR.language.get('Calendar', 'LBL_DATE_END') + '</span>: ' + (event.end.format(global_datetime_format))
+                                /*+ '<br><span class="title">' + SUGAR.language.get('Calendar', 'LBL_SUBJECT') + ': </span>' + ((event.title) ? event.title : '')*/
+                                + '<br><span class="title">' + SUGAR.language.get('Calendar', 'LBL_DESCRIPTION') + ': </span>' + event.description
                         },
                         position: {my: 'bottom left', at: 'top right'},
                         show: {solo: true},
                         hide: {when: 'inactive', delay: 50},
                         style: {
-                            width: 250,
+                            width: 350,
                             padding: 5,
                             color: 'black',
                             textAlign: 'left',
@@ -873,9 +880,17 @@ $(document).ready(function () {
                             }
                         }
                     });
+
+                    element.find('.fc-time').hide();
+
+                    console.log(event);
+
+                    element.find('.fc-title').html("" + event.title);
+
                 }
-            },
+            }
         });
+
         if ($('#calendar_title_' + user_id).length == 0) {
             var calendar = $("#calendar" + user_id + " > .fc-view-container");
             var calendarTitle = "<div class='monthCalBody'><h5 class='calSharedUser' id='calendar_title_" + user_id + "'></h5></div><div id='calendar" + user_id + "'></div>";

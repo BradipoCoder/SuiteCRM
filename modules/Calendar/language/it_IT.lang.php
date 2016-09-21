@@ -82,7 +82,8 @@ $mod_strings = array(
     'LBL_SELECT_USERS' => 'Selezionare gli utenti per la visualizzazione del calendario',
     'LBL_FILTER_BY_TEAM' => 'Filtra l´elenco degli utenti per gruppo:',
     'LBL_ASSIGNED_TO_NAME' => 'Assegnato a:',
-    'LBL_DATE' => 'Data e Ora di inizio',
+    'LBL_DATE' => 'Data di inizio',
+    'LBL_DATE_END' => 'Data di fine',
     'LBL_CREATE_MEETING' => 'Pianifica Riunione',
     'LBL_CREATE_CALL' => 'Nuova Chiamata',
     'LBL_HOURS_ABBREV' => 'h',
@@ -116,6 +117,7 @@ $mod_strings = array(
 
     'LBL_NO_USER' => 'Nessuna corrispondenza per il campo: Assegnato a',
     'LBL_SUBJECT' => 'Oggetto',
+    'LBL_DESCRIPTION' => 'Descrizione',
     'LBL_DURATION' => 'Durata',
     'LBL_STATUS' => 'Stato',
     'LBL_DATE_TIME' => 'Data e Ora',
