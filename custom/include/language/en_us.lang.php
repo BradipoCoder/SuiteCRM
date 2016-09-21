@@ -30,24 +30,7 @@ $GLOBALS['app_list_strings']['commercial_zone_list'] = array(
     1 => '1',
     2 => '2',
 );
-$GLOBALS['app_list_strings']['imp_agent_code_list'] = array(
-    '' => '',
-    'A4' => 'Chiara Aragno(A4)',
-);
-$GLOBALS['app_list_strings']['imp_agent_code_list'] = array(
-    '' => '',
-    'A4' => 'Chiara Aragno(A4)',
-    'A11' => 'Michela Tartaglia(A11)',
-    'A5' => 'Vito Scilabra(A5)',
-    'A7' => 'Lucio Lo Guercio(A7)',
-    'A8' => 'Claudio Crocco(A8)',
-    'A9' => 'Oriana Brussolo(A9)',
-    'A14' => 'Fabrizio Zollet(A14)',
-    'A6' => 'Davide Cazzadore(A6)',
-    'A10' => 'BEXB(A10)',
-    'A12' => 'MEPA(A12)',
-    'A13' => 'IMP(A13)',
-);
+
 $GLOBALS['app_list_strings']['account_type_dom'] = array(
     '' => '',
     'Competitor' => 'Competitor',
@@ -770,20 +753,7 @@ $GLOBALS['app_list_strings']['tel_errato']=array (
   20 => 'Inesistente',
   '' => '',
 );
-$GLOBALS['app_list_strings']['imp_agent_code_list']=array (
-  '' => '',
-  'A4' => 'Chiara Aragno(A4)',
-  'A11' => 'Michela Tartaglia(A11)',
-  'A5' => 'Vito Scilabra(A5)',
-  'A7' => 'Lucio Lo Guercio(A7)',
-  'A8' => 'Claudio Crocco(A8)',
-  'A9' => 'Oriana Brussolo(A9)',
-  'A14' => 'Fabrizio Zollet(A14)',
-  'A6' => 'Davide Cazzadore(A6)',
-  'A10' => 'BEXB(A10)',
-  'A12' => 'MEPA(A12)',
-  'A13' => 'IMP(A13)',
-);
+
 $GLOBALS['app_list_strings']['industry_dom']=array (
   '' => '',
   3 => 'Ente',
@@ -796,20 +766,7 @@ $GLOBALS['app_list_strings']['industry_dom']=array (
   12 => 'Sanità',
   100 => 'NC',
 );
-$GLOBALS['app_list_strings']['imp_agent_code_list']=array (
-  '' => '',
-  'A4' => 'Chiara Aragno(A4)',
-  'A11' => 'Michela Tartaglia(A11)',
-  'A5' => 'Vito Scilabra(A5)',
-  'A7' => 'Lucio Lo Guercio(A7)',
-  'A8' => 'Claudio Crocco(A8)',
-  'A9' => 'Oriana Brussolo(A9)',
-  'A14' => 'Fabrizio Zollet(A14)',
-  'A6' => 'Davide Cazzadore(A6)',
-  'A10' => 'BEXB(A10)',
-  'A12' => 'MEPA(A12)',
-  'A13' => 'IMP(A13)',
-);
+
 
 $GLOBALS['app_list_strings']['zone_list']=array (
   '' => '',
@@ -896,19 +853,7 @@ $GLOBALS['app_list_strings']['campagneAutomaticheSiNo']=array (
   1 => 'Si',
   2 => 'No',
 );
-$GLOBALS['app_list_strings']['imp_agent_code_list']=array (
-  '' => '',
-  'A4' => 'Chiara Aragno(A4)',
-  'A11' => 'Michela Tartaglia(A11)',
-  'A5' => 'Vito Scilabra(A5)',
-  'A7' => 'Lucio Lo Guercio(A7)',
-  'A8' => 'Claudio Crocco(A8)',
-  'A9' => 'Oriana Brussolo(A9)',
-  'A14' => 'Fabrizio Zollet(A14)',
-  'A10' => 'BEXB(A10)',
-  'A12' => 'MEPA(A12)',
-  'A13' => 'IMP(A13)',
-);
+
 $GLOBALS['app_list_strings']['active_inactive_list']=array (
   '' => '',
   1 => 'Active',
@@ -1157,15 +1102,15 @@ $GLOBALS['app_list_strings']['Campaign_List']=array (
   71 => 'A9 - Stocchiero',
 );
 $GLOBALS['app_list_strings']['imp_agent_code_list']=array (
-  '' => '',
-  'A4' => 'Chiara Aragno(A4)',
-  'A11' => 'Michela Tartaglia(A11)',
-  'A5' => 'Vito Scilabra(A5)',
-  'A7' => 'Lucio Lo Guercio(A7)',
-  'A8' => 'Claudio Crocco(A8)',
-  'A9' => 'Oriana Brussolo(A9)',
-  'A14' => 'Fabrizio Zollet(A14)',
-  'A10' => 'BEXB(A10)',
-  'A12' => 'MEPA(A12)',
-  'A13' => 'IMP(A13)',
+    '' => '',
+    'A4' => 'Chiara Aragno(A4)',
+    'A11' => 'Michela Tartaglia(A11)',
+    'A5' => 'Vito Scilabra(A5)',
+    'A7' => 'Lucio Loguercio(A7)',
+    'A8' => 'Claudio Crocco(A8)',
+    'A9' => 'Barbara Stocchiero(A9)',
+    'A14' => 'Fabrizio Zollet(A14)',
+    'A10' => 'BEXB(A10)',
+    'A12' => 'MEPA(A12)',
+    'A13' => 'IMP(A13)',
 );
