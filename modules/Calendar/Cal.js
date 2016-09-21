@@ -758,7 +758,7 @@ $(document).ready(function () {
             valueToPush["id"] = element['record'];
             valueToPush["record"] = element['record'];
 
-            valueToPush["description"] = 'This is a cool event';
+            valueToPush["description"] = element['description'];
             valueToPush['module'] = element['module_name'];
 
             valueToPush["start"] = new Date(moment.unix(element['ts_start']).format("MM/DD/YYYY") + " " + moment(element['time_start'], 'hh:mma').format("HH:mm"));
@@ -858,9 +858,9 @@ $(document).ready(function () {
                             title: {text: event.title},
                             text: ''
                                 + '<span class="title">' + SUGAR.language.get('Calendar', 'LBL_DATE') + '</span>: ' + (event.start.format(global_datetime_format))
-                                + '<br><span class="title">' + SUGAR.language.get('Calendar', 'LBL_DATE_END') + '</span>: ' + (event.end.format(global_datetime_format))
+                                + (event.end ? '<br><span class="title">' + SUGAR.language.get('Calendar', 'LBL_DATE_END') + '</span>: ' + (event.end.format(global_datetime_format)) : '')
                                 /*+ '<br><span class="title">' + SUGAR.language.get('Calendar', 'LBL_SUBJECT') + ': </span>' + ((event.title) ? event.title : '')*/
-                                + '<br><span class="title">' + SUGAR.language.get('Calendar', 'LBL_DESCRIPTION') + ': </span>' + event.description
+                                + '<br><span class="title">' + SUGAR.language.get('Calendar', 'LBL_DESCRIPTION') + ': </span>' + '<small>' + event.description + '</small>'
                         },
                         position: {my: 'bottom left', at: 'top right'},
                         show: {solo: true},
@@ -883,7 +883,7 @@ $(document).ready(function () {
 
                     element.find('.fc-time').hide();
 
-                    console.log(event);
+                    //console.log(event);
 
                     element.find('.fc-title').html("" + event.title);
 
