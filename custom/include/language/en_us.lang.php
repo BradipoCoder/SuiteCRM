@@ -1156,3 +1156,16 @@ $GLOBALS['app_list_strings']['Campaign_List']=array (
   70 => 'Ex A8 - 2016',
   71 => 'A9 - Stocchiero',
 );
+$GLOBALS['app_list_strings']['imp_agent_code_list']=array (
+  '' => '',
+  'A4' => 'Chiara Aragno(A4)',
+  'A11' => 'Michela Tartaglia(A11)',
+  'A5' => 'Vito Scilabra(A5)',
+  'A7' => 'Lucio Lo Guercio(A7)',
+  'A8' => 'Claudio Crocco(A8)',
+  'A9' => 'Oriana Brussolo(A9)',
+  'A14' => 'Fabrizio Zollet(A14)',
+  'A10' => 'BEXB(A10)',
+  'A12' => 'MEPA(A12)',
+  'A13' => 'IMP(A13)',
+);

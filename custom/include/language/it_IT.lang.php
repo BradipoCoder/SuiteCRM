@@ -1116,3 +1116,9 @@ $GLOBALS['app_list_strings']['Campaign_List']=array (
   70 => 'Ex A8 - 2016',
   71 => 'A9 - Stocchiero',
 );
+
+$GLOBALS['app_list_strings']['chiamatoperbarbara_list'] = array (
+    '' => '',
+    1 => 'Sì',
+    2 => 'No',
+);
