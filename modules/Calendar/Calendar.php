@@ -242,70 +242,115 @@ class Calendar {
 			}
 			foreach($acts as $act){
 											
-					$item = array();
-					$item['user_id'] = $user_id;
-					$item['module_name'] = $act->sugar_bean->module_dir;
-					$item['type'] = strtolower($act->sugar_bean->object_name);
-					$item['assigned_user_id'] = $act->sugar_bean->assigned_user_id;
-                    $item['assigned_user_name'] = $act->sugar_bean->assigned_user_name;
-					$item['record'] = $act->sugar_bean->id;
-                    //ma che cazzo!!!!
-					//$item['name'] = $act->sugar_bean->name . ' ' . $act->sugar_bean->assigned_user_name;
-                    $item['name'] = $act->sugar_bean->name;
-					$item['description'] = $act->sugar_bean->description;
+                $item = array();
+                $item['user_id'] = $user_id;
+                $item['module_name'] = $act->sugar_bean->module_dir;
+                $item['type'] = strtolower($act->sugar_bean->object_name);
+                $item['assigned_user_id'] = $act->sugar_bean->assigned_user_id;
+                $item['assigned_user_name'] = $act->sugar_bean->assigned_user_name;
+                $item['record'] = $act->sugar_bean->id;
+                //ma che cazzo!!!!
+                //$item['name'] = $act->sugar_bean->name . ' ' . $act->sugar_bean->assigned_user_name;
+                $item['name'] = $act->sugar_bean->name;
+                $item['description'] = $act->sugar_bean->description;
+            
+                
+                
+                //FULL DESCRIPTION - this goes into qTip
+                $fullDesc = [];
+                
+                $fullDesc[] = '<span class="title">' . $GLOBALS['mod_strings']['LBL_DATE'] . ': </span>';
+                $fullDesc[] = '<span class="value">';
+                $fullDesc[] = isset($act->sugar_bean->date_start) ? $act->sugar_bean->date_start :
+                    $act->sugar_bean->date_due;
+                $fullDesc[] = '</span>';
+                $fullDesc[] = '<br />';
+                
+                $fullDesc[] = '<span class="title">' . $GLOBALS['mod_strings']['LBL_DATE_END'] . ': </span>';
+                $fullDesc[] = '<span class="value">';
+                $fullDesc[] = isset($act->sugar_bean->date_end) ? $act->sugar_bean->date_end :
+                    $act->sugar_bean->date_due;
+                $fullDesc[] = '</span>';
+                $fullDesc[] = '<br />';
+                
+                if (!empty($act->sugar_bean->parent_type) && !empty($act->sugar_bean->parent_id))
+                {
+                    /** @var \SugarBean $focus */
+                    $focus = BeanFactory::getBean($act->sugar_bean->parent_type, $act->sugar_bean->parent_id);
+                    if($focus) {
+                        $fullDesc[] = '<span class="title">' . $act->sugar_bean->parent_type . ': </span>';
+                        $fullDesc[] = '<span class="value">';
+                        $fullDesc[] = '<a target="_blank" href="index.php?module='.$act->sugar_bean->parent_type.'&action=DetailView&record='
+                            .$act->sugar_bean->parent_id.'">';
+                        $fullDesc[] = $focus->name;
+                        $fullDesc[] = '</a>';
+                        $fullDesc[] = '</span>';
+                        $fullDesc[] = '<br />';
+                    }
+                }
+                
+                $fullDesc[] = '<hr style="margin:3px 0;"/>';
+                $fullDesc[] = '<small>';
+                $fullDesc[] = $act->sugar_bean->description;
+                $fullDesc[] = '</small>';
+            
+                $item['full_description'] = implode("\n", $fullDesc);
+                
+                
+                
 
-					if(isset($act->sugar_bean->duration_hours)){
-						$item['duration_hours'] = $act->sugar_bean->duration_hours;
-						$item['duration_minutes'] = $act->sugar_bean->duration_minutes;
-					}
-					 			
-					$item['detail'] = 0;
-					$item['edit'] = 0;
-					
-					if($act->sugar_bean->ACLAccess('DetailView'))
-						$item['detail'] = 1;
-					if($act->sugar_bean->ACLAccess('Save'))
-						$item['edit'] = 1;
-						
-					if(empty($act->sugar_bean->id)){
-						$item['detail'] = 0;
-						$item['edit'] = 0;
-					}
-					
-					if(!empty($act->sugar_bean->repeat_parent_id))
-						$item['repeat_parent_id'] = $act->sugar_bean->repeat_parent_id;
-					
-					if($item['detail'] == 1){
-						if(isset($field_list[$item['module_name']])){
-							foreach($field_list[$item['module_name']] as $field){
-								if(!isset($item[$field]) && isset($act->sugar_bean->$field)){
-									$item[$field] = $act->sugar_bean->$field;
-									if(empty($item[$field]))
-										$item[$field] = "";
-								}
-							}
-						}
-					}
-
-                    if (!empty($act->sugar_bean->parent_type) && !empty($act->sugar_bean->parent_id)) {
-                        $focus = BeanFactory::getBean($act->sugar_bean->parent_type, $act->sugar_bean->parent_id);
-                        // If the bean wasn't loaded, e.g. insufficient permissions
-                        if (!empty($focus))
-                        {
-                            $item['related_to'] = $focus->name;
+                if(isset($act->sugar_bean->duration_hours)){
+                    $item['duration_hours'] = $act->sugar_bean->duration_hours;
+                    $item['duration_minutes'] = $act->sugar_bean->duration_minutes;
+                }
+                            
+                $item['detail'] = 0;
+                $item['edit'] = 0;
+                
+                if($act->sugar_bean->ACLAccess('DetailView'))
+                    $item['detail'] = 1;
+                if($act->sugar_bean->ACLAccess('Save'))
+                    $item['edit'] = 1;
+                    
+                if(empty($act->sugar_bean->id)){
+                    $item['detail'] = 0;
+                    $item['edit'] = 0;
+                }
+                
+                if(!empty($act->sugar_bean->repeat_parent_id))
+                    $item['repeat_parent_id'] = $act->sugar_bean->repeat_parent_id;
+                
+                if($item['detail'] == 1){
+                    if(isset($field_list[$item['module_name']])){
+                        foreach($field_list[$item['module_name']] as $field){
+                            if(!isset($item[$field]) && isset($act->sugar_bean->$field)){
+                                $item[$field] = $act->sugar_bean->$field;
+                                if(empty($item[$field]))
+                                    $item[$field] = "";
+                            }
                         }
                     }
+                }
 
-					if(!isset($item['duration_hours']) || empty($item['duration_hours']))
-						$item['duration_hours'] = 0;
-					if(!isset($item['duration_minutes']) || empty($item['duration_minutes']))
-						$item['duration_minutes'] = 0;
+                if (!empty($act->sugar_bean->parent_type) && !empty($act->sugar_bean->parent_id)) {
+                    $focus = BeanFactory::getBean($act->sugar_bean->parent_type, $act->sugar_bean->parent_id);
+                    // If the bean wasn't loaded, e.g. insufficient permissions
+                    if (!empty($focus))
+                    {
+                        $item['related_to'] = $focus->name;
+                    }
+                }
 
-					if(isset($this->activityList[ $act->sugar_bean->module_name ]['start']) && !empty($this->activityList[ $act->sugar_bean->module_name ]['start'])){
-						$item = array_merge($item,CalendarUtils::get_time_data($act->sugar_bean, $this->activityList[ $act->sugar_bean->module_name ]['start'], $this->activityList[ $act->sugar_bean->module_name ]['end']));
-					}else{
-						$item = array_merge($item,CalendarUtils::get_time_data($act->sugar_bean));
-					}
+                if(!isset($item['duration_hours']) || empty($item['duration_hours']))
+                    $item['duration_hours'] = 0;
+                if(!isset($item['duration_minutes']) || empty($item['duration_minutes']))
+                    $item['duration_minutes'] = 0;
+
+                if(isset($this->activityList[ $act->sugar_bean->module_name ]['start']) && !empty($this->activityList[ $act->sugar_bean->module_name ]['start'])){
+                    $item = array_merge($item,CalendarUtils::get_time_data($act->sugar_bean, $this->activityList[ $act->sugar_bean->module_name ]['start'], $this->activityList[ $act->sugar_bean->module_name ]['end']));
+                }else{
+                    $item = array_merge($item,CalendarUtils::get_time_data($act->sugar_bean));
+                }
 
 
 				$shared_calendar_separate = $GLOBALS['current_user']->getPreference('calendar_display_shared_separate');

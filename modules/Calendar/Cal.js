@@ -753,16 +753,26 @@ $(document).ready(function () {
         $(calendar).appendTo(calendarContainer);
         var users_activities = [];
         $.each(user_calendar_activities, function (index, element) {
+
+            console.log(element);
+
+
             var valueToPush = {};
             valueToPush["title"] = element['name'];
             valueToPush["id"] = element['record'];
             valueToPush["record"] = element['record'];
 
             valueToPush["description"] = element['description'];
+            valueToPush["full_description"] = element['full_description'];
             valueToPush['module'] = element['module_name'];
 
-            valueToPush["start"] = new Date(moment.unix(element['ts_start']).format("MM/DD/YYYY") + " " + moment(element['time_start'], 'hh:mma').format("HH:mm"));
-            valueToPush["end"] = moment(new Date(moment.unix(element['ts_start']).format("MM/DD/YYYY") + " " + moment(element['time_start'], 'hh:mma').format("HH:mm"))).add(element['duration_hours'], 'hours').add(element['duration_minutes'], 'minutes');
+            //valueToPush["start"] = new Date(moment.unix(element['ts_start']).format("MM/DD/YYYY") + " " + moment(element['time_start'], 'hh:mma').format("HH:mm"));
+            //valueToPush["end"] = moment(new Date(moment.unix(element['ts_start']).format("MM/DD/YYYY") + " " + moment(element['time_start'], 'hh:mma').format("HH:mm"))).add(element['duration_hours'], 'hours').add(element['duration_minutes'], 'minutes');
+
+            //@bennnjamin  hotfix - https://github.com/salesagility/SuiteCRM/issues/2049
+            valueToPush["start"] = new Date(moment.utc(moment.unix(element['ts_start'])).format("MM/DD/YYYY") + " " + moment(element['time_start'], 'hh:mma').format("HH:mm"));
+            valueToPush["end"] = moment(new Date(moment.utc(moment.unix(element['ts_start'])).format("MM/DD/YYYY") + " " + moment(element['time_start'], 'hh:mma').format("HH:mm"))).add(element['duration_hours'], 'hours').add(element['duration_minutes'], 'minutes');
+
             if (element.module_name != "Meetings" && element.module_name != "Calls") {
                 valueToPush['editable'] = false;
             }
@@ -856,15 +866,18 @@ $(document).ready(function () {
                     element.qtip({
                         content: {
                             title: {text: event.title},
-                            text: ''
+                            /*text: ''
                                 + '<span class="title">' + SUGAR.language.get('Calendar', 'LBL_DATE') + '</span>: ' + (event.start.format(global_datetime_format))
                                 + (event.end ? '<br><span class="title">' + SUGAR.language.get('Calendar', 'LBL_DATE_END') + '</span>: ' + (event.end.format(global_datetime_format)) : '')
-                                /*+ '<br><span class="title">' + SUGAR.language.get('Calendar', 'LBL_SUBJECT') + ': </span>' + ((event.title) ? event.title : '')*/
-                                + '<br><span class="title">' + SUGAR.language.get('Calendar', 'LBL_DESCRIPTION') + ': </span>' + '<small>' + event.description + '</small>'
+                                + '<br><span class="title">' + SUGAR.language.get('Calendar', 'LBL_SUBJECT') + ': </span>' + ((event.title) ? event.title : '')
+                                + '<br><span class="title">' + SUGAR.language.get('Calendar', 'LBL_DESCRIPTION') + ': </span>' + '<small>' + event.description + '</small>'*/
+                            text: event.full_description
                         },
                         position: {my: 'bottom left', at: 'top right'},
+                        /*show: {solo: true},
+                        hide: {when: 'inactive', delay: 50},*/
                         show: {solo: true},
-                        hide: {when: 'inactive', delay: 50},
+                        hide: {fixed: true, delay: 300},
                         style: {
                             width: 350,
                             padding: 5,
