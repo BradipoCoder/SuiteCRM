@@ -42,14 +42,18 @@
  * Date: 20/09/16
  * Time: 11.09
  *
- * Make AOR_Report extend this class and
+ * Make AOR_Report extend this class:
+ * require_once("modules/AOR_Reports/AOR_Report_Mods.php");
+ * class AOR_Report extends AOR_Report_Mods {
+ *
  *
  * add @530
- * $report_sql = $this->build_report_query($_group_value, $extra);
- * $this->report_sql = $report_sql;
+ * //after: $report_sql = $this->build_report_query($_group_value, $extra);
+ * $this->setReportSql($report_sql);
  *
  * add: @544
- *  if ($this->db->lastDbError() !== FALSE){$this->report_error = $this->db->lastDbError();}
+ * //after: $result = $this->db->query($count_query);
+ * if ($this->db->lastDbError() !== FALSE){$this->setReportError($this->db->lastDbError());}
  *
  */
 
@@ -75,6 +79,13 @@ class AOR_Report_Mods extends Basic
         return $this->report_sql;
     }
     
+    /**
+     * @param string $report_sql
+     */
+    protected function setReportSql(string $report_sql)
+    {
+        $this->report_sql = $report_sql;
+    }
     
     /**
      * @return string
@@ -84,6 +95,12 @@ class AOR_Report_Mods extends Basic
         return $this->report_error;
     }
     
-    
+    /**
+     * @param string $report_error
+     */
+    protected function setReportError(string $report_error)
+    {
+        $this->report_error = $report_error;
+    }
     
 }
